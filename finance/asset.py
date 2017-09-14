@@ -1,11 +1,13 @@
 import time
 
-class AssetHistory:
+class Asset:
 
-    def __init__(self):
+    def __init__(self, name, owner):
+        self.name = name
+        self.owner = owner
         self.snapshots = []
 
-    def asset_value(self, query_time=None):
+    def value(self, query_time=None):
         if(self.snapshots == []):
             return 0
         if(query_time == None):
