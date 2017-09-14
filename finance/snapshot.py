@@ -6,10 +6,10 @@ class Snapshot:
         self.value = value
 
     def timestamp(self):
-        self.timestamp
+        return self.timestamp
 
     def asset_id(self):
-        self.asset_id
+        return self.asset_id
 
     def value(self):
-        self.value
+        return self.value
