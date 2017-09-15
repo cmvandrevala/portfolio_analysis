@@ -1,5 +1,6 @@
 import unittest
 import time
+
 from finance.snapshot import Snapshot
 
 class SnapshotTestCase(unittest.TestCase):

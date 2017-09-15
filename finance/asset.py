@@ -1,10 +1,11 @@
 import time
 
+from finance.snapshot import Snapshot
+
 class Asset:
 
-    def __init__(self, name, owner):
+    def __init__(self, name):
         self.name = name
-        self.owner = owner
         self.snapshots = []
 
     def value(self, query_time=None):
@@ -14,7 +15,8 @@ class Asset:
             return self.__find_asset_value(time.time())
         return self.__find_asset_value(query_time)
 
-    def import_snapshot(self, snapshot):
+    def import_snapshot(self, time, value):
+        snapshot = Snapshot(time,value)
         self.snapshots.append(snapshot)
         self.snapshots.sort(key = lambda x : x.timestamp)
 

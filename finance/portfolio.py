@@ -1,22 +1,18 @@
 from functools import reduce
-from collections import defaultdict
-
 class Portfolio:
 
     def __init__(self):
-        self.assets = defaultdict(int)
+        self.assets = []
 
-    def addAsset(self, asset, dollarAmount):
-        if dollarAmount >= 0: self.assets[asset] += dollarAmount
+    def import_asset(self, asset):
+        self.assets.append(asset)
 
     def percentages(self):
-        return {k: self.__percentOfPortfolio(v) for k, v in self.assets.items()}
+        asset_sum = self.__total_portfolio_value()
+        return dict((a.name, self.__percentage(a.value(), asset_sum)) for a in self.assets)
 
-    def __percentOfPortfolio(self, dollarAmount):
-        return self.__formatedPercent(dollarAmount) if self.__totalDollarAmount() > 0 else 0
+    def __total_portfolio_value(self):
+        return sum(asset.value() for asset in self.assets)
 
-    def __formatedPercent(self, dollarAmount):
-        return round(dollarAmount/self.__totalDollarAmount(), 3)
-
-    def __totalDollarAmount(self):
-        return reduce((lambda x, y: x + y), self.assets.values())
+    def __percentage(self, value, asset_sum):
+        return 0 if asset_sum == 0 else round(value / asset_sum, 3)
