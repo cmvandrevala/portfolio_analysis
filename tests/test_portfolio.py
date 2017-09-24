@@ -12,42 +12,51 @@ class PortfolioTestCase(unittest.TestCase):
     def test_it_starts_off_with_no_assets(self):
         self.assertEqual(self.portfolio.percentages(), {})
 
-    def test_it_adds_an_asset(self):
-        asset = Asset("PG")
-        asset.import_snapshot(time.time(), 1043.15)
-        self.portfolio.import_asset(asset)
+    def test_it_imports_asset_data_for_a_new_asset(self):
+        assetData = {"date": "2017-06-01", "name": "PG", "value": 1000}
+        self.portfolio.import_asset_data(assetData)
         self.assertEqual(self.portfolio.percentages(), {"PG": 1.0})
 
-    def test_it_adds_two_assets_in_equal_amounts(self):
-        asset1 = Asset("JJ")
-        asset1.import_snapshot(time.time(), 100)
-        asset2 = Asset("MCD")
-        asset2.import_snapshot(time.time(), 100)
-        self.portfolio.import_asset(asset1)
-        self.portfolio.import_asset(asset2)
-        self.assertEqual(self.portfolio.percentages(), {"JJ": 0.5, "MCD": 0.5})
+    def test_it_imports_asset_data_for_two_new_assets(self):
+        assetData = {"date": "2017-05-01", "name": "VZ", "value": 5000}
+        self.portfolio.import_asset_data(assetData)
+        assetData = {"date": "2017-06-08", "name": "KO", "value": 5000}
+        self.portfolio.import_asset_data(assetData)
+        self.assertEqual(self.portfolio.percentages(), {"KO": 0.5, "VZ": 0.5})
 
-    def test_it_adds_two_assets_in_different_amounts(self):
-        asset1 = Asset("AAPL")
-        asset1.import_snapshot(time.time(), 1000.50)
-        asset2 = Asset("BSX")
-        asset2.import_snapshot(time.time(), 100)
-        self.portfolio.import_asset(asset1)
-        self.portfolio.import_asset(asset2)
-        self.assertEqual(self.portfolio.percentages(), {"AAPL": 0.909, "BSX": 0.091})
+    def test_it_imports_asset_data_for_two_new_assets_in_different_amounts(self):
+        assetData = {"date": "2017-05-01", "name": "AAPL", "value": 2000}
+        self.portfolio.import_asset_data(assetData)
+        assetData = {"date": "2017-06-08", "name": "BSX", "value": 8000}
+        self.portfolio.import_asset_data(assetData)
+        self.assertEqual(self.portfolio.percentages(), {"AAPL": 0.2, "BSX": 0.8})
+
+    def test_it_imports_asset_data_for_an_existing_asset(self):
+        assetData = {"date": "2017-05-01", "name": "VZ", "value": 5000}
+        self.portfolio.import_asset_data(assetData)
+        assetData = {"date": "2017-05-02", "name": "VZ", "value": 2000}
+        self.portfolio.import_asset_data(assetData)
+        self.assertEqual(self.portfolio.percentages(), {"VZ": 1.0})
+
+    def test_it_imports_asset_data_for_existing_and_new_assets(self):
+        assetData = {"date": "2017-06-01", "name": "VZ", "value": 3000}
+        self.portfolio.import_asset_data(assetData)
+        assetData = {"date": "2017-06-30", "name": "PEP", "value": 4000}
+        self.portfolio.import_asset_data(assetData)
+        assetData = {"date": "2017-06-17", "name": "VZ", "value": 6000}
+        self.portfolio.import_asset_data(assetData)
+        self.assertEqual(self.portfolio.percentages(), {"VZ": 0.6, "PEP": 0.4})
 
     def test_it_does_not_ignore_a_single_zero_dollar_amount(self):
-        asset = Asset("T")
-        self.portfolio.import_asset(asset)
+        assetData = {"date": "2012-01-01", "name": "T", "value": 0}
+        self.portfolio.import_asset_data(assetData)
         self.assertEqual(self.portfolio.percentages(), {"T": 0})
 
     def test_it_does_not_ignore_a_zero_dollar_amount_mixed_with_other_amounts(self):
-        asset1 = Asset("VZ")
-        asset1.import_snapshot(time.time(), 0.0)
-        asset2 = Asset("SP")
-        asset2.import_snapshot(time.time(), 12.54)
-        self.portfolio.import_asset(asset1)
-        self.portfolio.import_asset(asset2)
+        assetData = {"date": "2011-02-08", "name": "VZ", "value": 0}
+        self.portfolio.import_asset_data(assetData)
+        assetData = {"date": "2011-02-08", "name": "SP", "value": 12.54}
+        self.portfolio.import_asset_data(assetData)
         self.assertEqual(self.portfolio.percentages(), {"VZ": 0, "SP": 1.0})
 
 if __name__ == '__main__':
