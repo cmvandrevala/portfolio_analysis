@@ -59,5 +59,19 @@ class PortfolioTestCase(unittest.TestCase):
         self.portfolio.import_asset_data(assetData)
         self.assertEqual(self.portfolio.percentages(), {"VZ": 0, "SP": 1.0})
 
+    def test_it_gives_the_total_value_of_the_portfolio_at_the_current_time(self):
+        assetData = {"date": "2011-02-08", "name": "VZ", "value": 100}
+        self.portfolio.import_asset_data(assetData)
+        assetData = {"date": "2011-02-08", "name": "SP", "value": 12.50}
+        self.portfolio.import_asset_data(assetData)
+        self.assertEqual(self.portfolio.total_value(), 112.50)
+
+    def test_it_gives_the_total_value_of_the_portfolio_at_a_previous_time(self):
+        assetData = {"date": "2017-01-01", "name": "VZ", "value": 100}
+        self.portfolio.import_asset_data(assetData)
+        assetData = {"date": "2017-06-01", "name": "SP", "value": 12.50}
+        self.portfolio.import_asset_data(assetData)
+        self.assertEqual(self.portfolio.total_value("2017-03-01"), 100)
+
 if __name__ == '__main__':
     unittest.main()

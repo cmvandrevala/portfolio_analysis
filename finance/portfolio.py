@@ -15,19 +15,16 @@ class Portfolio:
         self.__create_or_update_asset(name, date, value)
 
     def percentages(self):
-        asset_sum = self.__total_portfolio_value()
+        asset_sum = self.total_value()
         return dict((a.name, self.__percentage(a.value(), asset_sum)) for a in self.assets)
 
-    def __create_or_update_asset(self, name, date, value):
-        for asset in self.assets:
-            if asset.name == name:
-                asset.import_snapshot(self.__extract_date(date), value)
-                return
-        asset = Asset(name)
-        asset.import_snapshot(self.__extract_date(date), value)
-        self.assets.append(asset)
+    def total_value(self, date=None):
+        if date == None:
+            return sum(asset.value() for asset in self.assets)
+        else:
+            return sum(asset.value(self.__extract_date(date)) for asset in self.assets)
 
-    def __extract_date(self):
+    def __create_or_update_asset(self, name, date, value):
         for asset in self.assets:
             if asset.name == name:
                 asset.import_snapshot(self.__extract_date(date), value)
@@ -42,9 +39,6 @@ class Portfolio:
         day = int(date_string.split("-")[2])
         dt = datetime.datetime(year=year, month=month, day=day)
         return time.mktime(dt.timetuple())
-
-    def __total_portfolio_value(self):
-        return sum(asset.value() for asset in self.assets)
 
     def __percentage(self, value, asset_sum):
         return 0 if asset_sum == 0 else round(value / asset_sum, 3)
