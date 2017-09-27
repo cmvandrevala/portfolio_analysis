@@ -19,17 +19,4 @@ with open('test_ledger.csv') as csvfile:
         else:
             portfolio.import_liability_data({"name": row[2], "date": row[0], "value": float(row[6])})
 
-times = []
-owners_equity = []
-
-for day in range (0, number_of_days):
-    historical_time = current_time - day*seconds_per_day
-    formatted_date = datetime.datetime.fromtimestamp(historical_time).strftime('%Y-%m-%d')
-    times.append(datetime.datetime.fromtimestamp(historical_time))
-    owners_equity.append(portfolio.total_value(formatted_date))
-
-plot(times, owners_equity)
-xlabel('Date')
-ylabel("Owner's Equity")
-title("Owner's Equity vs. Time")
-show()
+print(portfolio.percentages())
