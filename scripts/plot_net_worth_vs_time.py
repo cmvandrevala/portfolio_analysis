@@ -4,7 +4,7 @@ from pylab import *
 
 from general_ledger.portfolio_creator import PortfolioCreator
 
-portfolio = PortfolioCreator("test_ledger.csv").create()
+portfolio = PortfolioCreator("tests/test_files/test_ledger.csv").create()
 current_time = time.time()
 number_of_days = 1000
 seconds_per_day = 24*60*60
