@@ -6,10 +6,13 @@ from finance.liability import Liability
 class LiabilityTestCase(unittest.TestCase):
 
     def setUp(self):
-        self.liability = Liability("some liability name")
+        self.liability = Liability("some liability name", "symbol")
 
     def test_it_has_a_name(self):
         self.assertEqual(self.liability.name, "some liability name")
+
+    def test_it_has_a_symbol(self):
+        self.assertEqual(self.liability.symbol, "symbol")
 
     def test_it_has_a_value_of_zero_if_there_are_no_snapshots(self):
         value = self.liability.value()

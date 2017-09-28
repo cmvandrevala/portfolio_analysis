@@ -1,23 +1,13 @@
-import csv
 import datetime
 import time
 from pylab import *
 
-from finance.portfolio import Portfolio
+from general_ledger.portfolio_creator import PortfolioCreator
 
-portfolio = Portfolio()
+portfolio = PortfolioCreator("tests/test_files/test_ledger.csv").create()
 current_time = time.time()
 number_of_days = 1000
 seconds_per_day = 24*60*60
-
-with open('test_ledger.csv') as csvfile:
-    reader = csv.reader(csvfile)
-    next(reader)
-    for row in reader:
-        if row[4] == "asset":
-            portfolio.import_asset_data({"name": row[1], "date": row[0], "value": float(row[3])})
-        else:
-            portfolio.import_liability_data({"name": row[1], "date": row[0], "value": float(row[3])})
 
 times = []
 owners_equity = []

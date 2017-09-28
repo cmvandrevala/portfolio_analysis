@@ -4,8 +4,9 @@ from finance.snapshot import Snapshot
 
 class Liability:
 
-    def __init__(self, name):
+    def __init__(self, name, symbol):
         self.name = name
+        self.symbol = symbol
         self.snapshots = []
 
     def value(self, query_time=None):
