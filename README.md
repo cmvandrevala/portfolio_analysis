@@ -7,6 +7,8 @@ This repo contains a set of Python scripts that I use in organizing my finances.
 * Python 3
 * Pylab
 
+Additionally, you can update `utilities/constants.py` to match your system.
+
 ### General Ledger
 
 The Python scripts pull data from a general, running ledger which is formatted as a CSV file. The ledger has the following columns (in order):

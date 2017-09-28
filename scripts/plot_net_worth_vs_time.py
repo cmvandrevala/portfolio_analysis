@@ -6,7 +6,7 @@ from pylab import *
 
 from general_ledger.portfolio_creator import PortfolioCreator
 
-portfolio = PortfolioCreator("ledger.csv").create()
+portfolio = PortfolioCreator(Constants.GENERAL_LEDGER_PATH).create()
 current_time = time.time()
 number_of_days = 1000
 
