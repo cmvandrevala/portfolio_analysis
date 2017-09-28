@@ -1,13 +1,13 @@
 clean:
-	rm -rf */*.pyc */__pycache__ *.csv
+	python3 -m scripts.clean_general_ledger
 
-import:
+import: clean
 	python3 -m scripts.import_csv_data
 
-net:
+net: clean
 	python3 -m scripts.plot_net_worth_vs_time
 
-percentages:
+percentages: clean
 	python3 -m scripts.calculate_percentages
 
 test:
