@@ -11,3 +11,7 @@ class Presenter:
     @staticmethod
     def value(value_str):
         return value_str.replace("$","").replace(",","").replace(")","").replace("(","-")
+
+    @staticmethod
+    def percentage(percent_fraction):
+        return str(100*percent_fraction) + "%"

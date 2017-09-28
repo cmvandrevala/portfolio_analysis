@@ -31,5 +31,14 @@ class PresenterTestCase(unittest.TestCase):
     def test_it_does_nothing_to_a_correctly_formatted_value(self):
         self.assertEqual(Presenter.value("5102.25"), "5102.25")
 
+    def test_it_formats_0_into_a_percentage(self):
+        self.assertEqual(Presenter.percentage(0.0), "0.0%")
+
+    def test_it_formats_one_half_into_a_percentage(self):
+        self.assertEqual(Presenter.percentage(0.5), "50.0%")
+
+    def test_it_formats_one_into_a_percentage(self):
+        self.assertEqual(Presenter.percentage(1.0), "100.0%")
+
 if __name__ == '__main__':
     unittest.main()
