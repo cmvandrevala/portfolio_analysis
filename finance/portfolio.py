@@ -12,18 +12,31 @@ class Portfolio:
 
     def import_asset_data(self, data):
         name = data["name"]
+        symbol = data["symbol"]
         date = data["date"]
         value = data["value"]
-        self.__create_or_update_asset(name, date, value)
+        self.__create_or_update_asset(name, symbol, date, value)
 
     def import_liability_data(self, data):
         name = data["name"]
+        symbol = data["symbol"]
         date = data["date"]
         value = data["value"]
-        self.__create_or_update_liability(name, date, value)
+        self.__create_or_update_liability(name, symbol, date, value)
 
     def percentages(self):
-        return dict((a.name, self.__percentage(a.value())) for a in self.assets)
+        output = {}
+        for asset in self.assets:
+            if asset.symbol in output:
+                output[asset.symbol] += asset.value()
+            else:
+                output[asset.symbol] = asset.value()
+        for key, value in output.items():
+            if self.total_value() == 0:
+                output[key] = 0
+            else:
+                output[key] = round(float(value)/self.__assets_value(),3)
+        return output
 
     def total_value(self, date=None):
         return round(self.__assets_value(date) + self.__liabilities_value(date), 2)
@@ -40,21 +53,21 @@ class Portfolio:
         else:
             return sum(liability.value(self.__extract_date(date)) for liability in self.liabilities)
 
-    def __create_or_update_asset(self, name, date, value):
+    def __create_or_update_asset(self, name, symbol, date, value):
         for asset in self.assets:
             if asset.name == name:
                 asset.import_snapshot(self.__extract_date(date), value)
                 return
-        asset = Asset(name)
+        asset = Asset(name, symbol)
         asset.import_snapshot(self.__extract_date(date), value)
         self.assets.append(asset)
 
-    def __create_or_update_liability(self, name, date, value):
+    def __create_or_update_liability(self, name, symbol, date, value):
         for liability in self.liabilities:
             if liability.name == name:
                 liability.import_snapshot(self.__extract_date(date), value)
                 return
-        liability = Liability(name)
+        liability = Liability(name, symbol)
         liability.import_snapshot(self.__extract_date(date), value)
         self.liabilities.append(liability)
 

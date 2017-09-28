@@ -8,6 +8,6 @@ Date,Institution,Name,Owner,Symbol,Classification,Value
 2017-02-08,US Bank,Loan_Two,Eusavio,CASHX,LIABILITY,10
 2017-03-08,US Bank,Loan_Two,Eusavio,CASHX,LIABILITY,20
 2017-04-08,US Bank,Loan_Two,Eusavio,CASHX,LIABILITY,30
-2016-03-16,US Bank,Savings,Amanda,CASHX,ASSET,420
-2016-04-30,US Bank,Savings,Amanda,CASHX,ASSET,410
-2016-05-27,US Bank,Savings,Amanda,CASHX,ASSET,200
+2016-03-16,US Bank,Savings,Amanda,CASH,ASSET,420
+2016-04-30,US Bank,Savings,Amanda,CASH,ASSET,410
+2016-05-27,US Bank,Savings,Amanda,CASH,ASSET,200
