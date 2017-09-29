@@ -14,4 +14,4 @@ class Presenter:
 
     @staticmethod
     def percentage(percent_fraction):
-        return str(100*percent_fraction) + "%"
+        return str(round(100*percent_fraction,1)) + "%"

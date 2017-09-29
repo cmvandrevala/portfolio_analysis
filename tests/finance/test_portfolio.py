@@ -110,5 +110,12 @@ class PortfolioTestCase(unittest.TestCase):
         self.portfolio.import_asset_data(assetData)
         self.assertEqual(self.portfolio.percentages(), {"A": 0.667, "B": 0.333})
 
+    def test_it_creates_different_assets_given_different_symbols_with_the_same_name(self):
+        assetData = {"date": "2017-01-01", "name": "Foo", "symbol": "A", "value": 100}
+        self.portfolio.import_asset_data(assetData)
+        assetData = {"date": "2017-06-01", "name": "Foo", "symbol": "B", "value": 200}
+        self.portfolio.import_asset_data(assetData)
+        self.assertEqual(self.portfolio.percentages(), {"A": 0.333, "B": 0.667})
+
 if __name__ == '__main__':
     unittest.main()

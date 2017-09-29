@@ -55,7 +55,7 @@ class Portfolio:
 
     def __create_or_update_asset(self, name, symbol, date, value):
         for asset in self.assets:
-            if asset.name == name:
+            if asset.name == name and asset.symbol == symbol:
                 asset.import_snapshot(self.__extract_date(date), value)
                 return
         asset = Asset(name, symbol)
