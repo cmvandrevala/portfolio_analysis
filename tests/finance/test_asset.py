@@ -6,13 +6,16 @@ from finance.asset import Asset
 class AssetTestCase(unittest.TestCase):
 
     def setUp(self):
-        self.asset = Asset("some asset name", "symbol")
+        self.asset = Asset("some asset name", "symbol", "Cash Equivalents")
 
     def test_it_has_a_name(self):
         self.assertEqual(self.asset.name, "some asset name")
 
     def test_it_has_a_symbol(self):
         self.assertEqual(self.asset.symbol, "symbol")
+
+    def test_it_has_an_asset_class(self):
+        self.assertEqual(self.asset.asset_class, "Cash Equivalents")
 
     def test_it_has_a_value_of_zero_if_there_are_no_snapshots(self):
         value = self.asset.value()

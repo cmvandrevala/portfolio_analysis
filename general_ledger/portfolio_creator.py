@@ -21,6 +21,6 @@ class PortfolioCreator:
 
     def __create_asset_or_liability(self, row):
         if row[5] == "ASSET":
-            self.portfolio.import_asset_data({"name": row[2], "date": row[0], "value": float(row[6]), "symbol": row[4]})
+            self.portfolio.import_asset_data({"name": row[2], "date": row[0], "value": float(row[6]), "symbol": row[4], "asset_class": row[7]})
         else:
-            self.portfolio.import_liability_data({"name": row[2], "date": row[0], "value": float(row[6]), "symbol": row[4]})
+            self.portfolio.import_liability_data({"name": row[2], "date": row[0], "value": float(row[6]), "symbol": row[4], "asset_class": row[7]})

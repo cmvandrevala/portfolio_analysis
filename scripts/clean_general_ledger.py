@@ -7,7 +7,7 @@ from utilities.constants import Constants
 if not os.path.isfile(Constants.GENERAL_LEDGER_PATH):
     with open(Constants.GENERAL_LEDGER_PATH, 'w') as f:
         writer = csv.writer(f)
-        writer.writerow(["Date", "Institution", "Name", "Owner", "Symbol", "Classification", "Value"])
+        writer.writerow(Constants.GENERAL_LEDGER_HEADERS)
 else:
     shutil.move(Constants.GENERAL_LEDGER_PATH, Constants.GENERAL_LEDGER_PATH + ".old")
     lines_seen = set()

@@ -15,7 +15,8 @@ class Portfolio:
         symbol = data["symbol"]
         date = data["date"]
         value = data["value"]
-        self.__create_or_update_asset(name, symbol, date, value)
+        asset_class = data["asset_class"]
+        self.__create_or_update_asset(name, symbol, date, value, asset_class)
 
     def import_liability_data(self, data):
         name = data["name"]
@@ -38,6 +39,17 @@ class Portfolio:
                 output[key] = round(float(value)/self.__assets_value(),3)
         return output
 
+    def asset_classes(self):
+        output = {"Cash Equivalents": 0, "Equities": 0, "Fixed Income": 0, "Real Estate": 0, "Commodities": 0}
+        for asset in self.assets:
+            output[asset.asset_class] += asset.value()
+        for key, value in output.items():
+            if self.total_value() == 0:
+                output[key] = 0
+            else:
+                output[key] = round(float(value)/self.__assets_value(),3)
+        return output
+
     def total_value(self, date=None):
         return round(self.__assets_value(date) + self.__liabilities_value(date), 2)
 
@@ -53,12 +65,12 @@ class Portfolio:
         else:
             return sum(liability.value(self.__extract_date(date)) for liability in self.liabilities)
 
-    def __create_or_update_asset(self, name, symbol, date, value):
+    def __create_or_update_asset(self, name, symbol, date, value, asset_class):
         for asset in self.assets:
             if asset.name == name and asset.symbol == symbol:
                 asset.import_snapshot(self.__extract_date(date), value)
                 return
-        asset = Asset(name, symbol)
+        asset = Asset(name, symbol, asset_class)
         asset.import_snapshot(self.__extract_date(date), value)
         self.assets.append(asset)
 

@@ -12,4 +12,5 @@ class RowFormatter:
         owner = "Family"
         symbol = "CASHX"
         classification = "ASSET"
-        return [ Presenter.date(row[0]), institution, account_type, owner, symbol, classification, Presenter.value(row[5]) ]
+        asset_class = "Cash Equivalents"
+        return [ Presenter.date(row[0]), institution, account_type, owner, symbol, classification, Presenter.value(row[5]), asset_class ]
