@@ -12,6 +12,6 @@ plt.bar(range(len(asset_classes)), asset_classes.values(), align='center')
 plt.xticks(range(len(asset_classes)), asset_classes.keys())
 
 plt.ylabel('Weight (% of Portfolio)')
-plt.title('Asset Weights')
+plt.title('Asset Class Weights')
 
 plt.show()

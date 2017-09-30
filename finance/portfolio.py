@@ -32,26 +32,25 @@ class Portfolio:
                 output[asset.symbol] += asset.value()
             else:
                 output[asset.symbol] = asset.value()
-        for key, value in output.items():
-            if self.total_value() == 0:
-                output[key] = 0
-            else:
-                output[key] = round(float(value)/self.__assets_value(),3)
+        self.__normalize_output(output)
         return output
 
     def asset_classes(self):
         output = {"Cash Equivalents": 0, "Equities": 0, "Fixed Income": 0, "Real Estate": 0, "Commodities": 0}
         for asset in self.assets:
             output[asset.asset_class] += asset.value()
+        self.__normalize_output(output)
+        return output
+
+    def total_value(self, date=None):
+        return round(self.__assets_value(date) + self.__liabilities_value(date), 2)
+
+    def __normalize_output(self, output):
         for key, value in output.items():
             if self.total_value() == 0:
                 output[key] = 0
             else:
                 output[key] = round(float(value)/self.__assets_value(),3)
-        return output
-
-    def total_value(self, date=None):
-        return round(self.__assets_value(date) + self.__liabilities_value(date), 2)
 
     def __assets_value(self, date=None):
         if date == None:
