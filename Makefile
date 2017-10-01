@@ -1,3 +1,6 @@
+classes:
+	python3 -m scripts.plot_asset_classes
+
 clean:
 	python3 -m scripts.clean_general_ledger
 

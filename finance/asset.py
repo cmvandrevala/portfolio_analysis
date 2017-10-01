@@ -4,9 +4,10 @@ from finance.snapshot import Snapshot
 
 class Asset:
 
-    def __init__(self, name, symbol):
+    def __init__(self, name, symbol, asset_class):
         self.name = name
         self.symbol = symbol
+        self.asset_class = asset_class
         self.snapshots = []
 
     def value(self, query_time=None):

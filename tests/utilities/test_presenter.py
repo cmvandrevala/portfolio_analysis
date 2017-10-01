@@ -40,5 +40,8 @@ class PresenterTestCase(unittest.TestCase):
     def test_it_formats_one_into_a_percentage(self):
         self.assertEqual(Presenter.percentage(1.0), "100.0%")
 
+    def test_it_rounds_a_repeating_decimal_to_one_place(self):
+        self.assertEqual(Presenter.percentage(0.777777777778), "77.8%")
+
 if __name__ == '__main__':
     unittest.main()
