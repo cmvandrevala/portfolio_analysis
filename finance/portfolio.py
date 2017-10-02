@@ -20,10 +20,9 @@ class Portfolio:
 
     def import_liability_data(self, data):
         name = data["name"]
-        symbol = data["symbol"]
         date = data["date"]
         value = data["value"]
-        self.__create_or_update_liability(name, symbol, date, value)
+        self.__create_or_update_liability(name, date, value)
 
     def percentages(self):
         output = {}
@@ -73,12 +72,12 @@ class Portfolio:
         asset.import_snapshot(self.__extract_date(date), value)
         self.assets.append(asset)
 
-    def __create_or_update_liability(self, name, symbol, date, value):
+    def __create_or_update_liability(self, name, date, value):
         for liability in self.liabilities:
             if liability.name == name:
                 liability.import_snapshot(self.__extract_date(date), value)
                 return
-        liability = Liability(name, symbol)
+        liability = Liability(name)
         liability.import_snapshot(self.__extract_date(date), value)
         self.liabilities.append(liability)
 
