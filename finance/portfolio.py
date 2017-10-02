@@ -1,6 +1,7 @@
 import datetime
 import time
 
+from collections import defaultdict
 from finance.asset import Asset
 from finance.liability import Liability
 
@@ -10,27 +11,16 @@ class Portfolio:
         self.assets = []
         self.liabilities = []
 
-    def import_asset_data(self, data):
-        name = data["name"]
-        symbol = data["symbol"]
-        date = data["date"]
-        value = data["value"]
-        asset_class = data["asset_class"]
-        self.__create_or_update_asset(name, symbol, date, value, asset_class)
-
-    def import_liability_data(self, data):
-        name = data["name"]
-        date = data["date"]
-        value = data["value"]
-        self.__create_or_update_liability(name, date, value)
+    def import_data(self, data):
+        if "asset_class" in data:
+            self.__create_or_update_asset(data["name"], data["symbol"], data["date"], data["value"], data["asset_class"])
+        else:
+            self.__create_or_update_liability(data["name"], data["date"], data["value"])
 
     def percentages(self):
-        output = {}
+        output = defaultdict(float)
         for asset in self.assets:
-            if asset.symbol in output:
-                output[asset.symbol] += asset.value()
-            else:
-                output[asset.symbol] = asset.value()
+            output[asset.symbol] += asset.value()
         self.__normalize_output(output)
         return output
 
