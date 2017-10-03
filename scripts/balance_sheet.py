@@ -8,11 +8,11 @@ portfolio = PortfolioCreator(Constants.GENERAL_LEDGER_PATH).create()
 asset_data = []
 liability_data = []
 
-asset_data.append(["Name", "Owner", "Asset Class", "Value"])
-liability_data.append(["Name", "Owner", "Asset Class", "Value"])
+asset_data.append(["Institution", "Name", "Owner", "Asset Class", "Value"])
+liability_data.append(["Institution", "Name", "Owner", "Asset Class", "Value"])
 
 for asset in portfolio.assets:
-    asset_data.append([asset.name, asset.owner, asset.asset_class, "$" + str(asset.value())])
+    asset_data.append([asset.institution, asset.name, asset.owner, asset.asset_class, "$" + str(asset.value())])
 
 for liability in portfolio.liabilities:
     liability_data.append([liability.name, "", "", "$" + str(liability.value())])

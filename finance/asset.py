@@ -5,11 +5,12 @@ from finance.snapshot_history import SnapshotHistory
 
 class Asset:
 
-    def __init__(self, name, owner, symbol, asset_class):
+    def __init__(self, name, owner, symbol, asset_class, institution):
         self.name = name
         self.owner = owner
         self.symbol = symbol
         self.asset_class = asset_class
+        self.institution = institution
         self.history = SnapshotHistory()
 
     def value(self, query_time=None):
