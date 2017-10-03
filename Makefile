@@ -1,3 +1,6 @@
+balance:
+	python3 -m scripts.balance_sheet
+
 classes:
 	python3 -m scripts.plot_asset_classes
 

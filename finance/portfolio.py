@@ -11,7 +11,7 @@ class Portfolio:
 
     def import_data(self, data):
         if "asset_class" in data:
-            self.__create_or_update_asset(data["name"], data["symbol"], data["date"], data["value"], data["asset_class"])
+            self.__create_or_update_asset(data["name"], data["owner"], data["symbol"], data["date"], data["value"], data["asset_class"])
         else:
             self.__create_or_update_liability(data["name"], data["date"], data["value"])
 
@@ -51,12 +51,12 @@ class Portfolio:
         else:
             return sum(liability.value(EpochConverter.convert(date)) for liability in self.liabilities)
 
-    def __create_or_update_asset(self, name, symbol, date, value, asset_class):
+    def __create_or_update_asset(self, name, owner, symbol, date, value, asset_class):
         for asset in self.assets:
             if asset.name == name and asset.symbol == symbol:
                 asset.import_snapshot(EpochConverter.convert(date), value)
                 return
-        asset = Asset(name, symbol, asset_class)
+        asset = Asset(name, owner, symbol, asset_class)
         asset.import_snapshot(EpochConverter.convert(date), value)
         self.assets.append(asset)
 

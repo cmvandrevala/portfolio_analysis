@@ -5,8 +5,9 @@ from finance.snapshot_history import SnapshotHistory
 
 class Asset:
 
-    def __init__(self, name, symbol, asset_class):
+    def __init__(self, name, owner, symbol, asset_class):
         self.name = name
+        self.owner = owner
         self.symbol = symbol
         self.asset_class = asset_class
         self.history = SnapshotHistory()
