@@ -13,7 +13,7 @@ class Portfolio:
         if "asset_class" in data:
             self.__create_or_update_asset(data["name"], data["owner"], data["symbol"], data["date"], data["value"], data["asset_class"], data["institution"])
         else:
-            self.__create_or_update_liability(data["name"], data["date"], data["value"])
+            self.__create_or_update_liability(data["name"], data["date"], data["value"], data["institution"])
 
     def percentages(self):
         output = defaultdict(float)
@@ -60,12 +60,12 @@ class Portfolio:
         asset.import_snapshot(EpochConverter.convert(date), value)
         self.assets.append(asset)
 
-    def __create_or_update_liability(self, name, date, value):
+    def __create_or_update_liability(self, name, date, value, institution):
         for liability in self.liabilities:
             if liability.name == name:
                 liability.import_snapshot(EpochConverter.convert(date), value)
                 return
-        liability = Liability(name)
+        liability = Liability(name, institution)
         liability.import_snapshot(EpochConverter.convert(date), value)
         self.liabilities.append(liability)
 

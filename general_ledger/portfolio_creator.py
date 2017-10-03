@@ -23,4 +23,4 @@ class PortfolioCreator:
         if row[5] == "ASSET":
             self.portfolio.import_data({"name": row[2], "date": row[0], "owner": row[3], "value": float(row[6]), "symbol": row[4], "asset_class": row[7], "institution": row[1]})
         else:
-            self.portfolio.import_data({"name": row[2], "date": row[0], "value": float(row[6])})
+            self.portfolio.import_data({"name": row[2], "date": row[0], "value": float(row[6]), "institution": row[1]})

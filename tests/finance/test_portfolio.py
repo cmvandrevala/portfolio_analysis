@@ -10,8 +10,8 @@ class PortfolioTestCase(unittest.TestCase):
         self.portfolio = Portfolio()
         self.asset_data_1 = {"date": "2017-06-01", "name": "Proctor and Gamble", "symbol": "PG", "value": 1000, "asset_class": "Equities", "owner": "Bob", "institution": "Bank 1"}
         self.asset_data_2 = {"date": "2017-07-01", "name": "Vanguard Bond Fund", "symbol": "VTIBX", "value": 2000, "asset_class": "Fixed Income", "owner": "Sam", "institution": "Bank 2"}
-        self.liability_data_1 = {"date": "2017-06-05", "name": "Visa Card", "value": 1000, "symbol": "CASHX"}
-        self.liability_data_2 = {"date": "2017-07-05", "name": "Personal Loan", "value": 1500, "symbol": "CASHX"}
+        self.liability_data_1 = {"date": "2017-06-05", "name": "Visa Card", "value": 1000, "symbol": "CASHX", "institution": "Bank 1"}
+        self.liability_data_2 = {"date": "2017-07-05", "name": "Personal Loan", "value": 1500, "symbol": "CASHX", "institution": "Bank 2"}
 
     def test_it_starts_off_with_no_assets_or_liabilities(self):
         self.assertEqual(self.portfolio.total_value(), 0)
@@ -76,7 +76,7 @@ class PortfolioTestCase(unittest.TestCase):
         self.portfolio.import_data(asset_data)
         asset_data = {"date": "2017-06-01", "name": "SP", "symbol": "SP", "value": 12.50, "asset_class": "class", "owner": "Julie", "institution": "Bank"}
         self.portfolio.import_data(asset_data)
-        liability_data = {"date": "2017-02-01", "name": "loan", "value": 50}
+        liability_data = {"date": "2017-02-01", "name": "loan", "value": 50, "institution": "bank"}
         self.portfolio.import_data(liability_data)
         self.assertEqual(self.portfolio.total_value("2017-03-01"), 50)
 

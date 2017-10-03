@@ -5,9 +5,10 @@ from finance.snapshot_history import SnapshotHistory
 
 class Liability:
 
-    def __init__(self, name):
+    def __init__(self, name, institution):
         self.name = name
         self.symbol = "CASHX"
+        self.institution = institution
         self.history = SnapshotHistory()
 
     def value(self, query_time=None):
