@@ -38,30 +38,30 @@ class PortfolioTestCase(unittest.TestCase):
         self.assertEqual(self.portfolio.total_value(), -2500)
 
     def test_it_imports_asset_data_for_an_existing_asset(self):
-        asset_data = {"date": "2017-05-01", "name": "Verizon", "symbol": "VZ", "value": 5000, "asset_class": "class", "owner": "Abraham", "institution": "Bank"}
+        asset_data = {"date": "2017-05-01", "name": "Verizon", "symbol": "VZ", "value": 5000, "asset_class": "Equities", "owner": "Abraham", "institution": "Bank"}
         self.portfolio.import_data(asset_data)
-        asset_data = {"date": "2017-05-02", "name": "Verizon", "symbol": "VZ", "value": 2000, "asset_class": "class", "owner": "Francis", "institution": "Bank"}
+        asset_data = {"date": "2017-05-02", "name": "Verizon", "symbol": "VZ", "value": 2000, "asset_class": "Equities", "owner": "Francis", "institution": "Bank"}
         self.portfolio.import_data(asset_data)
         self.assertEqual(self.portfolio.percentages(), {"VZ": 1.0})
 
     def test_it_imports_asset_data_for_existing_and_new_assets(self):
-        asset_data = {"date": "2017-06-01", "name": "VZ", "symbol": "VZ", "value": 3000, "asset_class": "class", "owner": "Willie", "institution": "Bank"}
+        asset_data = {"date": "2017-06-01", "name": "VZ", "symbol": "VZ", "value": 3000, "asset_class": "Equities", "owner": "Willie", "institution": "Bank"}
         self.portfolio.import_data(asset_data)
-        asset_data = {"date": "2017-06-30", "name": "PEP", "symbol": "PEP", "value": 4000, "asset_class": "class", "owner": "Seymour", "institution": "Bank"}
+        asset_data = {"date": "2017-06-30", "name": "PEP", "symbol": "PEP", "value": 4000, "asset_class": "Equities", "owner": "Seymour", "institution": "Bank"}
         self.portfolio.import_data(asset_data)
-        asset_data = {"date": "2017-06-17", "name": "VZ", "symbol": "VZ", "value": 6000, "asset_class": "class", "owner": "Jack", "institution": "Bank"}
+        asset_data = {"date": "2017-06-17", "name": "VZ", "symbol": "VZ", "value": 6000, "asset_class": "Equities", "owner": "Jack", "institution": "Bank"}
         self.portfolio.import_data(asset_data)
         self.assertEqual(self.portfolio.percentages(), {"VZ": 0.6, "PEP": 0.4})
 
     def test_it_does_not_ignore_a_single_zero_dollar_amount(self):
-        asset_data = {"date": "2012-01-01", "name": "T", "symbol": "T", "value": 0, "asset_class": "class", "owner": "Shauna", "institution": "Bank"}
+        asset_data = {"date": "2012-01-01", "name": "T", "symbol": "T", "value": 0, "asset_class": "Equities", "owner": "Shauna", "institution": "Bank"}
         self.portfolio.import_data(asset_data)
         self.assertEqual(self.portfolio.percentages(), {"T": 0})
 
     def test_it_does_not_ignore_a_zero_dollar_amount_mixed_with_other_amounts(self):
-        asset_data = {"date": "2011-02-08", "name": "Verizon", "symbol": "VZ", "value": 0, "asset_class": "class", "owner": "Brandine", "institution": "Bank"}
+        asset_data = {"date": "2011-02-08", "name": "Verizon", "symbol": "VZ", "value": 0, "asset_class": "Equities", "owner": "Brandine", "institution": "Bank"}
         self.portfolio.import_data(asset_data)
-        asset_data = {"date": "2011-02-08", "name": "Something", "symbol": "SP", "value": 12.54, "asset_class": "class", "owner": "Brittney", "institution": "Bank"}
+        asset_data = {"date": "2011-02-08", "name": "Something", "symbol": "SP", "value": 12.54, "asset_class": "Equities", "owner": "Brittney", "institution": "Bank"}
         self.portfolio.import_data(asset_data)
         self.assertEqual(self.portfolio.percentages(), {"VZ": 0, "SP": 1.0})
 
@@ -72,9 +72,9 @@ class PortfolioTestCase(unittest.TestCase):
         self.assertEqual(self.portfolio.total_value(), 2000)
 
     def test_it_gives_the_total_value_of_the_portfolio_at_a_previous_time(self):
-        asset_data = {"date": "2017-01-01", "name": "Verizon", "symbol": "VZ", "value": 100, "asset_class": "class", "owner": "Carl", "institution": "Bank"}
+        asset_data = {"date": "2017-01-01", "name": "Verizon", "symbol": "VZ", "value": 100, "asset_class": "Equities", "owner": "Carl", "institution": "Bank"}
         self.portfolio.import_data(asset_data)
-        asset_data = {"date": "2017-06-01", "name": "SP", "symbol": "SP", "value": 12.50, "asset_class": "class", "owner": "Julie", "institution": "Bank"}
+        asset_data = {"date": "2017-06-01", "name": "SP", "symbol": "SP", "value": 12.50, "asset_class": "Equities", "owner": "Julie", "institution": "Bank"}
         self.portfolio.import_data(asset_data)
         liability_data = {"date": "2017-02-01", "name": "loan", "value": 50, "institution": "bank"}
         self.portfolio.import_data(liability_data)
@@ -87,18 +87,18 @@ class PortfolioTestCase(unittest.TestCase):
         self.assertEqual(self.portfolio.percentages(), {'PG': 0.333, 'VTIBX': 0.667})
 
     def test_it_combines_assets_with_the_same_symbol_in_percentage_calculations(self):
-        asset_data = {"date": "2017-01-01", "name": "Foo", "symbol": "A", "value": 100, "asset_class": "class", "owner": "Felipe", "institution": "Bank"}
+        asset_data = {"date": "2017-01-01", "name": "Foo", "symbol": "A", "value": 100, "asset_class": "Equities", "owner": "Felipe", "institution": "Bank"}
         self.portfolio.import_data(asset_data)
-        asset_data = {"date": "2017-06-01", "name": "Bar", "symbol": "A", "value": 100, "asset_class": "class", "owner": "Kent", "institution": "Bank"}
+        asset_data = {"date": "2017-06-01", "name": "Bar", "symbol": "A", "value": 100, "asset_class": "Equities", "owner": "Kent", "institution": "Bank"}
         self.portfolio.import_data(asset_data)
-        asset_data = {"date": "2017-02-01", "name": "Baz", "symbol": "B", "value": 100, "asset_class": "class", "owner": "Marge", "institution": "Bank"}
+        asset_data = {"date": "2017-02-01", "name": "Baz", "symbol": "B", "value": 100, "asset_class": "Equities", "owner": "Marge", "institution": "Bank"}
         self.portfolio.import_data(asset_data)
         self.assertEqual(self.portfolio.percentages(), {"A": 0.667, "B": 0.333})
 
     def test_it_creates_different_assets_given_different_symbols_with_the_same_name(self):
-        asset_data = {"date": "2017-01-01", "name": "Foo", "symbol": "A", "value": 100, "asset_class": "class", "owner": "Lucy", "institution": "Bank"}
+        asset_data = {"date": "2017-01-01", "name": "Foo", "symbol": "A", "value": 100, "asset_class": "Equities", "owner": "Lucy", "institution": "Bank"}
         self.portfolio.import_data(asset_data)
-        asset_data = {"date": "2017-06-01", "name": "Foo", "symbol": "B", "value": 200, "asset_class": "class", "owner": "Greg", "institution": "Bank"}
+        asset_data = {"date": "2017-06-01", "name": "Foo", "symbol": "B", "value": 200, "asset_class": "Equities", "owner": "Greg", "institution": "Bank"}
         self.portfolio.import_data(asset_data)
         self.assertEqual(self.portfolio.percentages(), {"A": 0.333, "B": 0.667})
 

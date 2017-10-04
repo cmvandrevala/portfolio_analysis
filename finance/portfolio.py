@@ -10,10 +10,14 @@ class Portfolio:
         self.liabilities = []
 
     def import_data(self, data):
-        if "asset_class" in data:
-            self.__create_or_update_asset(data["name"], data["owner"], data["symbol"], data["date"], data["value"], data["asset_class"], data["institution"])
-        else:
-            self.__create_or_update_liability(data["name"], data["date"], data["value"], data["institution"])
+        name = data.get("name")
+        date = data.get("date")
+        value = data.get("value")
+        institution = data.get("institution")
+        owner = data.get("owner", None)
+        symbol = data.get("symbol", "CASHX")
+        asset_class = data.get("asset_class", None)
+        self.__create_entry(name, date, value, institution, owner, symbol, asset_class)
 
     def percentages(self):
         output = defaultdict(float)
@@ -51,23 +55,19 @@ class Portfolio:
         else:
             return sum(liability.value(EpochConverter.convert(date)) for liability in self.liabilities)
 
-    def __create_or_update_asset(self, name, owner, symbol, date, value, asset_class, institution):
-        for asset in self.assets:
-            if asset.name == name and asset.symbol == symbol:
-                asset.import_snapshot(EpochConverter.convert(date), value)
+    def __create_entry(self, name, date, value, institution, owner, symbol, asset_class):
+        if asset_class == None:
+            category = self.liabilities
+            j = Liability(name, institution)
+        else:
+            category = self.assets
+            j = Asset(name, owner, symbol, asset_class, institution)
+        for i in category:
+            if i.name == name and i.symbol == symbol:
+                i.import_snapshot(EpochConverter.convert(date), value)
                 return
-        asset = Asset(name, owner, symbol, asset_class, institution)
-        asset.import_snapshot(EpochConverter.convert(date), value)
-        self.assets.append(asset)
-
-    def __create_or_update_liability(self, name, date, value, institution):
-        for liability in self.liabilities:
-            if liability.name == name:
-                liability.import_snapshot(EpochConverter.convert(date), value)
-                return
-        liability = Liability(name, institution)
-        liability.import_snapshot(EpochConverter.convert(date), value)
-        self.liabilities.append(liability)
+        j.import_snapshot(EpochConverter.convert(date), value)
+        category.append(j)
 
     def __percentage(self, value):
         return 0 if self.__assets_value() == 0 else round(value / self.__assets_value(), 3)
