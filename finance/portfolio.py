@@ -34,40 +34,34 @@ class Portfolio:
         return output
 
     def total_value(self, date=None):
-        return round(self.__assets_value(date) + self.__liabilities_value(date), 2)
+        return round(self.__value_of(self.assets, date) + self.__value_of(self.liabilities, date), 2)
 
     def __normalize_output(self, output):
         for key, value in output.items():
             if self.total_value() == 0:
                 output[key] = 0
             else:
-                output[key] = round(float(value)/self.__assets_value(), 3)
+                output[key] = round(float(value)/self.__value_of(self.assets), 3)
 
-    def __assets_value(self, date=None):
+    def __value_of(self, assets_or_liabilities, date=None):
         if date == None:
-            return sum(asset.value() for asset in self.assets)
+            return sum(asset_or_liability.value() for asset_or_liability in assets_or_liabilities)
         else:
-            return sum(asset.value(EpochConverter.convert(date)) for asset in self.assets)
-
-    def __liabilities_value(self, date=None):
-        if date == None:
-            return sum(liability.value() for liability in self.liabilities)
-        else:
-            return sum(liability.value(EpochConverter.convert(date)) for liability in self.liabilities)
+            return sum(asset_or_liability.value(EpochConverter.convert(date)) for asset_or_liability in assets_or_liabilities)
 
     def __create_entry(self, name, date, value, institution, owner, symbol, asset_class):
         if asset_class == None:
-            category = self.liabilities
-            j = Liability(name, institution)
+            self.__create_or_update(name, date, value, symbol, self.liabilities, Liability(name, institution))
         else:
-            category = self.assets
-            j = Asset(name, owner, symbol, asset_class, institution)
+            self.__create_or_update(name, date, value, symbol, self.assets, Asset(name, owner, symbol, asset_class, institution))
+
+    def __create_or_update(self, name, date, value, symbol, category, asset_or_liability):
         for i in category:
             if i.name == name and i.symbol == symbol:
                 i.import_snapshot(EpochConverter.convert(date), value)
                 return
-        j.import_snapshot(EpochConverter.convert(date), value)
-        category.append(j)
+        asset_or_liability.import_snapshot(EpochConverter.convert(date), value)
+        category.append(asset_or_liability)
 
     def __percentage(self, value):
         return 0 if self.__assets_value() == 0 else round(value / self.__assets_value(), 3)
