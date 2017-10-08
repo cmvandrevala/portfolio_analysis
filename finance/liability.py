@@ -1,5 +1,3 @@
-import time
-
 from finance.snapshot import Snapshot
 from finance.snapshot_history import SnapshotHistory
 
@@ -15,7 +13,7 @@ class Liability:
         return -self.history.value(query_time)
 
     def import_snapshot(self, time, value):
-        snapshot = Snapshot(time,value)
+        snapshot = Snapshot(time, value)
         return self.history.import_snapshot(snapshot)
 
     def last_updated(self):

@@ -47,7 +47,7 @@ class Portfolio:
         if date == None:
             return sum(asset_or_liability.value() for asset_or_liability in assets_or_liabilities)
         else:
-            return sum(asset_or_liability.value(EpochConverter.convert(date)) for asset_or_liability in assets_or_liabilities)
+            return sum(asset_or_liability.value(EpochConverter.date_to_epoch(date)) for asset_or_liability in assets_or_liabilities)
 
     def __create_entry(self, name, date, value, institution, owner, symbol, asset_class):
         if asset_class == None:
@@ -58,9 +58,9 @@ class Portfolio:
     def __create_or_update(self, name, date, value, symbol, category, asset_or_liability):
         for i in category:
             if i.name == name and i.symbol == symbol:
-                i.import_snapshot(EpochConverter.convert(date), value)
+                i.import_snapshot(EpochConverter.date_to_epoch(date), value)
                 return
-        asset_or_liability.import_snapshot(EpochConverter.convert(date), value)
+        asset_or_liability.import_snapshot(EpochConverter.date_to_epoch(date), value)
         category.append(asset_or_liability)
 
     def __percentage(self, value):

@@ -1,5 +1,3 @@
-import time
-
 from finance.snapshot import Snapshot
 from finance.snapshot_history import SnapshotHistory
 

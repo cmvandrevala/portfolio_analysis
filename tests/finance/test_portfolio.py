@@ -1,5 +1,4 @@
 import unittest
-import time
 
 from finance.asset import Asset
 from finance.portfolio import Portfolio
