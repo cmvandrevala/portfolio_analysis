@@ -1,12 +1,12 @@
 import unittest
-import time
 
+from utilities.epoch_converter import EpochConverter
 from finance.snapshot import Snapshot
 
 class SnapshotTestCase(unittest.TestCase):
 
     def setUp(self):
-        self.timestamp = time.time()
+        self.timestamp = EpochConverter.current_epoch()
         self.snapshot = Snapshot(self.timestamp, 10235.63)
 
     def test_it_has_a_timestamp(self):

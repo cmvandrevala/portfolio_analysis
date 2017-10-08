@@ -13,4 +13,4 @@ class RowFormatter:
         symbol = "CASHX"
         classification = "ASSET"
         asset_class = "Cash Equivalents"
-        return [ Presenter.date(row[0]), institution, account_type, owner, symbol, classification, Presenter.value(row[5]), asset_class ]
+        return [ Presenter.date_slashes_as_dashes(row[0]), institution, account_type, owner, symbol, classification, Presenter.value_without_symbols(row[5]), asset_class ]

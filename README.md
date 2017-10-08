@@ -42,5 +42,9 @@ make test
 
 All of the scripts are located in the `scripts/` directory and are associated with a make task.
 
+* `make balance` -> Create a balance sheet
+* `make classes` -> Plot asset classes of portfolio
+* `make clean` -> Remove duplicate entries from the general ledger
+* `make import` -> Import finance data into a general ledger
 * `make net` -> Plot owner's equity versus time
 * `make percentages` -> Generate percentages for use in Portfolio Visualizer
