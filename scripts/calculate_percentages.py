@@ -12,7 +12,7 @@ with open('percentages.csv', 'w', newline='') as csvfile:
     writer = csv.writer(csvfile, delimiter=',')
     writer.writerow(['Symbol', 'Weight'])
     for symbol, percentage in percentages.items():
-        writer.writerow([symbol, Presenter.percentage(percentage)])
+        writer.writerow([symbol, Presenter.decimal_as_percentage(percentage)])
 
 plt.bar(range(len(percentages)), percentages.values(), align='center')
 plt.xticks(range(len(percentages)), percentages.keys())

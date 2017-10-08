@@ -1,7 +1,7 @@
 class Presenter:
 
     @staticmethod
-    def date(date_str):
+    def date_slashes_as_dashes(date_str):
         if (date_str.find("/") == -1):
             return date_str
         else:
@@ -9,9 +9,9 @@ class Presenter:
             return mdy[2] + "-" + mdy[0] + "-" + mdy[1]
 
     @staticmethod
-    def value(value_str):
+    def value_without_symbols(value_str):
         return value_str.replace("$","").replace(",","").replace(")","").replace("(","-")
 
     @staticmethod
-    def percentage(percent_fraction):
-        return str(round(100*percent_fraction,1)) + "%"
+    def decimal_as_percentage(percent_fraction):
+        return str(round(100*percent_fraction, 1)) + "%"
