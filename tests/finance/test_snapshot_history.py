@@ -1,4 +1,5 @@
 import unittest
+import datetime
 import time
 
 from finance.snapshot import Snapshot
@@ -70,6 +71,33 @@ class SnapshotHistoryTestCase(unittest.TestCase):
 
         value = self.history.value()
         self.assertEqual(value, 10)
+
+    def test_it_returns_the_latest_timestamp_for_one_snapshot(self):
+        current_time = time.time()
+        formatted_date = datetime.datetime.fromtimestamp(current_time).strftime('%Y-%m-%d')
+        snapshot = Snapshot(current_time, 1000)
+        self.history.import_snapshot(snapshot)
+        self.assertEqual(self.history.last_updated(), formatted_date)
+
+    def test_it_returns_the_latest_timestamp_for_two_snapshots(self):
+        current_time = time.time()
+        formatted_date = datetime.datetime.fromtimestamp(current_time).strftime('%Y-%m-%d')
+        snapshot = Snapshot(current_time, 1000)
+        self.history.import_snapshot(snapshot)
+        snapshot = Snapshot(current_time - 1000000, 2000)
+        self.history.import_snapshot(snapshot)
+        self.assertEqual(self.history.last_updated(), formatted_date)
+
+    def test_it_returns_the_latest_timestamp_for_three_snapshots(self):
+        current_time = time.time()
+        formatted_date = datetime.datetime.fromtimestamp(current_time).strftime('%Y-%m-%d')
+        snapshot = Snapshot(current_time, 1000)
+        self.history.import_snapshot(snapshot)
+        snapshot = Snapshot(current_time - 1000000, 2000)
+        self.history.import_snapshot(snapshot)
+        snapshot = Snapshot(current_time - 2000000, 2000)
+        self.history.import_snapshot(snapshot)
+        self.assertEqual(self.history.last_updated(), formatted_date)
 
 if __name__ == '__main__':
     unittest.main()

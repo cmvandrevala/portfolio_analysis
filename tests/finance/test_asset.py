@@ -1,4 +1,5 @@
 import unittest
+import datetime
 import time
 
 from finance.asset import Asset
@@ -73,6 +74,13 @@ class AssetTestCase(unittest.TestCase):
 
         value = self.asset.value()
         self.assertEqual(value, 10)
+
+    def test_it_returns_the_latest_timestamp(self):
+        timestamp = time.time()
+        formatted_date = datetime.datetime.fromtimestamp(timestamp).strftime('%Y-%m-%d')
+        self.asset.import_snapshot(timestamp, 100)
+        updated = self.asset.last_updated()
+        self.assertEqual(updated, formatted_date)
 
 if __name__ == '__main__':
     unittest.main()

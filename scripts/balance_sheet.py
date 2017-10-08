@@ -5,20 +5,18 @@ from general_ledger.portfolio_creator import PortfolioCreator
 from utilities.constants import Constants
 
 portfolio = PortfolioCreator(Constants.GENERAL_LEDGER_PATH).create()
-asset_data = []
-liability_data = []
+data = []
 
-asset_data.append(["Last Updated", "Institution", "Name", "Owner", "Asset Class", "Value"])
-liability_data.append(["Last Updated", "Institution", "Name", "Owner", "Asset Class", "Value"])
+data.append(["Last Updated", "Institution", "Name", "Owner", "Asset Class", "Value"])
 
 for asset in portfolio.assets:
-    asset_data.append(["", asset.institution, asset.name, asset.owner, asset.asset_class, str(asset.value())])
+    data.append([asset.last_updated(), asset.institution, asset.name, asset.owner, asset.asset_class, str(asset.value())])
 
 for liability in portfolio.liabilities:
-    liability_data.append(["", liability.institution, liability.name, "", "CASHX", str(-liability.value())])
+    data.append([liability.last_updated(), liability.institution, liability.name, "", "", str(liability.value())])
 
-asset_table = AsciiTable(asset_data)
-liability_table = AsciiTable(liability_data)
-print(asset_table.table)
-print(liability_table.table)
-print("Owners Equity: $" + str(portfolio.total_value()))
+data.append(["", "", "", "", "Total", str(portfolio.total_value())])
+
+t = AsciiTable(data)
+t.inner_footing_row_border = True
+print(t.table)

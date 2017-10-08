@@ -1,4 +1,5 @@
 import time
+import datetime
 
 class SnapshotHistory:
 
@@ -18,6 +19,10 @@ class SnapshotHistory:
         if(query_time == None):
             return self.__find_value(time.time())
         return self.__find_value(query_time)
+
+    def last_updated(self):
+        final_snapshot = self.snapshots[-1]
+        return datetime.datetime.fromtimestamp(final_snapshot.timestamp).strftime('%Y-%m-%d')
 
     def __find_value(self, query_time):
         value = 0

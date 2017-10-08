@@ -1,4 +1,5 @@
 import unittest
+import datetime
 import time
 
 from finance.liability import Liability
@@ -67,6 +68,13 @@ class LiabilityTestCase(unittest.TestCase):
 
         value = self.liability.value()
         self.assertEqual(value, -10)
+
+    def test_it_returns_the_latest_timestamp(self):
+        timestamp = time.time()
+        formatted_date = datetime.datetime.fromtimestamp(timestamp).strftime('%Y-%m-%d')
+        self.liability.import_snapshot(timestamp, 100)
+        updated = self.liability.last_updated()
+        self.assertEqual(updated, formatted_date)
 
 if __name__ == '__main__':
     unittest.main()

@@ -19,3 +19,6 @@ class Asset:
     def import_snapshot(self, time, value):
         snapshot = Snapshot(time,value)
         return self.history.import_snapshot(snapshot)
+
+    def last_updated(self):
+        return self.history.last_updated()
