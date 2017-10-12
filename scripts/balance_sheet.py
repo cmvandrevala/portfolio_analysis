@@ -4,7 +4,7 @@ from terminaltables import AsciiTable
 from general_ledger.portfolio_creator import PortfolioCreator
 from utilities.constants import Constants
 
-portfolio = PortfolioCreator(Constants.GENERAL_LEDGER_PATH).create()
+portfolio = PortfolioCreator(Constants.LOCAL_LEDGER_PATH).create()
 data = []
 
 data.append(["Last Updated", "Institution", "Name", "Owner", "Asset Class", "Value"])
