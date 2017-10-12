@@ -1,7 +1,7 @@
 from collections import defaultdict
 from utilities.epoch_converter import EpochConverter
-from finance.asset import Asset
-from finance.liability import Liability
+from core.asset import Asset
+from core.liability import Liability
 
 class Portfolio:
 
