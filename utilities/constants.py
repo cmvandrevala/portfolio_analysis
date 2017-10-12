@@ -1,4 +1,7 @@
 class Constants:
+    DAYS_PER_YEAR = 365
+    GENERAL_LEDGER_HEADERS = ["Timestamp", "Institution", "Description", "Owner", "Symbol", "Asset or Liability", "Value", "Asset Class"]
+    LEDGERS_DIRECTORY = "../general_ledger/"
+    LOCAL_LEDGER_PATH = "local_ledger.csv"
     SECONDS_PER_DAY = 86400
-    GENERAL_LEDGER_PATH = "ledger.csv"
-    GENERAL_LEDGER_HEADERS = ["Date", "Institution", "Name", "Owner", "Symbol", "Classification", "Value", "Asset Class"]
+    YES_REPONSES = ["y", "ye", "yes"]

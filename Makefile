@@ -1,7 +1,7 @@
-balance:
+balance: import
 	python3 -m scripts.balance_sheet
 
-classes:
+classes: import
 	python3 -m scripts.plot_asset_classes
 
 clean:
@@ -10,10 +10,10 @@ clean:
 import: clean
 	python3 -m scripts.import_csv_data
 
-net: clean
+net: import
 	python3 -m scripts.plot_net_worth_vs_time
 
-percentages: clean
+percentages: import
 	python3 -m scripts.calculate_percentages
 
 test:

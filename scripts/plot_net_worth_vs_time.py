@@ -4,8 +4,8 @@ from pylab import *
 
 from general_ledger.portfolio_creator import PortfolioCreator
 
-portfolio = PortfolioCreator(Constants.GENERAL_LEDGER_PATH).create()
-number_of_days = 1000
+portfolio = PortfolioCreator(Constants.LOCAL_LEDGER_PATH).create()
+number_of_days = Constants.DAYS_PER_YEAR*15
 
 times = []
 owners_equity = []

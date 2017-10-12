@@ -5,7 +5,7 @@ from general_ledger.portfolio_creator import PortfolioCreator
 from utilities.constants import Constants
 from utilities.presenter import Presenter
 
-portfolio = PortfolioCreator(Constants.GENERAL_LEDGER_PATH).create()
+portfolio = PortfolioCreator(Constants.LOCAL_LEDGER_PATH).create()
 percentages = portfolio.percentages()
 
 with open('percentages.csv', 'w', newline='') as csvfile:
