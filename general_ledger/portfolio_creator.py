@@ -1,6 +1,6 @@
 import csv
 
-from finance.portfolio import Portfolio
+from core.portfolio import Portfolio
 
 class PortfolioCreator:
 

@@ -1,5 +1,5 @@
-from finance.snapshot import Snapshot
-from finance.snapshot_history import SnapshotHistory
+from core.snapshot import Snapshot
+from core.snapshot_history import SnapshotHistory
 
 class Liability:
 

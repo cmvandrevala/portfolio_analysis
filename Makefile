@@ -17,6 +17,6 @@ percentages: import
 	python3 -m scripts.calculate_percentages
 
 test:
-	python3 -m unittest discover tests/finance
+	python3 -m unittest discover tests/core
 	python3 -m unittest discover tests/general_ledger
 	python3 -m unittest discover tests/utilities

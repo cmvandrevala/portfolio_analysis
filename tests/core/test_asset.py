@@ -1,7 +1,7 @@
 import unittest
 
 from utilities.epoch_converter import EpochConverter
-from finance.asset import Asset
+from core.asset import Asset
 
 class AssetTestCase(unittest.TestCase):
 

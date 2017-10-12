@@ -1,7 +1,7 @@
 import unittest
 
-from finance.asset import Asset
-from finance.portfolio import Portfolio
+from core.asset import Asset
+from core.portfolio import Portfolio
 
 class PortfolioTestCase(unittest.TestCase):
 

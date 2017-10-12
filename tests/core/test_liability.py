@@ -1,7 +1,7 @@
 import unittest
 
 from utilities.epoch_converter import EpochConverter
-from finance.liability import Liability
+from core.liability import Liability
 
 class LiabilityTestCase(unittest.TestCase):
 

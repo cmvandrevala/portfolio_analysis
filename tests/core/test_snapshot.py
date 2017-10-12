@@ -1,7 +1,7 @@
 import unittest
 
 from utilities.epoch_converter import EpochConverter
-from finance.snapshot import Snapshot
+from core.snapshot import Snapshot
 
 class SnapshotTestCase(unittest.TestCase):
 
