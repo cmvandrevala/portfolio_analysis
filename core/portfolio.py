@@ -1,7 +1,6 @@
 from collections import defaultdict
 from utilities.epoch_converter import EpochConverter
 from core.account import Account
-from core.liability import Liability
 
 class Portfolio:
 
@@ -34,7 +33,7 @@ class Portfolio:
         return output
 
     def total_value(self, date=None):
-        return round(self.__value_of(self.assets, date) + self.__value_of(self.liabilities, date), 2)
+        return round(self.__value_of(self.assets, date) - self.__value_of(self.liabilities, date), 2)
 
     def __normalize_output(self, output):
         for key, value in output.items():
@@ -51,7 +50,7 @@ class Portfolio:
 
     def __create_entry(self, name, date, value, institution, owner, symbol, asset_class):
         if asset_class == None:
-            self.__create_or_update(name, date, value, symbol, self.liabilities, Liability(name, institution))
+            self.__create_or_update(name, date, value, symbol, self.liabilities, Account(name, owner, symbol, asset_class, institution, "LIABILITY"))
         else:
             self.__create_or_update(name, date, value, symbol, self.assets, Account(name, owner, symbol, asset_class, institution, "ASSET"))
 
