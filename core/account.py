@@ -21,3 +21,11 @@ class Account:
 
     def last_updated(self):
         return self.history.last_updated()
+
+    def is_identical_to(self, account):
+        return ( self.name == account.name and
+                 self.owner == account.owner and
+                 self.symbol == account.symbol and
+                 self.asset_class == account.asset_class and
+                 self.institution == account.institution and
+                 self.account_type == account.account_type )

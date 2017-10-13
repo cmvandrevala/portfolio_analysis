@@ -53,7 +53,7 @@ class Portfolio:
 
     def __create_or_update(self, name, date, value, symbol, category, asset_or_liability):
         for i in category:
-            if i.name == name and i.symbol == symbol:
+            if i.is_identical_to(asset_or_liability):
                 i.import_snapshot(EpochConverter.date_to_epoch(date), value)
                 return
         asset_or_liability.import_snapshot(EpochConverter.date_to_epoch(date), value)
