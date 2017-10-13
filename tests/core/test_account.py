@@ -6,7 +6,7 @@ from core.account import Account
 class AssetTestCase(unittest.TestCase):
 
     def setUp(self):
-        self.account = Account("asset name", "Bob Bobberson", "asset symbol", "Cash Equivalents", "Rachel's Bank")
+        self.account = Account("asset name", "Bob Bobberson", "asset symbol", "Cash Equivalents", "Rachel's Bank", "ASSET")
 
     def test_it_has_a_name(self):
         self.assertEqual(self.account.name, "asset name")
@@ -22,6 +22,9 @@ class AssetTestCase(unittest.TestCase):
 
     def test_it_has_an_institution(self):
         self.assertEqual(self.account.institution, "Rachel's Bank")
+
+    def test_it_has_an_account_type(self):
+        self.assertEqual(self.account.account_type, "ASSET")
 
     def test_it_has_a_value_of_zero_if_there_are_no_snapshots(self):
         value = self.account.value()

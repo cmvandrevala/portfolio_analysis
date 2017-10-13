@@ -3,12 +3,13 @@ from core.snapshot_history import SnapshotHistory
 
 class Account:
 
-    def __init__(self, name, owner, symbol, asset_class, institution):
+    def __init__(self, name, owner, symbol, asset_class, institution, account_type):
         self.name = name
         self.owner = owner
         self.symbol = symbol
         self.asset_class = asset_class
         self.institution = institution
+        self.account_type = account_type
         self.history = SnapshotHistory()
 
     def value(self, query_time=None):

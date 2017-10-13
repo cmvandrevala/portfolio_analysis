@@ -53,7 +53,7 @@ class Portfolio:
         if asset_class == None:
             self.__create_or_update(name, date, value, symbol, self.liabilities, Liability(name, institution))
         else:
-            self.__create_or_update(name, date, value, symbol, self.assets, Account(name, owner, symbol, asset_class, institution))
+            self.__create_or_update(name, date, value, symbol, self.assets, Account(name, owner, symbol, asset_class, institution, "ASSET"))
 
     def __create_or_update(self, name, date, value, symbol, category, asset_or_liability):
         for i in category:
