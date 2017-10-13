@@ -1,12 +1,13 @@
 import unittest
 
 from utilities.epoch_converter import EpochConverter
+from valid_options.account_type import AccountType
 from core.account import Account
 
 class AssetTestCase(unittest.TestCase):
 
     def setUp(self):
-        self.account = Account("account name", "Bob Bobberson", "SYMBOL", "Cash Equivalents", "Rachel's Bank", "ASSET")
+        self.account = Account("account name", "Bob Bobberson", "SYMBOL", "Cash Equivalents", "Rachel's Bank", AccountType.ASSET)
 
     def test_it_has_a_name(self):
         self.assertEqual(self.account.name, "account name")
@@ -24,7 +25,11 @@ class AssetTestCase(unittest.TestCase):
         self.assertEqual(self.account.institution, "Rachel's Bank")
 
     def test_it_has_an_account_type(self):
-        self.assertEqual(self.account.account_type, "ASSET")
+        self.assertEqual(self.account.account_type(), AccountType.ASSET.value)
+
+    def test_it_throws_an_exception_if_a_string_is_passed_in_for_an_account_type(self):
+        invalid_account = Account("account name", "Bob Bobberson", "SYMBOL", "Cash Equivalents", "Rachel's Bank", "RANDOM")
+        self.assertRaises(AttributeError, invalid_account.account_type)
 
     def test_it_has_a_value_of_zero_if_there_are_no_snapshots(self):
         value = self.account.value()
@@ -81,27 +86,27 @@ class AssetTestCase(unittest.TestCase):
         self.assertTrue(self.account.is_identical_to(self.account))
 
     def test_an_account_is_not_identical_to_one_with_a_different_name(self):
-        different_account = Account("another name", "Bob Bobberson", "SYMBOL", "Cash Equivalents", "Rachel's Bank", "ASSET")
+        different_account = Account("another name", "Bob Bobberson", "SYMBOL", "Cash Equivalents", "Rachel's Bank", AccountType.ASSET)
         self.assertFalse(self.account.is_identical_to(different_account))
 
     def test_an_account_is_not_identical_to_one_with_a_different_owner(self):
-        different_account = Account("account name", "Sam Sampson", "SYMBOL", "Cash Equivalents", "Rachel's Bank", "ASSET")
+        different_account = Account("account name", "Sam Sampson", "SYMBOL", "Cash Equivalents", "Rachel's Bank", AccountType.ASSET)
         self.assertFalse(self.account.is_identical_to(different_account))
 
     def test_an_account_is_not_identical_to_one_with_a_different_symbol(self):
-        different_account = Account("account name", "Bob Bobberson", "SYMBOL_2", "Cash Equivalents", "Rachel's Bank", "ASSET")
+        different_account = Account("account name", "Bob Bobberson", "SYMBOL_2", "Cash Equivalents", "Rachel's Bank", AccountType.ASSET)
         self.assertFalse(self.account.is_identical_to(different_account))
 
     def test_an_account_is_not_identical_to_one_with_a_different_asset_class(self):
-        different_account = Account("account name", "Bob Bobberson", "SYMBOL", "Equities", "Rachel's Bank", "ASSET")
+        different_account = Account("account name", "Bob Bobberson", "SYMBOL", "Equities", "Rachel's Bank", AccountType.ASSET)
         self.assertFalse(self.account.is_identical_to(different_account))
 
     def test_an_account_is_not_identical_to_one_with_a_different_institution(self):
-        different_account = Account("account name", "Bob Bobberson", "SYMBOL", "Cash Equivalents", "Eric's Bank", "ASSET")
+        different_account = Account("account name", "Bob Bobberson", "SYMBOL", "Cash Equivalents", "Eric's Bank", AccountType.ASSET)
         self.assertFalse(self.account.is_identical_to(different_account))
 
     def test_an_account_is_not_identical_to_one_with_a_different_account_type(self):
-        different_account = Account("account name", "Bob Bobberson", "SYMBOL", "Cash Equivalents", "Rachel's Bank", "LIABILITY")
+        different_account = Account("account name", "Bob Bobberson", "SYMBOL", "Cash Equivalents", "Rachel's Bank", AccountType.LIABILITY)
         self.assertFalse(self.account.is_identical_to(different_account))
 
 if __name__ == '__main__':

@@ -1,5 +1,6 @@
 from core.snapshot import Snapshot
 from core.snapshot_history import SnapshotHistory
+from valid_options.account_type import AccountType
 
 class Account:
 
@@ -9,8 +10,11 @@ class Account:
         self.symbol = symbol
         self.asset_class = asset_class
         self.institution = institution
-        self.account_type = account_type
+        self.__account_type = account_type
         self.history = SnapshotHistory()
+
+    def account_type(self):
+        return self.__account_type.value
 
     def value(self, query_time=None):
         return self.history.value(query_time)
@@ -28,4 +32,4 @@ class Account:
                  self.symbol == account.symbol and
                  self.asset_class == account.asset_class and
                  self.institution == account.institution and
-                 self.account_type == account.account_type )
+                 self.account_type() == account.account_type() )

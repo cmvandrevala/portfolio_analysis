@@ -23,21 +23,22 @@ Additionally, you need to update `utilities/constants.py` to fit your specific n
 
 The Python scripts pull data from a directory containing a number of CSV files with financial data. Each file has the following columns (in order):
 
-* Date: Formatted as year-month-day
+* Timestamp: Formatted as year-month-day
 * Institution: Where is the asset or liability held
-* Name: The name of the asset or liability
+* Description: The name of the asset or liability
 * Owner: The owner of the asset or liability
 * Symbol: What is the ticker symbol of the asset or liability
-* Classification: Can take the values of "ASSET" or "LIABILITY"
+* Account Type: Can take the values of "ASSET" or "LIABILITY"
 * Value: The value of the asset or liability on the given day
+* Asset Class: The asset class of the account. Liabilities have an asset class of "Cash Equivalents"
 
 For example:
 
 ```
-Date,Institution,Name,Owner,Symbol,Classification,Value
-2017-05-01,Bobs Bank,Checking_Cyrus,Cyrus,CASHX,ASSET,600
-2017-06-07,Sams Bank,Checking_Stephen,Stephen,CASHX,ASSET,500
-2017-07-08,Eusavios Loans,Mary_Loan,Mary,CASHX,LIABILITY,400
+Timestamp,Institution,Description,Owner,Symbol,Account Type,Value,Asset Class
+2017-05-01,Bobs Bank,Checking_Cyrus,Cyrus,CASHX,ASSET,600,Cash Equivalents
+2017-06-07,Sams Bank,Checking_Stephen,Stephen,CASHX,ASSET,500,Cash Equivalents
+2017-07-08,Eusavios Loans,Mary_Loan,Mary,CASHX,LIABILITY,400,Cash Equivalents
 ```
 
 You can set the location of this directory by updating `Constants.LEDGERS_DIRECTORY` in `utilities/constants.py`
