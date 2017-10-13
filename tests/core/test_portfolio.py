@@ -1,6 +1,5 @@
 import unittest
 
-from core.asset import Asset
 from core.portfolio import Portfolio
 
 class PortfolioTestCase(unittest.TestCase):
@@ -43,14 +42,23 @@ class PortfolioTestCase(unittest.TestCase):
         self.portfolio.import_data(asset_data)
         self.assertEqual(self.portfolio.percentages(), {"VZ": 1.0})
 
-    def test_it_imports_asset_data_for_existing_and_new_assets(self):
+    def test_it_imports_asset_data_for_existing_and_new_assets_with_the_same_owner(self):
         asset_data = {"date": "2017-06-01", "name": "VZ", "symbol": "VZ", "value": 3000, "asset_class": "Equities", "owner": "Willie", "institution": "Bank"}
         self.portfolio.import_data(asset_data)
-        asset_data = {"date": "2017-06-30", "name": "PEP", "symbol": "PEP", "value": 4000, "asset_class": "Equities", "owner": "Seymour", "institution": "Bank"}
+        asset_data = {"date": "2017-06-30", "name": "PEP", "symbol": "PEP", "value": 4000, "asset_class": "Equities", "owner": "Willie", "institution": "Bank"}
+        self.portfolio.import_data(asset_data)
+        asset_data = {"date": "2017-06-17", "name": "VZ", "symbol": "VZ", "value": 6000, "asset_class": "Equities", "owner": "Willie", "institution": "Bank"}
+        self.portfolio.import_data(asset_data)
+        self.assertEqual(self.portfolio.percentages(), {"VZ": 0.6, "PEP": 0.4})
+
+    def test_it_imports_asset_data_for_existing_and_new_assets_with_different_owners(self):
+        asset_data = {"date": "2017-06-01", "name": "VZ", "symbol": "VZ", "value": 6000, "asset_class": "Equities", "owner": "Willie", "institution": "Bank"}
+        self.portfolio.import_data(asset_data)
+        asset_data = {"date": "2017-06-30", "name": "PEP", "symbol": "PEP", "value": 6000, "asset_class": "Equities", "owner": "Seymour", "institution": "Bank"}
         self.portfolio.import_data(asset_data)
         asset_data = {"date": "2017-06-17", "name": "VZ", "symbol": "VZ", "value": 6000, "asset_class": "Equities", "owner": "Jack", "institution": "Bank"}
         self.portfolio.import_data(asset_data)
-        self.assertEqual(self.portfolio.percentages(), {"VZ": 0.6, "PEP": 0.4})
+        self.assertEqual(self.portfolio.percentages(), {"VZ": 0.667, "PEP": 0.333})
 
     def test_it_does_not_ignore_a_single_zero_dollar_amount(self):
         asset_data = {"date": "2012-01-01", "name": "T", "symbol": "T", "value": 0, "asset_class": "Equities", "owner": "Shauna", "institution": "Bank"}
