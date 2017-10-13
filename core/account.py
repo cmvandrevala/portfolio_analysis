@@ -1,7 +1,7 @@
 from core.snapshot import Snapshot
 from core.snapshot_history import SnapshotHistory
 
-class Asset:
+class Account:
 
     def __init__(self, name, owner, symbol, asset_class, institution):
         self.name = name

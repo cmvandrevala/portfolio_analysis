@@ -1,6 +1,5 @@
 import unittest
 
-from core.asset import Asset
 from core.portfolio import Portfolio
 
 class PortfolioTestCase(unittest.TestCase):

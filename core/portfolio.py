@@ -1,6 +1,6 @@
 from collections import defaultdict
 from utilities.epoch_converter import EpochConverter
-from core.asset import Asset
+from core.account import Account
 from core.liability import Liability
 
 class Portfolio:
@@ -53,7 +53,7 @@ class Portfolio:
         if asset_class == None:
             self.__create_or_update(name, date, value, symbol, self.liabilities, Liability(name, institution))
         else:
-            self.__create_or_update(name, date, value, symbol, self.assets, Asset(name, owner, symbol, asset_class, institution))
+            self.__create_or_update(name, date, value, symbol, self.assets, Account(name, owner, symbol, asset_class, institution))
 
     def __create_or_update(self, name, date, value, symbol, category, asset_or_liability):
         for i in category:
