@@ -24,7 +24,10 @@ class AssetTestCase(unittest.TestCase):
         self.assertEqual(self.account.institution, "Rachel's Bank")
 
     def test_it_has_an_account_type(self):
-        self.assertEqual(self.account.account_type, "ASSET")
+        self.assertEqual(self.account.account_type(), "ASSET")
+
+    def test_it_throws_an_exception_if_a_random_account_type_is_passed_in(self):
+        self.assertRaises(ValueError, Account, "account name", "Bob Bobberson", "SYMBOL", "Cash Equivalents", "Rachel's Bank", "RANDOM")
 
     def test_it_has_a_value_of_zero_if_there_are_no_snapshots(self):
         value = self.account.value()
