@@ -17,7 +17,8 @@ class Portfolio:
         owner = data.get("owner", None)
         symbol = data.get("symbol", "CASHX")
         asset_class = data.get("asset_class", None)
-        self.__create_entry(name, date, value, institution, owner, symbol, asset_class)
+        account_type = data.get("account_type")
+        self.__create_entry(name, date, value, institution, owner, symbol, asset_class, account_type)
 
     def percentages(self):
         output = defaultdict(float)
@@ -46,8 +47,8 @@ class Portfolio:
     def __value_of(self, accounts, date=None):
         return sum(account.value(EpochConverter.date_to_epoch(date)) for account in accounts)
 
-    def __create_entry(self, name, date, value, institution, owner, symbol, asset_class):
-        if asset_class == None:
+    def __create_entry(self, name, date, value, institution, owner, symbol, asset_class, account_type):
+        if account_type == AccountType.LIABILITY.value:
             self.__create_or_update(name, date, value, symbol, self.liabilities, Account(name, owner, symbol, asset_class, institution, AccountType.LIABILITY))
         else:
             self.__create_or_update(name, date, value, symbol, self.assets, Account(name, owner, symbol, asset_class, institution, AccountType.ASSET))
