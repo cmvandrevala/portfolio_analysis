@@ -10,7 +10,7 @@ class Account:
         self.symbol = symbol
         self.asset_class = asset_class
         self.institution = institution
-        self.__account_type = AccountType(account_type)
+        self.__account_type = account_type
         self.history = SnapshotHistory()
 
     def account_type(self):
