@@ -11,6 +11,14 @@ class EpochConverterTestCase(unittest.TestCase):
     def test_it_extracts_an_epoch_from_another_date_string_with_dashes(self):
         self.assertEqual(EpochConverter.date_to_epoch("2011-03-01"), 1298980800)
 
+    def test_it_returns_the_current_epoch_if_the_date_has_a_value_of_None(self):
+        current_epoch = EpochConverter.current_epoch()
+        self.assertAlmostEqual(EpochConverter.date_to_epoch(None), current_epoch, places=1)
+
+    def test_it_returns_the_current_epoch_if_no_date_is_passed_in(self):
+        current_epoch = EpochConverter.current_epoch()
+        self.assertAlmostEqual(EpochConverter.date_to_epoch(), current_epoch, places=1)
+
     def test_it_converts_an_epoch_into_a_utc_date_string(self):
         epoch = 1507488000
         expected_date = "2017-10-08"

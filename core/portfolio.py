@@ -42,11 +42,8 @@ class Portfolio:
             else:
                 output[key] = round(float(value)/self.__value_of(self.assets), 3)
 
-    def __value_of(self, assets_or_liabilities, date=None):
-        if date == None:
-            return sum(asset_or_liability.value() for asset_or_liability in assets_or_liabilities)
-        else:
-            return sum(asset_or_liability.value(EpochConverter.date_to_epoch(date)) for asset_or_liability in assets_or_liabilities)
+    def __value_of(self, accounts, date=None):
+        return sum(account.value(EpochConverter.date_to_epoch(date)) for account in accounts)
 
     def __create_entry(self, name, date, value, institution, owner, symbol, asset_class):
         if asset_class == None:
