@@ -18,10 +18,14 @@ class PortfolioCreator:
         reader = csv.reader(csvfile)
         next(reader)
         for row in reader:
-            self.__create_asset_or_liability(row)
+            self.__create_account(row)
 
-    def __create_asset_or_liability(self, row):
-        if row[5] == AccountType.ASSET.value:
-            self.portfolio.import_data({"name": row[2], "date": row[0], "owner": row[3], "value": float(row[6]), "symbol": row[4], "asset_class": row[7], "institution": row[1]})
-        else:
-            self.portfolio.import_data({"name": row[2], "date": row[0], "value": float(row[6]), "institution": row[1]})
+    def __create_account(self, row):
+        self.portfolio.import_data({ "date": row[0],
+                                     "institution": row[1],
+                                     "name": row[2],
+                                     "owner": row[3],
+                                     "symbol": row[4],
+                                     "account_type": row[5],
+                                     "value": float(row[6]),
+                                     "asset_class": row[7] })
