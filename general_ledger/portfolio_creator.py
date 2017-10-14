@@ -18,9 +18,9 @@ class PortfolioCreator:
         reader = csv.reader(csvfile)
         next(reader)
         for row in reader:
-            self.__create_asset_or_liability(row)
+            self.__create_account(row)
 
-    def __create_asset_or_liability(self, row):
+    def __create_account(self, row):
         self.portfolio.import_data({ "date": row[0],
                                      "institution": row[1],
                                      "name": row[2],

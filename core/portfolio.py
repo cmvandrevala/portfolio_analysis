@@ -14,9 +14,9 @@ class Portfolio:
         date = data.get("date")
         value = data.get("value")
         institution = data.get("institution")
-        owner = data.get("owner", None)
-        symbol = data.get("symbol", "CASHX")
-        asset_class = data.get("asset_class", None)
+        owner = data.get("owner")
+        symbol = data.get("symbol")
+        asset_class = data.get("asset_class")
         account_type = data.get("account_type")
         self.__create_entry(name, date, value, institution, owner, symbol, asset_class, account_type)
 
