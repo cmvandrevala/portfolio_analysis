@@ -2,6 +2,7 @@ from collections import defaultdict
 from utilities.epoch_converter import EpochConverter
 from core.account import Account
 from valid_options.account_type import AccountType
+from valid_options.asset_class import AssetClass
 
 class Portfolio:
 
@@ -21,7 +22,7 @@ class Portfolio:
         institution = data.get("institution")
         owner = data.get("owner")
         symbol = data.get("symbol")
-        asset_class = data.get("asset_class")
+        asset_class = AssetClass(data.get("asset_class"))
         account_type = AccountType(data.get("account_type"))
         account = Account(name, owner, symbol, asset_class, institution, account_type)
         self.__create_or_update(name, date, value, symbol, account)
@@ -36,7 +37,7 @@ class Portfolio:
     def asset_classes(self):
         output = {"Cash Equivalents": 0, "Equities": 0, "Fixed Income": 0, "Real Estate": 0, "Commodities": 0}
         for asset in self.assets():
-            output[asset.asset_class] += asset.value()
+            output[asset.asset_class()] += asset.value()
         self.__normalize_output(output)
         return output
 

@@ -8,8 +8,8 @@ class PortfolioTestCase(unittest.TestCase):
         self.portfolio = Portfolio()
         self.asset_data_1 = {"date": "2017-06-01", "name": "Proctor and Gamble", "symbol": "PG", "value": 1000, "asset_class": "Equities", "owner": "Bob", "institution": "Bank 1", "account_type": "ASSET"}
         self.asset_data_2 = {"date": "2017-07-01", "name": "Vanguard Bond Fund", "symbol": "VTIBX", "value": 2000, "asset_class": "Fixed Income", "owner": "Sam", "institution": "Bank 2", "account_type": "ASSET"}
-        self.liability_data_1 = {"date": "2017-06-05", "name": "Visa Card", "value": 1000, "symbol": "CASHX", "institution": "Bank 1", "account_type": "LIABILITY"}
-        self.liability_data_2 = {"date": "2017-07-05", "name": "Personal Loan", "value": 1500, "symbol": "CASHX", "institution": "Bank 2", "account_type": "LIABILITY"}
+        self.liability_data_1 = {"date": "2017-06-05", "name": "Visa Card", "value": 1000, "symbol": "CASHX", "institution": "Bank 1", "account_type": "LIABILITY", "asset_class": "None"}
+        self.liability_data_2 = {"date": "2017-07-05", "name": "Personal Loan", "value": 1500, "symbol": "CASHX", "institution": "Bank 2", "account_type": "LIABILITY", "asset_class": "None"}
 
     def test_it_starts_off_with_no_assets_or_liabilities(self):
         self.assertEqual(self.portfolio.total_value(), 0)
@@ -83,7 +83,7 @@ class PortfolioTestCase(unittest.TestCase):
         self.portfolio.import_data(asset_data)
         asset_data = {"date": "2017-06-01", "name": "SP", "symbol": "SP", "value": 12.50, "asset_class": "Equities", "owner": "Julie", "institution": "Bank", "account_type": "ASSET"}
         self.portfolio.import_data(asset_data)
-        liability_data = {"date": "2017-02-01", "name": "loan", "value": 50, "institution": "bank", "account_type": "LIABILITY"}
+        liability_data = {"date": "2017-02-01", "name": "loan", "value": 50, "institution": "bank", "account_type": "LIABILITY", "asset_class": "None"}
         self.portfolio.import_data(liability_data)
         self.assertEqual(self.portfolio.total_value("2017-03-01"), 50)
 

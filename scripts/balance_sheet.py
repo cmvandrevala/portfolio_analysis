@@ -10,7 +10,7 @@ data = []
 data.append(["Last Updated", "Institution", "Name", "Owner", "Asset Class", "Value"])
 
 for asset in portfolio.assets():
-    data.append([asset.last_updated(), asset.institution, asset.name, asset.owner, asset.asset_class, str(asset.value())])
+    data.append([asset.last_updated(), asset.institution, asset.name, asset.owner, asset.asset_class(), str(asset.value())])
 
 for liability in portfolio.liabilities():
     data.append([liability.last_updated(), liability.institution, liability.name, "-", "-", str(liability.value())])
