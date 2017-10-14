@@ -23,7 +23,8 @@ class Portfolio:
         symbol = data.get("symbol")
         asset_class = data.get("asset_class")
         account_type = AccountType(data.get("account_type"))
-        self.__create_entry(name, date, value, institution, owner, symbol, asset_class, account_type)
+        account = Account(name, owner, symbol, asset_class, institution, account_type)
+        self.__create_or_update(name, date, value, symbol, account)
 
     def percentages(self):
         output = defaultdict(float)
@@ -52,16 +53,13 @@ class Portfolio:
     def __value_of(self, accounts, date=None):
         return sum(account.value(EpochConverter.date_to_epoch(date)) for account in accounts)
 
-    def __create_entry(self, name, date, value, institution, owner, symbol, asset_class, account_type):
-        self.__create_or_update(name, date, value, symbol, self.accounts, Account(name, owner, symbol, asset_class, institution, account_type))
-
-    def __create_or_update(self, name, date, value, symbol, category, asset_or_liability):
-        for i in category:
-            if i.is_identical_to(asset_or_liability):
-                i.import_snapshot(EpochConverter.date_to_epoch(date), value)
+    def __create_or_update(self, name, date, value, symbol, account):
+        for existing_account in self.accounts:
+            if existing_account.is_identical_to(account):
+                existing_account.import_snapshot(EpochConverter.date_to_epoch(date), value)
                 return
-        asset_or_liability.import_snapshot(EpochConverter.date_to_epoch(date), value)
-        category.append(asset_or_liability)
+        account.import_snapshot(EpochConverter.date_to_epoch(date), value)
+        self.accounts.append(account)
 
     def __percentage(self, value):
         return 0 if self.__assets_value() == 0 else round(value / self.__assets_value(), 3)
