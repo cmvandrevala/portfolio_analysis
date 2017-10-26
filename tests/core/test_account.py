@@ -3,6 +3,7 @@ import unittest
 from utilities.epoch_converter import EpochConverter
 from valid_options.account_type import AccountType
 from valid_options.asset_class import AssetClass
+from utilities.constants import Constants
 from core.account import Account
 
 class AssetTestCase(unittest.TestCase):
@@ -116,9 +117,27 @@ class AssetTestCase(unittest.TestCase):
 
     def test_it_returns_a_row_for_a_balance_sheet(self):
         timestamp = EpochConverter.current_epoch()
+        expected_date = EpochConverter.epoch_to_date(timestamp)
         self.account.import_snapshot(timestamp, 100)
         balance_sheet_row = self.account.balance_sheet_row()
-        self.assertEqual(balance_sheet_row, ["2017-10-26", "Rachel's Bank","account name","SYMBOL","Bob Bobberson","Cash Equivalents","100"])
+        self.assertEqual(balance_sheet_row, ["\x1b[31m" + expected_date + "\x1b[0m", "Rachel's Bank","account name","SYMBOL","Bob Bobberson","Cash Equivalents","100"])
+
+    def test_it_colors_the_date_red_if_it_is_in_the_future(self):
+        date_difference = Constants.SECONDS_PER_DAY
+        timestamp = EpochConverter.current_epoch()
+        expected_date = EpochConverter.epoch_to_date(timestamp + date_difference)
+        self.account.import_snapshot(timestamp, 100)
+        self.account.import_snapshot(timestamp + date_difference, 0)
+        balance_sheet_row = self.account.balance_sheet_row()
+        self.assertEqual(balance_sheet_row, ["\x1b[31m" + expected_date + "\x1b[0m", "Rachel's Bank","account name","SYMBOL","Bob Bobberson","Cash Equivalents","0"])
+
+    def test_it_colors_the_date_red_if_it_is_over_180_days_in_the_past(self):
+        date_difference = Constants.SECONDS_PER_DAY*181
+        timestamp = EpochConverter.current_epoch()
+        expected_date = EpochConverter.epoch_to_date(timestamp - date_difference)
+        self.account.import_snapshot(timestamp - date_difference, 0)
+        balance_sheet_row = self.account.balance_sheet_row()
+        self.assertEqual(balance_sheet_row, ["\x1b[31m" + expected_date + "\x1b[0m", "Rachel's Bank","account name","SYMBOL","Bob Bobberson","Cash Equivalents","0"])
 
 if __name__ == '__main__':
     unittest.main()

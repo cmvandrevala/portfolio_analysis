@@ -1,5 +1,8 @@
 from core.snapshot import Snapshot
 from core.snapshot_history import SnapshotHistory
+from termcolor import colored
+from utilities.constants import Constants
+from utilities.epoch_converter import EpochConverter
 from valid_options.account_type import AccountType
 from valid_options.asset_class import AssetClass
 
@@ -39,4 +42,9 @@ class Account:
                  self.account_type() == account.account_type() )
 
     def balance_sheet_row(self):
-        return [self.last_updated(), self.institution, self.name, self.symbol, self.owner, self.asset_class(), str(self.value())]
+        last_updated_epoch = EpochConverter.date_to_epoch(self.history.last_updated())
+        if last_updated_epoch > EpochConverter.current_epoch() or last_updated_epoch < EpochConverter.current_epoch() - 180*Constants.SECONDS_PER_DAY:
+            color = 'red'
+        else:
+            color = 'white'
+        return [colored(self.last_updated(), color), self.institution, self.name, self.symbol, self.owner, self.asset_class(), str(self.value(last_updated_epoch))]
