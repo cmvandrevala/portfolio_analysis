@@ -1,4 +1,6 @@
 class Constants:
+    BALANCE_SHEET_HEADERS = ["Last Updated", "Institution", "Name", "Symbol", "Owner", "Asset Class", "Value"]
+    BALANCE_SHEET_SPACERS = ["---", "---", "---", "---", "---", "---", "---"]
     DAYS_PER_YEAR = 365
     GENERAL_LEDGER_HEADERS = ["Timestamp", "Institution", "Description", "Owner", "Symbol", "Account Type", "Value", "Asset Class"]
     LEDGERS_DIRECTORY = "../general_ledger/csv/"
