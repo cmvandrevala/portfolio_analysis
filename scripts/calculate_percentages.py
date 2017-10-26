@@ -13,7 +13,6 @@ sorted_names = sorted(unsorted_data, key=unsorted_data.__getitem__)
 for k in sorted_names:
     percentages[k] = unsorted_data[k]
 
-
 with open('percentages.csv', 'w', newline='') as csvfile:
     writer = csv.writer(csvfile, delimiter=',')
     writer.writerow(['Symbol', 'Weight'])

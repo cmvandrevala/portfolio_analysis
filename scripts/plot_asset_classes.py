@@ -6,7 +6,12 @@ from utilities.constants import Constants
 from utilities.presenter import Presenter
 
 portfolio = PortfolioCreator(Constants.LOCAL_LEDGER_PATH).create()
-asset_classes = portfolio.asset_classes()
+unsorted_data = portfolio.asset_classes()
+asset_classes = {}
+
+sorted_names = sorted(unsorted_data, key=unsorted_data.__getitem__)
+for k in sorted_names:
+    asset_classes[k] = unsorted_data[k]
 
 plt.bar(range(len(asset_classes)), asset_classes.values(), align='center')
 plt.xticks(range(len(asset_classes)), asset_classes.keys())
