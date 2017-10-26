@@ -37,3 +37,6 @@ class Account:
                  self.asset_class() == account.asset_class() and
                  self.institution == account.institution and
                  self.account_type() == account.account_type() )
+
+    def balance_sheet_row(self):
+        return [self.last_updated(), self.institution, self.name, self.symbol, self.owner, self.asset_class(), str(self.value())]

@@ -10,12 +10,12 @@ data = []
 data.append(Constants.BALANCE_SHEET_HEADERS)
 
 for asset in portfolio.assets():
-    data.append([asset.last_updated(), asset.institution, asset.name, asset.symbol, asset.owner, asset.asset_class(), str(asset.value())])
+    data.append(asset.balance_sheet_row())
 
 data.append(Constants.BALANCE_SHEET_SPACERS)
 
 for liability in portfolio.liabilities():
-    data.append([liability.last_updated(), liability.institution, liability.name, liability.symbol, liability.owner, liability.asset_class(), str(-liability.value())])
+    data.append(liability.balance_sheet_row())
 
 data.append(["", "", "", "", "", "Total", str(portfolio.total_value())])
 

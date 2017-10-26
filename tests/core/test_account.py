@@ -114,5 +114,11 @@ class AssetTestCase(unittest.TestCase):
         different_account = Account("account name", "Bob Bobberson", "SYMBOL", AssetClass.CASH_EQUIVALENTS, "Rachel's Bank", AccountType.LIABILITY)
         self.assertFalse(self.account.is_identical_to(different_account))
 
+    def test_it_returns_a_row_for_a_balance_sheet(self):
+        timestamp = EpochConverter.current_epoch()
+        self.account.import_snapshot(timestamp, 100)
+        balance_sheet_row = self.account.balance_sheet_row()
+        self.assertEqual(balance_sheet_row, ["2017-10-26", "Rachel's Bank","account name","SYMBOL","Bob Bobberson","Cash Equivalents","100"])
+
 if __name__ == '__main__':
     unittest.main()
