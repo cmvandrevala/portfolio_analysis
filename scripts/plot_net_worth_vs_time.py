@@ -1,4 +1,4 @@
-from utilities.epoch_converter import EpochConverter
+from utilities.epoch_timestamp_converter import EpochTimestampConverter
 from utilities.constants import Constants
 from pylab import *
 
@@ -11,8 +11,8 @@ times = []
 owners_equity = []
 
 for day in range (0, number_of_days):
-    historical_time = EpochConverter.current_epoch() - day*Constants.SECONDS_PER_DAY
-    formatted_date = EpochConverter.epoch_to_date(historical_time)
+    historical_time = EpochTimestampConverter().epoch() - day*Constants.SECONDS_PER_DAY
+    formatted_date = EpochTimestampConverter().timestamp(historical_time)
     times.append(datetime.datetime.fromtimestamp(historical_time))
     owners_equity.append(portfolio.total_value(formatted_date))
 

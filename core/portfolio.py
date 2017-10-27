@@ -1,5 +1,5 @@
 from collections import defaultdict
-from utilities.epoch_converter import EpochConverter
+from utilities.epoch_timestamp_converter import EpochTimestampConverter
 from core.account import Account
 from valid_options.account_type import AccountType
 from valid_options.asset_class import AssetClass
@@ -52,14 +52,14 @@ class Portfolio:
                 output[key] = round(float(value)/self.__value_of(self.assets()), 3)
 
     def __value_of(self, accounts, date=None):
-        return sum(account.value(EpochConverter.date_to_epoch(date)) for account in accounts)
+        return sum(account.value(EpochTimestampConverter().epoch(date)) for account in accounts)
 
     def __create_or_update(self, name, date, value, symbol, account):
         for existing_account in self.accounts:
             if existing_account.is_identical_to(account):
-                existing_account.import_snapshot(EpochConverter.date_to_epoch(date), value)
+                existing_account.import_snapshot(EpochTimestampConverter().epoch(date), value)
                 return
-        account.import_snapshot(EpochConverter.date_to_epoch(date), value)
+        account.import_snapshot(EpochTimestampConverter().epoch(date), value)
         self.accounts.append(account)
 
     def __percentage(self, value):

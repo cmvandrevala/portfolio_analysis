@@ -1,4 +1,4 @@
-from utilities.epoch_converter import EpochConverter
+from utilities.epoch_timestamp_converter import EpochTimestampConverter
 
 class SnapshotHistory:
 
@@ -16,12 +16,12 @@ class SnapshotHistory:
         if(self.snapshots == []):
             return 0
         if(query_time == None):
-            return self.__find_value(EpochConverter.current_epoch())
+            return self.__find_value(EpochTimestampConverter().epoch())
         return self.__find_value(query_time)
 
     def last_updated(self):
         timestamp = self.snapshots[-1].timestamp
-        return EpochConverter.epoch_to_date(timestamp)
+        return EpochTimestampConverter().timestamp(timestamp)
 
     def __find_value(self, query_time):
         value = 0

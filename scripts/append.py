@@ -1,6 +1,6 @@
 from pathlib import Path
 from utilities.constants import Constants
-from utilities.epoch_converter import EpochConverter
+from utilities.epoch_timestamp_converter import EpochTimestampConverter
 import os.path
 import sys
 
@@ -43,7 +43,7 @@ def timestamp():
     if len(sys.argv) == 4:
         return sys.argv[3]
     else:
-        return EpochConverter.epoch_to_date(EpochConverter.current_epoch())
+        return EpochTimestampConverter().timestamp(EpochTimestampConverter.epoch())
 
 def path():
     return Constants.LEDGERS_DIRECTORY + sys.argv[1] + ".csv"
