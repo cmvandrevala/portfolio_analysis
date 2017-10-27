@@ -3,6 +3,7 @@ import unittest
 from utilities.epoch_converter import EpochConverter
 from valid_options.account_type import AccountType
 from valid_options.asset_class import AssetClass
+from utilities.constants import Constants
 from core.account import Account
 
 class AssetTestCase(unittest.TestCase):
@@ -113,6 +114,47 @@ class AssetTestCase(unittest.TestCase):
     def test_an_account_is_not_identical_to_one_with_a_different_account_type(self):
         different_account = Account("account name", "Bob Bobberson", "SYMBOL", AssetClass.CASH_EQUIVALENTS, "Rachel's Bank", AccountType.LIABILITY)
         self.assertFalse(self.account.is_identical_to(different_account))
+
+    def test_it_returns_a_row_for_a_balance_sheet(self):
+        date_difference = Constants.SECONDS_PER_DAY*10
+        timestamp = EpochConverter.current_epoch()
+        expected_date = EpochConverter.epoch_to_date(timestamp - date_difference)
+        self.account.import_snapshot(timestamp - date_difference, 100)
+        balance_sheet_row = self.account.balance_sheet_row()
+        self.assertEqual(balance_sheet_row, ["\x1b[0;37;40m" + expected_date + "\x1b[0m", "Rachel's Bank","account name","SYMBOL","Bob Bobberson","Cash Equivalents","100"])
+
+    def test_it_colors_the_date_red_if_it_is_in_the_future(self):
+        date_difference = Constants.SECONDS_PER_DAY*100
+        timestamp = EpochConverter.current_epoch()
+        expected_date = EpochConverter.epoch_to_date(timestamp + date_difference)
+        self.account.import_snapshot(timestamp, 100)
+        self.account.import_snapshot(timestamp + date_difference, 0)
+        balance_sheet_row = self.account.balance_sheet_row()
+        self.assertEqual(balance_sheet_row, ["\x1b[1;31;40m" + expected_date + "\x1b[0m", "Rachel's Bank","account name","SYMBOL","Bob Bobberson","Cash Equivalents","0"])
+
+    def test_it_colors_the_date_yellow_if_it_is_over_30_days_in_the_past(self):
+        date_difference = Constants.SECONDS_PER_DAY*31
+        timestamp = EpochConverter.current_epoch()
+        expected_date = EpochConverter.epoch_to_date(timestamp - date_difference)
+        self.account.import_snapshot(timestamp - date_difference, 0)
+        balance_sheet_row = self.account.balance_sheet_row()
+        self.assertEqual(balance_sheet_row, ["\x1b[0;33;40m" + expected_date + "\x1b[0m", "Rachel's Bank","account name","SYMBOL","Bob Bobberson","Cash Equivalents","0"])
+
+    def test_it_colors_the_date_pink_if_it_is_over_60_days_in_the_past(self):
+        date_difference = Constants.SECONDS_PER_DAY*61
+        timestamp = EpochConverter.current_epoch()
+        expected_date = EpochConverter.epoch_to_date(timestamp - date_difference)
+        self.account.import_snapshot(timestamp - date_difference, 0)
+        balance_sheet_row = self.account.balance_sheet_row()
+        self.assertEqual(balance_sheet_row, ["\x1b[1;35;40m" + expected_date + "\x1b[0m", "Rachel's Bank","account name","SYMBOL","Bob Bobberson","Cash Equivalents","0"])
+
+    def test_it_colors_the_date_red_if_it_is_over_90_days_in_the_past(self):
+        date_difference = Constants.SECONDS_PER_DAY*91
+        timestamp = EpochConverter.current_epoch()
+        expected_date = EpochConverter.epoch_to_date(timestamp - date_difference)
+        self.account.import_snapshot(timestamp - date_difference, 0)
+        balance_sheet_row = self.account.balance_sheet_row()
+        self.assertEqual(balance_sheet_row, ["\x1b[1;31;40m" + expected_date + "\x1b[0m", "Rachel's Bank","account name","SYMBOL","Bob Bobberson","Cash Equivalents","0"])
 
 if __name__ == '__main__':
     unittest.main()
