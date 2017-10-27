@@ -110,47 +110,47 @@ class PortfolioTestCase(unittest.TestCase):
         self.assertEqual(self.portfolio.percentages(), {"A": 0.333, "B": 0.667})
 
     def test_it_returns_zero_for_each_asset_class_if_there_is_no_asset_data(self):
-        self.assertEqual(self.portfolio.asset_classes(), {"Cash Equivalents": 0, "Equities": 0, "Fixed Income": 0, "Real Estate": 0, "Commodities": 0, "Annuity": 0, "Fixed Assets": 0})
+        self.assertEqual(self.portfolio.asset_classes(), {"Cash Equivalents": 0, "Equities": 0, "Fixed Income": 0, "Real Estate": 0, "Commodities": 0, "Annuities": 0, "Fixed Assets": 0})
 
     def test_it_returns_asset_data_for_one_cash_equivalent(self):
         asset_data = {"date": "2017-01-01", "name": "Foo", "symbol": "A", "value": 100, "asset_class": "Cash Equivalents", "owner": "Frank", "institution": "Bank", "account_type": "ASSET"}
         self.portfolio.import_data(asset_data)
-        self.assertEqual(self.portfolio.asset_classes(), {"Cash Equivalents": 1, "Equities": 0, "Fixed Income": 0, "Real Estate": 0, "Commodities": 0, "Annuity": 0, "Fixed Assets": 0})
+        self.assertEqual(self.portfolio.asset_classes(), {"Cash Equivalents": 1, "Equities": 0, "Fixed Income": 0, "Real Estate": 0, "Commodities": 0, "Annuities": 0, "Fixed Assets": 0})
 
     def test_it_returns_asset_data_for_one_equity(self):
         self.portfolio.import_data(self.asset_data_1)
-        self.assertEqual(self.portfolio.asset_classes(), {"Cash Equivalents": 0, "Equities": 1, "Fixed Income": 0, "Real Estate": 0, "Commodities": 0, "Annuity": 0, "Fixed Assets": 0})
+        self.assertEqual(self.portfolio.asset_classes(), {"Cash Equivalents": 0, "Equities": 1, "Fixed Income": 0, "Real Estate": 0, "Commodities": 0, "Annuities": 0, "Fixed Assets": 0})
 
     def test_it_returns_asset_data_for_one_fixed_income_asset(self):
         self.portfolio.import_data(self.asset_data_2)
-        self.assertEqual(self.portfolio.asset_classes(), {"Cash Equivalents": 0, "Equities": 0, "Fixed Income": 1, "Real Estate": 0, "Commodities": 0, "Annuity": 0, "Fixed Assets": 0})
+        self.assertEqual(self.portfolio.asset_classes(), {"Cash Equivalents": 0, "Equities": 0, "Fixed Income": 1, "Real Estate": 0, "Commodities": 0, "Annuities": 0, "Fixed Assets": 0})
 
     def test_it_returns_asset_data_for_one_real_estate_asset(self):
         asset_data = {"date": "2017-01-01", "name": "Foo", "symbol": "A", "value": 100, "asset_class": "Real Estate", "owner": "Anna", "institution": "Bank", "account_type": "ASSET"}
         self.portfolio.import_data(asset_data)
-        self.assertEqual(self.portfolio.asset_classes(), {"Cash Equivalents": 0, "Equities": 0, "Fixed Income": 0, "Real Estate": 1, "Commodities": 0, "Annuity": 0, "Fixed Assets": 0})
+        self.assertEqual(self.portfolio.asset_classes(), {"Cash Equivalents": 0, "Equities": 0, "Fixed Income": 0, "Real Estate": 1, "Commodities": 0, "Annuities": 0, "Fixed Assets": 0})
 
     def test_it_returns_asset_data_for_one_commodity(self):
         asset_data = {"date": "2017-01-01", "name": "Foo", "symbol": "A", "value": 100, "asset_class": "Commodities", "owner": "Clark", "institution": "Bank", "account_type": "ASSET"}
         self.portfolio.import_data(asset_data)
-        self.assertEqual(self.portfolio.asset_classes(), {"Cash Equivalents": 0, "Equities": 0, "Fixed Income": 0, "Real Estate": 0, "Commodities": 1, "Annuity": 0, "Fixed Assets": 0})
+        self.assertEqual(self.portfolio.asset_classes(), {"Cash Equivalents": 0, "Equities": 0, "Fixed Income": 0, "Real Estate": 0, "Commodities": 1, "Annuities": 0, "Fixed Assets": 0})
 
     def test_it_returns_asset_data_for_one_annuity(self):
-        asset_data = {"date": "2017-01-01", "name": "Foo", "symbol": "A", "value": 100, "asset_class": "Annuity", "owner": "Clark", "institution": "Bank", "account_type": "ASSET"}
+        asset_data = {"date": "2017-01-01", "name": "Foo", "symbol": "A", "value": 100, "asset_class": "Annuities", "owner": "Clark", "institution": "Bank", "account_type": "ASSET"}
         self.portfolio.import_data(asset_data)
-        self.assertEqual(self.portfolio.asset_classes(), {"Cash Equivalents": 0, "Equities": 0, "Fixed Income": 0, "Real Estate": 0, "Commodities": 0, "Annuity": 1, "Fixed Assets": 0})
+        self.assertEqual(self.portfolio.asset_classes(), {"Cash Equivalents": 0, "Equities": 0, "Fixed Income": 0, "Real Estate": 0, "Commodities": 0, "Annuities": 1, "Fixed Assets": 0})
 
     def test_it_returns_asset_data_for_one_fixed_asset(self):
         asset_data = {"date": "2017-01-01", "name": "Foo", "symbol": "A", "value": 100, "asset_class": "Fixed Assets", "owner": "Clark", "institution": "Bank", "account_type": "ASSET"}
         self.portfolio.import_data(asset_data)
-        self.assertEqual(self.portfolio.asset_classes(), {"Cash Equivalents": 0, "Equities": 0, "Fixed Income": 0, "Real Estate": 0, "Commodities": 0, "Annuity": 0, "Fixed Assets": 1})
+        self.assertEqual(self.portfolio.asset_classes(), {"Cash Equivalents": 0, "Equities": 0, "Fixed Income": 0, "Real Estate": 0, "Commodities": 0, "Annuities": 0, "Fixed Assets": 1})
 
     def test_it_returns_asset_data_for_two_asset_classes(self):
         asset_data = {"date": "2017-01-01", "name": "Foo", "symbol": "A", "value": 100, "asset_class": "Equities", "owner": "Tiffany", "institution": "Bank", "account_type": "ASSET"}
         self.portfolio.import_data(asset_data)
         asset_data = {"date": "2017-02-01", "name": "Bar", "symbol": "B", "value": 100, "asset_class": "Fixed Income", "owner": "Eusavio", "institution": "Bank", "account_type": "ASSET"}
         self.portfolio.import_data(asset_data)
-        self.assertEqual(self.portfolio.asset_classes(), {"Cash Equivalents": 0, "Equities": 0.5, "Fixed Income": 0.5, "Real Estate": 0, "Commodities": 0, "Annuity": 0, "Fixed Assets": 0})
+        self.assertEqual(self.portfolio.asset_classes(), {"Cash Equivalents": 0, "Equities": 0.5, "Fixed Income": 0.5, "Real Estate": 0, "Commodities": 0, "Annuities": 0, "Fixed Assets": 0})
 
 
 if __name__ == '__main__':

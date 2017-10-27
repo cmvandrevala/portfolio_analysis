@@ -35,10 +35,11 @@ class Portfolio:
         return output
 
     def asset_classes(self):
-        output = {"Cash Equivalents": 0, "Equities": 0, "Fixed Income": 0, "Real Estate": 0, "Commodities": 0, "Annuity": 0, "Fixed Assets": 0}
+        output = dict( (v, 0) for v in [e.value for e in AssetClass] )
         for asset in self.assets():
             output[asset.asset_class()] += asset.value()
         self.__normalize_output(output)
+        del output["None"]
         return output
 
     def total_value(self, date=None):

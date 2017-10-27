@@ -1,7 +1,7 @@
 from enum import Enum
 
 class AssetClass(Enum):
-    ANNUITY = "Annuity"
+    ANNUITIES = "Annuities"
     CASH_EQUIVALENTS = "Cash Equivalents"
     COMMODITIES = "Commodities"
     EQUITIES = "Equities"

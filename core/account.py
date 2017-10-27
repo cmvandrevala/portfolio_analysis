@@ -42,7 +42,7 @@ class Account:
 
     def balance_sheet_row(self):
         colored_date = self.__unicode_color() + self.last_updated() + "\x1b[0m"
-        return [colored_date, self.institution, self.name, self.symbol, self.owner, self.asset_class(), str(self.value(EpochTimestampConverter().epoch(self.last_updated())))]
+        return [colored_date, self.institution, self.name, self.symbol, self.owner, self.asset_class(), str(self.value())]
 
     def __unicode_color(self):
         last_updated_epoch = EpochTimestampConverter().epoch(self.last_updated())
