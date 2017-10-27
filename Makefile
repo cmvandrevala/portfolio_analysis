@@ -7,7 +7,8 @@ classes: import
 clean:
 	python3 -m scripts.clean_general_ledger
 
-import: clean
+import:
+	rm local_ledger.csv
 	python3 -m scripts.import_csv_data
 
 net: import

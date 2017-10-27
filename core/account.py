@@ -1,6 +1,5 @@
 from core.snapshot import Snapshot
 from core.snapshot_history import SnapshotHistory
-from termcolor import colored
 from utilities.constants import Constants
 from utilities.epoch_converter import EpochConverter
 from valid_options.account_type import AccountType
@@ -42,9 +41,18 @@ class Account:
                  self.account_type() == account.account_type() )
 
     def balance_sheet_row(self):
-        last_updated_epoch = EpochConverter.date_to_epoch(self.history.last_updated())
-        if last_updated_epoch > EpochConverter.current_epoch() or last_updated_epoch < EpochConverter.current_epoch() - 180*Constants.SECONDS_PER_DAY:
-            color = 'red'
+        colored_date = self.__unicode_color() + self.last_updated() + "\x1b[0m"
+        return [colored_date, self.institution, self.name, self.symbol, self.owner, self.asset_class(), str(self.value(EpochConverter.date_to_epoch(self.last_updated())))]
+
+    def __unicode_color(self):
+        last_updated_epoch = EpochConverter.date_to_epoch(self.last_updated())
+        if last_updated_epoch > EpochConverter.current_epoch():
+            return "\x1b[1;31;40m"
+        elif last_updated_epoch < EpochConverter.current_epoch() - 90*Constants.SECONDS_PER_DAY:
+            return "\x1b[1;31;40m"
+        elif last_updated_epoch < EpochConverter.current_epoch() - 60*Constants.SECONDS_PER_DAY:
+            return "\x1b[1;35;40m"
+        elif last_updated_epoch < EpochConverter.current_epoch() - 30*Constants.SECONDS_PER_DAY:
+            return "\x1b[0;33;40m"
         else:
-            color = 'white'
-        return [colored(self.last_updated(), color), self.institution, self.name, self.symbol, self.owner, self.asset_class(), str(self.value(last_updated_epoch))]
+            return "\x1b[0;37;40m"
