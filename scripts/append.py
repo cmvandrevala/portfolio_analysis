@@ -43,7 +43,7 @@ def timestamp():
     if len(sys.argv) == 4:
         return sys.argv[3]
     else:
-        return EpochTimestampConverter().timestamp(EpochTimestampConverter.epoch())
+        return EpochTimestampConverter().timestamp()
 
 def path():
     return Constants.LEDGERS_DIRECTORY + sys.argv[1] + ".csv"

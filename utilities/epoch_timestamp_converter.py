@@ -10,8 +10,11 @@ class EpochTimestampConverter:
             v = self.__split_timestamp(timestamp)
             return self.__calculate_epoch_from_timestamp(v[0], v[1])
 
-    def timestamp(self, epoch):
-        return datetime.datetime.utcfromtimestamp(epoch).strftime('%Y-%m-%d')
+    def timestamp(self, epoch=None):
+        if epoch == None:
+            return self.timestamp(self.epoch())
+        else:
+            return datetime.datetime.utcfromtimestamp(epoch).strftime('%Y-%m-%d')
 
     def __split_timestamp(self, timestamp):
         if "T" in timestamp:

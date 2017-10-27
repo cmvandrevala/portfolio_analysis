@@ -28,6 +28,10 @@ class EpochTimestampConverterTestCase(unittest.TestCase):
         current_epoch = self.converter.epoch()
         self.assertAlmostEqual(self.converter.epoch(), current_epoch, places=1)
 
+    def test_it_returns_the_current_date_given_no_epoch(self):
+        epoch = self.converter.epoch()
+        self.assertEqual(self.converter.timestamp(epoch), self.converter.timestamp())
+
     def test_it_converts_an_epoch_into_a_utc_date_string(self):
         epoch = 1507488000
         expected_date = "2017-10-08"
