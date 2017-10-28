@@ -3,7 +3,6 @@ import requests
 import json
 import csv
 
-from general_ledger.row_formatter import RowFormatter
 from utilities.constants import Constants
 
 resp = requests.get(Constants.DATA_URL)
