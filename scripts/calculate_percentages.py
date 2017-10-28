@@ -2,10 +2,9 @@ import csv
 import matplotlib.pyplot as plt
 
 from general_ledger.portfolio_creator import PortfolioCreator
-from utilities.constants import Constants
 from utilities.presenter import Presenter
 
-portfolio = PortfolioCreator(Constants.LOCAL_LEDGER_PATH).create()
+portfolio = PortfolioCreator().create()
 unsorted_data = portfolio.percentages()
 percentages = {}
 

@@ -1,10 +1,9 @@
-from utilities.epoch_timestamp_converter import EpochTimestampConverter
-from utilities.constants import Constants
-from pylab import *
-
 from general_ledger.portfolio_creator import PortfolioCreator
+from pylab import *
+from utilities.constants import Constants
+from utilities.epoch_timestamp_converter import EpochTimestampConverter
 
-portfolio = PortfolioCreator(Constants.LOCAL_LEDGER_PATH).create()
+portfolio = PortfolioCreator().create()
 number_of_days = Constants.DAYS_PER_YEAR*15
 
 times = []
