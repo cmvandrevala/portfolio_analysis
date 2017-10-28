@@ -4,7 +4,6 @@ import json
 import csv
 
 from general_ledger.row_formatter import RowFormatter
-from general_ledger.csv_importer import CsvImporter
 from utilities.constants import Constants
 
 resp = requests.get(Constants.DATA_URL)
