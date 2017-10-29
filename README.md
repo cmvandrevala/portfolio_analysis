@@ -57,15 +57,5 @@ There are a number of Python scripts located in the `scripts/` directory and (mo
 
 * `make balance` -> Create a balance sheet with data from
 * `make classes` -> Plot asset classes of portfolio
-* `make clean` -> Remove duplicate entries from the general ledger
-* `make import` -> Import finance data into a general ledger
 * `make net` -> Plot owner's equity versus time
 * `make percentages` -> Generate percentages for use in Portfolio Visualizer
-
-Note that there is no `make append` command since this requires command line arguments. For now, you can run this script using:
-
-```
-python3 -m scripts.append <name of CSV file without extension> <value> <optional date>
-```
-
-In the future, I will add a command line task for this command or come up with a prettier solution.
