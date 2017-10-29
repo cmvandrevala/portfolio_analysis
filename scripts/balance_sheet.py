@@ -4,9 +4,7 @@ from terminaltables import AsciiTable
 from utilities.constants import Constants
 
 portfolio = PortfolioCreator().create(DataSource())
-data = []
-
-data.append(Constants.BALANCE_SHEET_HEADERS)
+data = [Constants.BALANCE_SHEET_HEADERS]
 
 for asset in portfolio.assets():
     data.append(asset.balance_sheet_row())

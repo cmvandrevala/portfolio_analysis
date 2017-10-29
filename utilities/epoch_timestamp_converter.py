@@ -1,17 +1,20 @@
 import datetime
 import time
 
+
 class EpochTimestampConverter:
+    def __init__(self):
+        pass
 
     def epoch(self, timestamp=None):
-        if timestamp == None:
+        if timestamp is None:
             return time.time()
         else:
             v = self.__split_timestamp(timestamp)
             return self.__calculate_epoch_from_timestamp(v[0], v[1])
 
     def timestamp(self, epoch=None):
-        if epoch == None:
+        if epoch is None:
             return self.timestamp(self.epoch())
         else:
             return datetime.datetime.utcfromtimestamp(epoch).strftime('%Y-%m-%d')
@@ -23,7 +26,7 @@ class EpochTimestampConverter:
         else:
             d = self.__split_date_on_dashes(timestamp)
             t = self.__split_time_on_colons()
-        return [d,t]
+        return [d, t]
 
     def __split_date_on_dashes(self, date_string):
         year = int(date_string.split("-")[0])
@@ -32,19 +35,19 @@ class EpochTimestampConverter:
         return {"year": year, "month": month, "day": day}
 
     def __split_time_on_colons(self, time_string=None):
-        if time_string == None:
+        if time_string is None:
             return {"hour": 12, "minute": 0, "second": 0}
         else:
             hour = int(time_string.split(":")[0])
             minute = int(time_string.split(":")[1])
-            second = int(time_string.split(":")[2].replace("Z",""))
+            second = int(time_string.split(":")[2].replace("Z", ""))
             return {"hour": hour, "minute": minute, "second": second}
 
     def __calculate_epoch_from_timestamp(self, date, time):
-        return datetime.datetime( year=date["year"],
-                                  month=date["month"],
-                                  day=date["day"],
-                                  hour=time["hour"],
-                                  minute=time["minute"],
-                                  second=time["second"],
-                                  tzinfo=datetime.timezone.utc ).timestamp()
+        return datetime.datetime(year=date["year"],
+                                 month=date["month"],
+                                 day=date["day"],
+                                 hour=time["hour"],
+                                 minute=time["minute"],
+                                 second=time["second"],
+                                 tzinfo=datetime.timezone.utc).timestamp()

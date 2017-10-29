@@ -4,8 +4,8 @@ from utilities.epoch_timestamp_converter import EpochTimestampConverter
 from core.snapshot import Snapshot
 from core.snapshot_history import SnapshotHistory
 
-class SnapshotHistoryTestCase(unittest.TestCase):
 
+class SnapshotHistoryTestCase(unittest.TestCase):
     def setUp(self):
         self.history = SnapshotHistory()
         self.converter = EpochTimestampConverter()
@@ -94,6 +94,7 @@ class SnapshotHistoryTestCase(unittest.TestCase):
         snapshot = Snapshot(current_epoch - 2000000, 2000)
         self.history.import_snapshot(snapshot)
         self.assertEqual(self.history.last_updated(), formatted_date)
+
 
 if __name__ == '__main__':
     unittest.main()

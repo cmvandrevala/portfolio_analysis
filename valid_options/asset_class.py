@@ -1,5 +1,6 @@
 from enum import Enum
 
+
 class AssetClass(Enum):
     ANNUITIES = "Annuities"
     CASH_EQUIVALENTS = "Cash Equivalents"

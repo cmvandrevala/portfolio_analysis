@@ -1,11 +1,10 @@
-import datetime
-import time
-
 class Presenter:
+    def __init__(self):
+        pass
 
     @staticmethod
     def date_slashes_as_dashes(date_str):
-        if (date_str.find("/") == -1):
+        if date_str.find("/") == -1:
             return date_str
         else:
             mdy = date_str.split("/")
@@ -13,8 +12,8 @@ class Presenter:
 
     @staticmethod
     def value_without_symbols(value_str):
-        return value_str.replace("$","").replace(",","").replace(")","").replace("(","-")
+        return value_str.replace("$", "").replace(",", "").replace(")", "").replace("(", "-")
 
     @staticmethod
     def decimal_as_percentage(percent_fraction):
-        return str(round(100*percent_fraction, 1)) + "%"
+        return str(round(100 * percent_fraction, 1)) + "%"

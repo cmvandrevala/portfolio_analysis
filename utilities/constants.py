@@ -1,4 +1,7 @@
 class Constants:
+    def __init__(self):
+        pass
+
     BALANCE_SHEET_HEADERS = ["Last Updated", "Institution", "Name", "Symbol", "Owner", "Asset Class", "Value"]
     BALANCE_SHEET_SPACERS = ["---", "---", "---", "---", "---", "---", "---"]
     DAYS_PER_YEAR = 365
@@ -6,5 +9,5 @@ class Constants:
     LEDGERS_DIRECTORY = "../general_ledger/csv/"
     LOCAL_LEDGER_PATH = "local_ledger.csv"
     SECONDS_PER_DAY = 86400
-    YES_REPONSES = ["y", "ye", "yes"]
+    YES_RESPONSES = ["y", "ye", "yes"]
     DATA_URL = "http://localhost:5000"

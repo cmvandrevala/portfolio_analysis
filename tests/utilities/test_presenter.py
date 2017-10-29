@@ -4,7 +4,6 @@ from utilities.presenter import Presenter
 
 
 class PresenterTestCase(unittest.TestCase):
-
     def test_it_formats_a_date_with_slashes(self):
         self.assertEqual(Presenter.date_slashes_as_dashes("12/02/2017"), "2017-12-02")
 
@@ -43,6 +42,7 @@ class PresenterTestCase(unittest.TestCase):
 
     def test_it_rounds_a_repeating_decimal_to_one_place(self):
         self.assertEqual(Presenter.decimal_as_percentage(0.777777777778), "77.8%")
+
 
 if __name__ == '__main__':
     unittest.main()

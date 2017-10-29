@@ -1,11 +1,11 @@
 import unittest
 
-from utilities.epoch_timestamp_converter import EpochTimestampConverter
+from core.account import Account
+from utilities.constants import Constants
 from utilities.epoch_timestamp_converter import EpochTimestampConverter
 from valid_options.account_type import AccountType
 from valid_options.asset_class import AssetClass
-from utilities.constants import Constants
-from core.account import Account
+
 
 class AssetTestCase(unittest.TestCase):
 
