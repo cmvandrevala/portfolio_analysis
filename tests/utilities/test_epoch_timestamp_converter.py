@@ -3,8 +3,8 @@ import unittest
 
 from utilities.epoch_timestamp_converter import EpochTimestampConverter
 
-class EpochTimestampConverterTestCase(unittest.TestCase):
 
+class EpochTimestampConverterTestCase(unittest.TestCase):
     def setUp(self):
         self.converter = EpochTimestampConverter()
 
@@ -51,6 +51,7 @@ class EpochTimestampConverterTestCase(unittest.TestCase):
         date = "2011-02-03"
         epoch = self.converter.epoch(date)
         self.assertEqual(self.converter.timestamp(epoch), date)
+
 
 if __name__ == '__main__':
     unittest.main()

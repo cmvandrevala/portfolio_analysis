@@ -1,10 +1,9 @@
-import csv
-
+from portfolio_creator.data_source import DataSource
+from portfolio_creator.portfolio_creator import PortfolioCreator
 from terminaltables import AsciiTable
-from general_ledger.portfolio_creator import PortfolioCreator
 from utilities.constants import Constants
 
-portfolio = PortfolioCreator().create()
+portfolio = PortfolioCreator().create(DataSource())
 data = []
 
 data.append(Constants.BALANCE_SHEET_HEADERS)

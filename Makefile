@@ -12,4 +12,5 @@ percentages:
 
 test:
 	python3 -m unittest discover tests/core
+	python3 -m unittest discover tests/portfolio_creator
 	python3 -m unittest discover tests/utilities

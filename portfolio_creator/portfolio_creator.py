@@ -1,18 +1,15 @@
-import csv
 import json
-import requests
 
-from valid_options.account_type import AccountType
-from utilities.constants import Constants
 from core.portfolio import Portfolio
+
 
 class PortfolioCreator:
 
     def __init__(self):
         self.portfolio = Portfolio()
 
-    def create(self):
-        data = requests.get(Constants.DATA_URL).text
+    def create(self, data_source):
+        data = data_source.get()
         for item in json.loads(data):
             self.portfolio.import_data({ "date": item["timestamp"],
                                          "institution": item["institution"],

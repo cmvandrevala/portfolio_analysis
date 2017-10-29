@@ -1,10 +1,8 @@
-import csv
 import matplotlib.pyplot as plt
+from portfolio_creator.data_source import DataSource
+from portfolio_creator.portfolio_creator import PortfolioCreator
 
-from general_ledger.portfolio_creator import PortfolioCreator
-from utilities.presenter import Presenter
-
-portfolio = PortfolioCreator().create()
+portfolio = PortfolioCreator().create(DataSource())
 unsorted_data = portfolio.asset_classes()
 asset_classes = {}
 
