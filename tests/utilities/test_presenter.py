@@ -1,10 +1,9 @@
 import unittest
-import time
 
 from utilities.presenter import Presenter
 
-class PresenterTestCase(unittest.TestCase):
 
+class PresenterTestCase(unittest.TestCase):
     def test_it_formats_a_date_with_slashes(self):
         self.assertEqual(Presenter.date_slashes_as_dashes("12/02/2017"), "2017-12-02")
 
@@ -23,10 +22,10 @@ class PresenterTestCase(unittest.TestCase):
     def test_it_formats_a_negative_value_with_no_commas(self):
         self.assertEqual(Presenter.value_without_symbols("($500)"), "-500")
 
-    def test_it_formats_a_positive_value_with_one_comma(self):
+    def test_it_formats_a_negative_value_with_one_comma(self):
         self.assertEqual(Presenter.value_without_symbols("($5,000)"), "-5000")
 
-    def test_it_formats_a_positive_value_with_many_commas(self):
+    def test_it_formats_a_negative_value_with_many_commas(self):
         self.assertEqual(Presenter.value_without_symbols("($5,000,125)"), "-5000125")
 
     def test_it_does_nothing_to_a_correctly_formatted_value(self):
@@ -43,6 +42,7 @@ class PresenterTestCase(unittest.TestCase):
 
     def test_it_rounds_a_repeating_decimal_to_one_place(self):
         self.assertEqual(Presenter.decimal_as_percentage(0.777777777778), "77.8%")
+
 
 if __name__ == '__main__':
     unittest.main()

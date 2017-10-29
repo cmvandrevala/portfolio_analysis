@@ -1,11 +1,11 @@
 import csv
 import matplotlib.pyplot as plt
 
-from general_ledger.portfolio_creator import PortfolioCreator
-from utilities.constants import Constants
+from portfolio_creator.portfolio_creator import PortfolioCreator
+from portfolio_creator.data_source import DataSource
 from utilities.presenter import Presenter
 
-portfolio = PortfolioCreator(Constants.LOCAL_LEDGER_PATH).create()
+portfolio = PortfolioCreator().create(DataSource())
 unsorted_data = portfolio.percentages()
 percentages = {}
 
@@ -13,7 +13,7 @@ sorted_names = sorted(unsorted_data, key=unsorted_data.__getitem__)
 for k in sorted_names:
     percentages[k] = unsorted_data[k]
 
-with open('percentages.csv', 'w', newline='') as csvfile:
+with open("percentages.csv", 'w', newline='') as csvfile:
     writer = csv.writer(csvfile, delimiter=',')
     writer.writerow(['Symbol', 'Weight'])
     for symbol, percentage in percentages.items():
