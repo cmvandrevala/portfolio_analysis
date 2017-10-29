@@ -9,5 +9,4 @@ class Constants:
     LEDGERS_DIRECTORY = "../general_ledger/csv/"
     LOCAL_LEDGER_PATH = "local_ledger.csv"
     SECONDS_PER_DAY = 86400
-    YES_RESPONSES = ["y", "ye", "yes"]
     DATA_URL = "http://localhost:5000"

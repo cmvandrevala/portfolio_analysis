@@ -2,26 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e26b7626-ff6c-4e5a-a5a5-220169b3523b" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/account.py" afterPath="$PROJECT_DIR$/core/account.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/portfolio.py" afterPath="$PROJECT_DIR$/core/portfolio.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/snapshot_history.py" afterPath="$PROJECT_DIR$/core/snapshot_history.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/portfolio_creator/data_source.py" afterPath="$PROJECT_DIR$/portfolio_creator/data_source.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/portfolio_creator/portfolio_creator.py" afterPath="$PROJECT_DIR$/portfolio_creator/portfolio_creator.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/append.py" afterPath="$PROJECT_DIR$/scripts/append.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/balance_sheet.py" afterPath="$PROJECT_DIR$/scripts/balance_sheet.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/calculate_percentages.py" afterPath="$PROJECT_DIR$/scripts/calculate_percentages.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/core/test_account.py" afterPath="$PROJECT_DIR$/tests/core/test_account.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/core/test_portfolio.py" afterPath="$PROJECT_DIR$/tests/core/test_portfolio.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/core/test_snapshot.py" afterPath="$PROJECT_DIR$/tests/core/test_snapshot.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/core/test_snapshot_history.py" afterPath="$PROJECT_DIR$/tests/core/test_snapshot_history.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/portfolio_creator/test_portfolio_creator.py" afterPath="$PROJECT_DIR$/tests/portfolio_creator/test_portfolio_creator.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/utilities/test_presenter.py" afterPath="$PROJECT_DIR$/tests/utilities/test_presenter.py" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/scripts/append.py" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/utilities/constants.py" afterPath="$PROJECT_DIR$/utilities/constants.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/utilities/epoch_timestamp_converter.py" afterPath="$PROJECT_DIR$/utilities/epoch_timestamp_converter.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/utilities/presenter.py" afterPath="$PROJECT_DIR$/utilities/presenter.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/valid_options/account_type.py" afterPath="$PROJECT_DIR$/valid_options/account_type.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/valid_options/asset_class.py" afterPath="$PROJECT_DIR$/valid_options/asset_class.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -56,19 +38,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="append.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/append.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="376">
-              <caret line="68" column="0" lean-forward="true" selection-start-line="68" selection-start-column="0" selection-end-line="68" selection-end-column="0" />
-              <folding>
-                <element signature="e#0#24#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="calculate_percentages.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="calculate_percentages.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/calculate_percentages.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="225">
@@ -112,11 +82,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="constants.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="constants.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/utilities/constants.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="7" column="117" lean-forward="false" selection-start-line="7" selection-start-column="117" selection-end-line="7" selection-end-column="117" />
+            <state relative-caret-position="150">
+              <caret line="10" column="27" lean-forward="false" selection-start-line="10" selection-start-column="27" selection-end-line="10" selection-end-column="27" />
               <folding />
             </state>
           </provider>
@@ -176,9 +146,9 @@
         <option value="$PROJECT_DIR$/portfolio_creator/portfolio_creator.py" />
         <option value="$PROJECT_DIR$/valid_options/account_type.py" />
         <option value="$PROJECT_DIR$/valid_options/asset_class.py" />
-        <option value="$PROJECT_DIR$/utilities/constants.py" />
         <option value="$PROJECT_DIR$/tests/core/test_snapshot.py" />
         <option value="$PROJECT_DIR$/tests/core/test_snapshot_history.py" />
+        <option value="$PROJECT_DIR$/utilities/constants.py" />
       </list>
     </option>
   </component>
@@ -459,9 +429,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="435">
           <caret line="32" column="19" lean-forward="true" selection-start-line="32" selection-start-column="19" selection-end-line="32" selection-end-column="19" />
-          <folding>
-            <element signature="e#0#24#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -714,14 +682,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/utilities/constants.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="117" lean-forward="false" selection-start-line="7" selection-start-column="117" selection-end-line="7" selection-end-column="117" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/core/portfolio.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="555">
@@ -736,9 +696,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="376">
           <caret line="68" column="0" lean-forward="true" selection-start-line="68" selection-start-column="0" selection-end-line="68" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#24#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -749,6 +707,14 @@
           <folding>
             <element signature="e#0#10#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utilities/constants.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" column="27" lean-forward="false" selection-start-line="10" selection-start-column="27" selection-end-line="10" selection-end-column="27" />
+          <folding />
         </state>
       </provider>
     </entry>
