@@ -157,13 +157,21 @@ class AssetTestCase(unittest.TestCase):
         balance_sheet_row = self.account.balance_sheet_row()
         self.assertEqual(balance_sheet_row, ["\x1b[1;31;40m" + expected_date + "\x1b[0m", "Rachel's Bank","account name","SYMBOL","Bob Bobberson","Cash Equivalents","0"])
 
-    def test_it_returns_a_row_for_a_liability(self):
+    def test_it_returns_a_row_for_a_liability_less_than_one_week_old(self):
         date_difference = Constants.SECONDS_PER_DAY*2
         timestamp = EpochTimestampConverter().epoch()
         expected_date = EpochTimestampConverter().timestamp(timestamp - date_difference)
         self.liability.import_snapshot(timestamp - date_difference, 100)
         liabilities_row = self.liability.liabilities_row()
         self.assertEqual(liabilities_row, [expected_date, "Rachel's Bank","account name","Bob Bobberson","100"])
+
+    def test_it_returns_a_row_for_a_liability_greater_than_one_week_old(self):
+        date_difference = Constants.SECONDS_PER_DAY*9
+        timestamp = EpochTimestampConverter().epoch()
+        expected_date = EpochTimestampConverter().timestamp(timestamp - date_difference)
+        self.liability.import_snapshot(timestamp - date_difference, 100)
+        liabilities_row = self.liability.liabilities_row()
+        self.assertEqual(liabilities_row, ["\x1b[0;30;41m" + expected_date + "\x1b[0m", "Rachel's Bank","account name","Bob Bobberson","100"])
 
 if __name__ == '__main__':
     unittest.main()
