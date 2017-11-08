@@ -43,6 +43,9 @@ class Account:
         return [colored_date, self.institution, self.name, self.symbol, self.owner, self.asset_class(),
                 str(self.value())]
 
+    def liabilities_row(self):
+        return [self.last_updated(), self.institution, self.name, self.owner, str(self.value())]
+
     def __unicode_color(self):
         last_updated_epoch = EpochTimestampConverter().epoch(self.last_updated())
         if last_updated_epoch > EpochTimestampConverter().epoch():

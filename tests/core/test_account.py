@@ -11,6 +11,7 @@ class AssetTestCase(unittest.TestCase):
 
     def setUp(self):
         self.account = Account("account name", "Bob Bobberson", "SYMBOL", AssetClass.CASH_EQUIVALENTS, "Rachel's Bank", AccountType.ASSET)
+        self.liability = Account("account name", "Bob Bobberson", "SYMBOL", AssetClass.CASH_EQUIVALENTS, "Rachel's Bank", AccountType.LIABILITY)
 
     def test_it_has_a_name(self):
         self.assertEqual(self.account.name, "account name")
@@ -155,6 +156,14 @@ class AssetTestCase(unittest.TestCase):
         self.account.import_snapshot(timestamp - date_difference, 0)
         balance_sheet_row = self.account.balance_sheet_row()
         self.assertEqual(balance_sheet_row, ["\x1b[1;31;40m" + expected_date + "\x1b[0m", "Rachel's Bank","account name","SYMBOL","Bob Bobberson","Cash Equivalents","0"])
+
+    def test_it_returns_a_row_for_a_liability(self):
+        date_difference = Constants.SECONDS_PER_DAY*2
+        timestamp = EpochTimestampConverter().epoch()
+        expected_date = EpochTimestampConverter().timestamp(timestamp - date_difference)
+        self.liability.import_snapshot(timestamp - date_difference, 100)
+        liabilities_row = self.liability.liabilities_row()
+        self.assertEqual(liabilities_row, [expected_date, "Rachel's Bank","account name","Bob Bobberson","100"])
 
 if __name__ == '__main__':
     unittest.main()
