@@ -1,9 +1,9 @@
 import csv
-import matplotlib.pyplot as plt
 
-from portfolio_creator.portfolio_creator import PortfolioCreator
 from portfolio_creator.data_source import DataSource
+from portfolio_creator.portfolio_creator import PortfolioCreator
 from utilities.presenter import Presenter
+from visualizations.bar_graph import BarGraph
 
 portfolio = PortfolioCreator().create(DataSource())
 unsorted_data = portfolio.percentages()
@@ -19,10 +19,5 @@ with open("percentages.csv", 'w', newline='') as csvfile:
     for symbol, percentage in percentages.items():
         writer.writerow([symbol, Presenter.decimal_as_percentage(percentage)])
 
-plt.bar(range(len(percentages)), percentages.values(), align='center')
-plt.xticks(range(len(percentages)), percentages.keys(), rotation=90)
-
-plt.ylabel('Weight (% of Portfolio)')
-plt.title('Asset Weights')
-
-plt.show()
+params = {"title": "Asset Weights", "ylabel": "Weight (% of Portfolio)", "rotation": 90}
+BarGraph.single_dataset(percentages, params)
