@@ -2,7 +2,7 @@ import datetime
 
 from portfolio_creator.data_source import DataSource
 from portfolio_creator.portfolio_creator import PortfolioCreator
-from pylab import plot, xlabel, ylabel, title, show
+from visualizations.line_graph import LineGraph
 from utilities.constants import Constants
 from utilities.epoch_timestamp_converter import EpochTimestampConverter
 
@@ -18,8 +18,5 @@ for day in range(0, number_of_days):
     times.append(datetime.datetime.fromtimestamp(historical_time))
     owners_equity.append(portfolio.total_value(formatted_date))
 
-plot(times, owners_equity)
-xlabel('Date')
-ylabel("Owner's Equity")
-title("Owner's Equity vs. Time")
-show()
+params = {"xlabel": "Date", "ylabel": "Owner's Equity", "title": "Owner's Equity vs. Time"}
+LineGraph.single_line(times, owners_equity, params)
