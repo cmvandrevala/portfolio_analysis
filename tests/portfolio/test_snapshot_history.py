@@ -1,8 +1,8 @@
 import unittest
 
 from utilities.epoch_timestamp_converter import EpochTimestampConverter
-from core.snapshot import Snapshot
-from core.snapshot_history import SnapshotHistory
+from portfolio.snapshot import Snapshot
+from portfolio.snapshot_history import SnapshotHistory
 
 
 class SnapshotHistoryTestCase(unittest.TestCase):

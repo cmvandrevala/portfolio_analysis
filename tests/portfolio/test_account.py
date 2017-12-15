@@ -1,6 +1,6 @@
 import unittest
 
-from core.account import Account
+from portfolio.account import Account
 from utilities.constants import Constants
 from utilities.epoch_timestamp_converter import EpochTimestampConverter
 from valid_options.account_type import AccountType

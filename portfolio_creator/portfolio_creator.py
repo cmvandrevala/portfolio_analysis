@@ -1,6 +1,6 @@
 import json
 
-from core.portfolio import Portfolio
+from portfolio.portfolio import Portfolio
 
 
 class PortfolioCreator:
@@ -9,13 +9,18 @@ class PortfolioCreator:
 
     def create(self, data_source):
         data = data_source.get()
-        for item in json.loads(data):
+        snapshots = json.loads(data)
+        for item in snapshots["snapshots"]:
+            if item["asset"]:
+                account_type = "ASSET"
+            else:
+                account_type = "LIABILITY"
             self.portfolio.import_data({"date": item["timestamp"],
                                         "institution": item["institution"],
-                                        "name": item["description"],
+                                        "name": item["account"],
                                         "owner": item["owner"],
-                                        "symbol": item["symbol"],
-                                        "account_type": item["asset_or_liability"],
-                                        "value": float(item["value"]),
-                                        "asset_class": item["asset_class"]})
+                                        "symbol": item["investment"],
+                                        "account_type": account_type,
+                                        "value": float(item["value"])/100,
+                                        "asset_class": "Cash Equivalents"})
         return self.portfolio

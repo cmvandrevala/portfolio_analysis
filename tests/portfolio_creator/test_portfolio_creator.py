@@ -9,22 +9,21 @@ class MockDataSource:
         pass
 
     def get(self):
-        return json.dumps([{"timestamp": "2017-01-02",
+        return json.dumps({"snapshots": [{"timestamp": "2017-01-02",
                             "institution": "John's Union",
-                            "description": "Checking",
+                            "account": "Checking",
                             "owner": "Robert",
-                            "symbol": "CASHX",
-                            "asset_or_liability": "ASSET",
-                            "value": 980.66,
-                            "asset_class": "Cash Equivalents"},
+                            "investment": "CASHX",
+                            "asset": True,
+                            "value": 98066},
                            {"timestamp": "2017-10-25",
                             "institution": "Bob's Bank",
-                            "description": "Credit Card",
+                            "account": "Credit Card",
                             "owner": "John",
-                            "symbol": "CASHX",
-                            "asset_or_liability": "LIABILITY",
-                            "value": 1000.00,
-                            "asset_class": "None"}])
+                            "investment": "CASHX",
+                            "asset": False,
+                            "value": 100000,
+                            "asset_class": "None"}]})
 
 
 class PortfolioCreatorTestCase(unittest.TestCase):
