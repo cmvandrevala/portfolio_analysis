@@ -3,6 +3,7 @@ from portfolio.snapshot_history import SnapshotHistory
 from utilities.constants import Constants
 from utilities.epoch_timestamp_converter import EpochTimestampConverter
 
+
 class Account:
     def __init__(self, name, owner, symbol, asset_class, institution, account_type):
         self.name = name
@@ -38,7 +39,8 @@ class Account:
                 self.account_type() == account.account_type())
 
     def balance_sheet_row(self):
-        return [self.__last_updated_for_balance_sheet(), self.institution, self.name, self.symbol, self.owner, self.asset_class(), str(self.value())]
+        return [self.__last_updated_for_balance_sheet(), self.institution, self.name, self.symbol, self.owner,
+                self.asset_class(), str(self.value())]
 
     def liabilities_row(self):
         return [self.__last_updated_for_liabilities_row(), self.institution, self.name, self.owner, str(self.value())]

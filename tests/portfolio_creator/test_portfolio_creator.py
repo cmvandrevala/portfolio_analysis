@@ -5,8 +5,6 @@ from portfolio_creator.portfolio_creator import PortfolioCreator
 
 
 class MockDataSource:
-    def __init__(self):
-        pass
 
     def get(self):
         return json.dumps({"snapshots": [{"timestamp": "2017-01-02",
@@ -27,11 +25,9 @@ class MockDataSource:
 
 
 class PortfolioCreatorTestCase(unittest.TestCase):
-    def setUp(self):
-        self.creator = PortfolioCreator()
 
     def test_it_creates_a_portfolio(self):
-        portfolio = self.creator.create(MockDataSource())
+        portfolio = PortfolioCreator().create(MockDataSource())
         self.assertEqual(portfolio.total_value(), -19.34)
         self.assertEqual(portfolio.percentages(), {"CASHX": 1.0})
 

@@ -1,7 +1,4 @@
 class Constants:
-    def __init__(self):
-        pass
-
     BALANCE_SHEET_HEADERS = ["Last Updated", "Institution", "Account", "Investment", "Owner", "Asset Class", "Value"]
     BALANCE_SHEET_SPACERS = ["---", "---", "---", "---", "---", "---", "---"]
     DAYS_PER_YEAR = 365

@@ -11,16 +11,15 @@ class PortfolioCreator:
         data = data_source.get()
         snapshots = json.loads(data)
         for item in snapshots["snapshots"]:
-            if item["asset"]:
-                account_type = "ASSET"
-            else:
-                account_type = "LIABILITY"
-            self.portfolio.import_data({"date": item["timestamp"],
+            self.portfolio.import_data({"timestamp": item["timestamp"],
                                         "institution": item["institution"],
                                         "name": item["account"],
                                         "owner": item["owner"],
                                         "symbol": item["investment"],
-                                        "account_type": account_type,
+                                        "account_type": self.__account_type(item),
                                         "value": float(item["value"])/100,
                                         "asset_class": "Cash Equivalents"})
         return self.portfolio
+
+    def __account_type(self, account):
+        return "ASSET" if account["asset"] else "LIABILITY"

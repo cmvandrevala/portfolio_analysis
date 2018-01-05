@@ -3,9 +3,6 @@ import time
 
 
 class EpochTimestampConverter:
-    def __init__(self):
-        pass
-
     def epoch(self, timestamp=None):
         if timestamp is None:
             return time.time()
