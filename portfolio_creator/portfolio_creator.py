@@ -15,9 +15,15 @@ class PortfolioCreator:
                                         "owner": item["owner"],
                                         "symbol": item["investment"],
                                         "account_type": self.__account_type(item),
-                                        "value": float(item["value"])/100,
-                                        "asset_class": "Cash Equivalents"})
+                                        "value": self.__value(item),
+                                        "asset_class": self.__asset_class(item)})
         return portfolio
 
     def __account_type(self, account):
         return "ASSET" if account["asset"] else "LIABILITY"
+
+    def __value(self, account):
+        return float(account["value"])/100
+
+    def __asset_class(self, account):
+        return account.get("assetClass", "None")
