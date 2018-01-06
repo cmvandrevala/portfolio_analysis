@@ -17,7 +17,7 @@ class Portfolio:
 
     def import_data(self, data):
         name = data.get("name")
-        date = data.get("date")
+        date = data.get("timestamp")
         value = data.get("value")
         institution = data.get("institution")
         owner = data.get("owner")
