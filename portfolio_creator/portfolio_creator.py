@@ -13,7 +13,7 @@ class PortfolioCreator:
                                         "institution": item["institution"],
                                         "name": item["account"],
                                         "owner": item["owner"],
-                                        "symbol": item["investment"],
+                                        "investment": item["investment"],
                                         "account_type": self.__account_type(item),
                                         "value": self.__value(item),
                                         "asset_class": self.__asset_class(item)})

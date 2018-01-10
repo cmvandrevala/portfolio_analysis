@@ -21,10 +21,10 @@ class Portfolio:
         value = data.get("value")
         institution = data.get("institution")
         owner = data.get("owner")
-        symbol = data.get("symbol")
+        investment = data.get("investment")
         asset_class = AssetClass(data.get("asset_class"))
         account_type = AccountType(data.get("account_type"))
-        account = Account(name, owner, symbol, asset_class, institution, account_type)
+        account = Account(name, owner, investment, asset_class, institution, account_type)
         self.__create_or_update(date, value, account)
 
     def percentages(self):
