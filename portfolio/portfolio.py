@@ -2,7 +2,6 @@ from collections import defaultdict
 
 from portfolio.account_builder import AccountBuilder
 from utilities.epoch_timestamp_converter import EpochTimestampConverter
-from portfolio.account import Account
 from valid_options.account_type import AccountType
 from valid_options.asset_class import AssetClass
 

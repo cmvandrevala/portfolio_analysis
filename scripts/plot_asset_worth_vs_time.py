@@ -14,12 +14,12 @@ number_of_days = Constants.DAYS_PER_YEAR * 1
 
 name = "Employee Equity"
 owner = "Cyrus"
-symbol = "8th Light Company Shares"
-asset_class = AssetClass.CASH_EQUIVALENTS
+investment = "8th Light Company Shares"
+asset_class = AssetClass.NONE
 institution = "8th Light"
 account_type = AccountType.ASSET
 
-test_account = Account(name, owner, symbol, asset_class, institution, account_type)
+test_account = Account(name, owner, investment, asset_class, institution, account_type)
 
 account = None
 

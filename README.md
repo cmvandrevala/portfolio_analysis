@@ -59,3 +59,24 @@ There are a number of Python scripts located in the `scripts/` directory and (mo
 * `make classes` -> Plot asset classes of portfolio
 * `make net` -> Plot owner's equity versus time
 * `make percentages` -> Generate percentages for use in Portfolio Visualizer
+
+### A Note About Matplotlib
+
+If you are using `pipenv` on OSX, you might notice an error complaining that Python has not been installed as a framework:
+
+```bazaar
+RuntimeError: Python is not installed as a framework. The Mac OS X backend 
+will not be able to function correctly if Python is not installed as a 
+framework. See the Python documentation for more information on installing 
+Python as a framework on Mac OS X. Please either reinstall Python as a 
+framework, or try one of the other backends. If you are using (Ana)Conda 
+please install python.app and replace the use of 'python' with 'pythonw'. 
+See 'Working with Matplotlib on OSX' in the Matplotlib FAQ for more 
+information.
+```
+
+This might be due to the fact that OSX has a different image-rendering backend for Matplotlib than other operating systems. To fix this problem, create a new file called `~/.matplotlib/matplotlibrc` and add the following line of code:
+
+```python
+backend: TkAgg
+```
