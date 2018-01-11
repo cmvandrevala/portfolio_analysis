@@ -1,4 +1,6 @@
 from collections import defaultdict
+
+from portfolio.account_builder import AccountBuilder
 from utilities.epoch_timestamp_converter import EpochTimestampConverter
 from portfolio.account import Account
 from valid_options.account_type import AccountType
@@ -16,21 +18,19 @@ class Portfolio:
         return list(filter(lambda x: x.account_type() == "LIABILITY", self.accounts))
 
     def import_data(self, data):
-        name = data.get("name")
-        date = data.get("timestamp")
-        value = data.get("value")
-        institution = data.get("institution")
-        owner = data.get("owner")
-        investment = data.get("investment")
-        asset_class = AssetClass(data.get("asset_class"))
-        account_type = AccountType(data.get("account_type"))
-        account = Account(name, owner, investment, asset_class, institution, account_type)
-        self.__create_or_update(date, value, account)
+        account = AccountBuilder().set_name(data.get("name"))\
+            .set_institution(data.get("institution"))\
+            .set_owner(data.get("owner"))\
+            .set_investment(data.get("investment"))\
+            .set_asset_class(AssetClass(data.get("asset_class")))\
+            .set_account_type(AccountType(data.get("account_type")))\
+            .build()
+        self.__create_or_update(data.get("timestamp"), data.get("value"), account)
 
     def percentages(self):
         output = defaultdict(float)
         for asset in self.assets():
-            output[asset.symbol] += asset.value()
+            output[asset.investment] += asset.value()
         self.__normalize_output(output)
         return output
 

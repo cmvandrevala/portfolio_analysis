@@ -13,9 +13,9 @@ class PortfolioTestCase(unittest.TestCase):
                              "asset_class": "Fixed Income", "owner": "Sam", "institution": "Bank 2",
                              "account_type": "ASSET"}
         self.liability_data_1 = {"timestamp": "2017-06-05", "name": "Visa Card", "value": 1000, "investment": "CASHX",
-                                 "institution": "Bank 1", "account_type": "LIABILITY", "asset_class": "None"}
+                                 "institution": "Bank 1", "account_type": "LIABILITY", "asset_class": "None", "owner": "Craig"}
         self.liability_data_2 = {"timestamp": "2017-07-05", "name": "Personal Loan", "value": 1500, "investment": "CASHX",
-                                 "institution": "Bank 2", "account_type": "LIABILITY", "asset_class": "None"}
+                                 "institution": "Bank 2", "account_type": "LIABILITY", "asset_class": "None", "owner": "Eusavio"}
 
     def test_it_starts_off_with_no_assets_or_liabilities(self):
         self.assertEqual(self.portfolio.total_value(), 0)
@@ -102,8 +102,8 @@ class PortfolioTestCase(unittest.TestCase):
         asset_data = {"timestamp": "2017-06-01", "name": "SP", "investment": "SP", "value": 12.50, "asset_class": "Equities",
                       "owner": "Julie", "institution": "Bank", "account_type": "ASSET"}
         self.portfolio.import_data(asset_data)
-        liability_data = {"timestamp": "2017-02-01", "name": "loan", "value": 50, "institution": "bank",
-                          "account_type": "LIABILITY", "asset_class": "None"}
+        liability_data = {"timestamp": "2017-02-01", "name": "loan", "investment": "Bank of Martin", "value": 50, "institution": "bank",
+                          "account_type": "LIABILITY", "asset_class": "None", "owner": "Martin"}
         self.portfolio.import_data(liability_data)
         self.assertEqual(self.portfolio.total_value("2017-03-01"), 50)
 
@@ -113,7 +113,7 @@ class PortfolioTestCase(unittest.TestCase):
         self.portfolio.import_data(self.liability_data_1)
         self.assertEqual(self.portfolio.percentages(), {'PG': 0.333, 'VTIBX': 0.667})
 
-    def test_it_combines_assets_with_the_same_symbol_in_percentage_calculations(self):
+    def test_it_combines_assets_with_the_same_investment_in_percentage_calculations(self):
         asset_data = {"timestamp": "2017-01-01", "name": "Foo", "investment": "A", "value": 100, "asset_class": "Equities",
                       "owner": "Felipe", "institution": "Bank", "account_type": "ASSET"}
         self.portfolio.import_data(asset_data)
@@ -125,7 +125,7 @@ class PortfolioTestCase(unittest.TestCase):
         self.portfolio.import_data(asset_data)
         self.assertEqual(self.portfolio.percentages(), {"A": 0.667, "B": 0.333})
 
-    def test_it_creates_different_assets_given_different_symbols_with_the_same_name(self):
+    def test_it_creates_different_assets_given_different_investments_with_the_same_name(self):
         asset_data = {"timestamp": "2017-01-01", "name": "Foo", "investment": "A", "value": 100, "asset_class": "Equities",
                       "owner": "Lucy", "institution": "Bank", "account_type": "ASSET"}
         self.portfolio.import_data(asset_data)
