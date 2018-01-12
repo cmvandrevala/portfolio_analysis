@@ -26,6 +26,12 @@ class Portfolio:
             .build()
         self.__create_or_update(data.get("timestamp"), data.get("value"), account)
 
+    def import_account(self, account):
+        for existing_account in self.accounts:
+            if existing_account.is_identical_to(account):
+                return
+        self.accounts.append(account)
+
     def percentages(self):
         output = defaultdict(float)
         for asset in self.assets():

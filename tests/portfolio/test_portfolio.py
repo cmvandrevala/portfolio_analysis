@@ -1,6 +1,9 @@
 import unittest
 
+from portfolio.account_builder import AccountBuilder
 from portfolio.portfolio import Portfolio
+from valid_options.account_type import AccountType
+from valid_options.asset_class import AssetClass
 
 
 class PortfolioTestCase(unittest.TestCase):
@@ -203,6 +206,47 @@ class PortfolioTestCase(unittest.TestCase):
                          {"Cash Equivalents": 0, "Equities": 0.5, "Fixed Income": 0.5, "Real Estate": 0,
                           "Commodities": 0, "Annuities": 0, "Fixed Assets": 0})
 
+    def test_it_imports_an_account(self):
+        account = AccountBuilder().set_name("name") \
+            .set_institution("institution") \
+            .set_owner("owner") \
+            .set_investment("investment") \
+            .set_asset_class(AssetClass.NONE) \
+            .set_account_type(AccountType.ASSET) \
+            .build()
+        self.portfolio.import_account(account)
+        self.assertEqual(self.portfolio.accounts, [account])
+
+    def test_it_imports_a_second_account_in_the_portfolio(self):
+        account_one = AccountBuilder().set_name("name") \
+            .set_institution("institution") \
+            .set_owner("owner") \
+            .set_investment("investment") \
+            .set_asset_class(AssetClass.NONE) \
+            .set_account_type(AccountType.ASSET) \
+            .build()
+        account_two = AccountBuilder().set_name("name") \
+            .set_institution("institution") \
+            .set_owner("another owner") \
+            .set_investment("investment") \
+            .set_asset_class(AssetClass.NONE) \
+            .set_account_type(AccountType.ASSET) \
+            .build()
+        self.portfolio.import_account(account_one)
+        self.portfolio.import_account(account_two)
+        self.assertEqual(self.portfolio.accounts, [account_one, account_two])
+
+    def test_it_does_not_import_an_account_if_it_already_exists_in_the_portfolio(self):
+        account = AccountBuilder().set_name("name") \
+            .set_institution("institution") \
+            .set_owner("owner") \
+            .set_investment("investment") \
+            .set_asset_class(AssetClass.NONE) \
+            .set_account_type(AccountType.ASSET) \
+            .build()
+        self.portfolio.import_account(account)
+        self.portfolio.import_account(account)
+        self.assertEqual(self.portfolio.accounts, [account])
 
 if __name__ == '__main__':
     unittest.main()
