@@ -26,4 +26,4 @@ class PortfolioCreator:
         return float(account["value"])/100
 
     def __asset_class(self, account):
-        return account.get("assetClass", "None")
+        return account.get("asset_class", "None")
