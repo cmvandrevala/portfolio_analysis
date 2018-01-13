@@ -48,7 +48,16 @@ class Portfolio:
         return output
 
     def total_value(self, date=None):
-        return round(self.__value_of(self.assets(), date) - self.__value_of(self.liabilities(), date), 2)
+        return self.assets_value(date) - self.liabilities_value(date)
+
+    def assets_value(self, date=None):
+        return self.__value_of(self.assets(), date)
+
+    def liabilities_value(self, date=None):
+        return self.__value_of(self.liabilities(), date)
+
+    def __value_of(self, accounts, date=None):
+        return sum(account.value(EpochTimestampConverter().epoch(date)) for account in accounts)
 
     def __normalize_output(self, output):
         for key, value in output.items():
@@ -56,9 +65,6 @@ class Portfolio:
                 output[key] = 0
             else:
                 output[key] = round(float(value) / self.__value_of(self.assets()), 3)
-
-    def __value_of(self, accounts, date=None):
-        return sum(account.value(EpochTimestampConverter().epoch(date)) for account in accounts)
 
     def __create_or_update(self, date, value, account):
         for existing_account in self.accounts:

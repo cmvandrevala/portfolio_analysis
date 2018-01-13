@@ -37,7 +37,7 @@ class PortfolioCreatorTestCase(unittest.TestCase):
 
     def test_it_creates_a_portfolio(self):
         portfolio = PortfolioCreator().create(MockDataSource())
-        self.assertEqual(portfolio.total_value(), -19.34)
+        self.assertAlmostEqual(portfolio.total_value(), -19.34)
         self.assertEqual(portfolio.percentages(), {"CASHX": 1.0})
         self.assertEqual(portfolio.asset_classes(), {'Annuities': 0.0, 'Cash Equivalents': 1.0, 'Commodities': 0.0, 'Equities': 0.0, 'Fixed Assets': 0.0, 'Fixed Income': 0.0, 'Real Estate': 0.0})
 
