@@ -13,7 +13,7 @@ class PortfolioCreator:
                                         "institution": item["institution"],
                                         "name": item["account"],
                                         "owner": item["owner"],
-                                        "symbol": item["investment"],
+                                        "investment": item["investment"],
                                         "account_type": self.__account_type(item),
                                         "value": self.__value(item),
                                         "asset_class": self.__asset_class(item)})
@@ -26,4 +26,4 @@ class PortfolioCreator:
         return float(account["value"])/100
 
     def __asset_class(self, account):
-        return account.get("assetClass", "None")
+        return account.get("asset_class", "None")

@@ -1,6 +1,7 @@
 from collections import defaultdict
+
+from portfolio.account_builder import AccountBuilder
 from utilities.epoch_timestamp_converter import EpochTimestampConverter
-from portfolio.account import Account
 from valid_options.account_type import AccountType
 from valid_options.asset_class import AssetClass
 
@@ -16,21 +17,25 @@ class Portfolio:
         return list(filter(lambda x: x.account_type() == "LIABILITY", self.accounts))
 
     def import_data(self, data):
-        name = data.get("name")
-        date = data.get("timestamp")
-        value = data.get("value")
-        institution = data.get("institution")
-        owner = data.get("owner")
-        symbol = data.get("symbol")
-        asset_class = AssetClass(data.get("asset_class"))
-        account_type = AccountType(data.get("account_type"))
-        account = Account(name, owner, symbol, asset_class, institution, account_type)
-        self.__create_or_update(date, value, account)
+        account = AccountBuilder().set_name(data.get("name"))\
+            .set_institution(data.get("institution"))\
+            .set_owner(data.get("owner"))\
+            .set_investment(data.get("investment"))\
+            .set_asset_class(AssetClass(data.get("asset_class")))\
+            .set_account_type(AccountType(data.get("account_type")))\
+            .build()
+        self.__create_or_update(data.get("timestamp"), data.get("value"), account)
+
+    def import_account(self, account):
+        for existing_account in self.accounts:
+            if existing_account.is_identical_to(account):
+                return
+        self.accounts.append(account)
 
     def percentages(self):
         output = defaultdict(float)
         for asset in self.assets():
-            output[asset.symbol] += asset.value()
+            output[asset.investment] += asset.value()
         self.__normalize_output(output)
         return output
 
@@ -43,7 +48,16 @@ class Portfolio:
         return output
 
     def total_value(self, date=None):
-        return round(self.__value_of(self.assets(), date) - self.__value_of(self.liabilities(), date), 2)
+        return self.assets_value(date) - self.liabilities_value(date)
+
+    def assets_value(self, date=None):
+        return self.__value_of(self.assets(), date)
+
+    def liabilities_value(self, date=None):
+        return self.__value_of(self.liabilities(), date)
+
+    def __value_of(self, accounts, date=None):
+        return sum(account.value(EpochTimestampConverter().epoch(date)) for account in accounts)
 
     def __normalize_output(self, output):
         for key, value in output.items():
@@ -51,9 +65,6 @@ class Portfolio:
                 output[key] = 0
             else:
                 output[key] = round(float(value) / self.__value_of(self.assets()), 3)
-
-    def __value_of(self, accounts, date=None):
-        return sum(account.value(EpochTimestampConverter().epoch(date)) for account in accounts)
 
     def __create_or_update(self, date, value, account):
         for existing_account in self.accounts:

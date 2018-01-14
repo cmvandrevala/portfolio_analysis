@@ -1,25 +1,32 @@
 import datetime
 
-from portfolio.account import Account
+from pylab import plot, xlabel, ylabel, title, show
+
+from portfolio.account_builder import AccountBuilder
 from portfolio_creator.data_source import DataSource
 from portfolio_creator.portfolio_creator import PortfolioCreator
-from pylab import plot, xlabel, ylabel, title, show
 from utilities.constants import Constants
 from utilities.epoch_timestamp_converter import EpochTimestampConverter
-from valid_options.asset_class import AssetClass
 from valid_options.account_type import AccountType
+from valid_options.asset_class import AssetClass
 
 portfolio = PortfolioCreator().create(DataSource())
 number_of_days = Constants.DAYS_PER_YEAR * 1
 
 name = "Employee Equity"
 owner = "Cyrus"
-symbol = "8th Light Company Shares"
-asset_class = AssetClass.CASH_EQUIVALENTS
+investment = "8th Light Company Shares"
+asset_class = AssetClass.NONE
 institution = "8th Light"
 account_type = AccountType.ASSET
 
-test_account = Account(name, owner, symbol, asset_class, institution, account_type)
+test_account = AccountBuilder().set_name(name) \
+    .set_institution(institution) \
+    .set_owner(owner) \
+    .set_investment(investment) \
+    .set_asset_class(asset_class) \
+    .set_account_type(account_type) \
+    .build()
 
 account = None
 
