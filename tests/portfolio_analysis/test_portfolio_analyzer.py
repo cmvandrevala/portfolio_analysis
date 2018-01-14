@@ -10,7 +10,7 @@ from valid_options.account_type import AccountType
 from valid_options.asset_class import AssetClass
 
 
-class AssetTestCase(unittest.TestCase):
+class PortfolioAnalyzerCase(unittest.TestCase):
     def test_it_returns_the_debt_to_equity_ratio_for_a_portfolio_with_no_liabilities(self):
         account = AccountBuilder().set_name("name") \
             .set_institution("institution") \

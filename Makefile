@@ -19,6 +19,9 @@ net:
 percentages:
 	python3 -m scripts.calculate_percentages
 
+recommend:
+	python3 -m scripts.recommend_investment
+
 test:
 	python3 -m unittest discover tests/portfolio
 	python3 -m unittest discover tests/portfolio_analysis
