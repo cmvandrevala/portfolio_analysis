@@ -11,6 +11,8 @@ mypy = "*"
 terminaltables = "*"
 matplotlib = "*"
 requests = "*"
+flask = "*"
+"jinja2" = "*"
 
 
 [dev-packages]
