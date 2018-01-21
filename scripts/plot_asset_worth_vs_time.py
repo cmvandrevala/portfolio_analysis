@@ -13,12 +13,12 @@ from valid_options.asset_class import AssetClass
 portfolio = PortfolioCreator().create(DataSource())
 number_of_days = Constants.DAYS_PER_YEAR * 1
 
-name = "Employee Equity"
-owner = "Cyrus"
-investment = "8th Light Company Shares"
-asset_class = AssetClass.NONE
-institution = "8th Light"
+institution = "Consumer's Credit Union"
+name = "Bank Accounts"
+owner = "Family"
+investment = "Regular Shares"
 account_type = AccountType.ASSET
+asset_class = AssetClass.NONE
 
 test_account = AccountBuilder().set_name(name) \
     .set_institution(institution) \
@@ -47,6 +47,16 @@ for day in range(0, number_of_days):
     owners_equity.append(account.value(historical_time))
 
 plot(times, owners_equity)
+
+times = []
+owners_equity = []
+
+for snapshot in account.history.snapshots:
+    times.append(datetime.datetime.fromtimestamp(snapshot.timestamp))
+    owners_equity.append(snapshot.value)
+
+plot(times, owners_equity, 'o')
+
 xlabel('Date')
 ylabel("Value")
 title("Value of " + institution + "/" + name + " vs. Time")
