@@ -27,4 +27,5 @@ test:
 	python3 -m unittest discover tests/portfolio
 	python3 -m unittest discover tests/portfolio_analysis
 	python3 -m unittest discover tests/portfolio_creator
+	python3 -m unittest discover tests/report
 	python3 -m unittest discover tests/utilities
