@@ -17,7 +17,7 @@ data.append(Constants.BALANCE_SHEET_SPACERS)
 for liability in portfolio.liabilities():
     data.append(balance_sheet.liabilities_row(liability))
 
-data.append(["", "", "", "", "", "Total", str(portfolio.total_value())])
+data.append(["", "", "", "", "Total", str(portfolio.total_value())])
 
 t = AsciiTable(data)
 t.inner_footing_row_border = True
