@@ -3,31 +3,20 @@ from utilities.epoch_timestamp_converter import EpochTimestampConverter
 
 
 class BalanceSheet:
-    def asset_row(self, account):
-        return [self.__last_updated_for_balance_sheet(account), account.institution, account.name, account.investment,
-                account.owner, str(account.value())]
 
-    def liabilities_row(self, account):
-        return [self.__last_updated_for_liabilities_row(account), account.institution, account.name, account.investment, account.owner,
+    def __init__(self):
+        self.RED = "\x1b[1;31;40m"
+
+    def row(self, account):
+        return [self.__last_updated(account), account.institution, account.name, account.investment, account.owner,
                 str(account.value())]
 
-    def __last_updated_for_balance_sheet(self, account):
+    def __last_updated(self, account):
         last_updated_epoch = EpochTimestampConverter().epoch(account.last_updated())
         if last_updated_epoch > EpochTimestampConverter().epoch():
-            return self.__color_last_updated(account, "\x1b[1;31;40m")
-        elif self.__within_time_period(last_updated_epoch, 90):
-            return self.__color_last_updated(account, "\x1b[1;31;40m")
-        elif self.__within_time_period(last_updated_epoch, 60):
-            return self.__color_last_updated(account, "\x1b[1;35;40m")
-        elif self.__within_time_period(last_updated_epoch, 30):
-            return self.__color_last_updated(account, "\x1b[0;33;40m")
-        else:
-            return self.__color_last_updated(account)
-
-    def __last_updated_for_liabilities_row(self, account):
-        last_updated_epoch = EpochTimestampConverter().epoch(account.last_updated())
-        if self.__within_time_period(last_updated_epoch, 7):
-            return self.__color_last_updated(account, "\x1b[1;31;40m")
+            return self.__color_last_updated(account, self.RED)
+        elif self.__within_time_period(last_updated_epoch, 7):
+            return self.__color_last_updated(account, self.RED)
         else:
             return self.__color_last_updated(account)
 

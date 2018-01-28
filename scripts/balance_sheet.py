@@ -10,12 +10,12 @@ balance_sheet = BalanceSheet()
 data = [Constants.BALANCE_SHEET_HEADERS]
 
 for asset in portfolio.assets():
-    data.append(balance_sheet.asset_row(asset))
+    data.append(balance_sheet.row(asset))
 
 data.append(Constants.BALANCE_SHEET_SPACERS)
 
 for liability in portfolio.liabilities():
-    data.append(balance_sheet.liabilities_row(liability))
+    data.append(balance_sheet.row(liability))
 
 data.append(["", "", "", "", "Total", str(portfolio.total_value())])
 
