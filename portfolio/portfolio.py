@@ -17,12 +17,14 @@ class Portfolio:
         return list(filter(lambda x: x.account_type() == "LIABILITY", self.accounts))
 
     def import_data(self, data):
-        account = AccountBuilder().set_name(data.get("name"))\
+        account = AccountBuilder()\
+            .set_name(data.get("name"))\
             .set_institution(data.get("institution"))\
             .set_owner(data.get("owner"))\
             .set_investment(data.get("investment"))\
             .set_asset_class(AssetClass(data.get("asset_class")))\
             .set_account_type(AccountType(data.get("account_type")))\
+            .set_update_frequency(data.get("update_frequency"))\
             .build()
         self.__create_or_update(data.get("timestamp"), data.get("value"), account)
 

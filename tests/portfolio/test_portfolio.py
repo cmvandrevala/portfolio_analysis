@@ -11,18 +11,16 @@ class PortfolioTestCase(unittest.TestCase):
         self.portfolio = Portfolio()
         self.asset_data_1 = {"timestamp": "2017-06-01", "name": "Proctor and Gamble", "investment": "PG", "value": 1000,
                              "asset_class": "Equities", "owner": "Bob", "institution": "Bank 1",
-                             "account_type": "ASSET"}
+                             "account_type": "ASSET", "update_frequency": 2}
         self.asset_data_2 = {"timestamp": "2017-07-01", "name": "Vanguard Bond Fund", "investment": "VTIBX",
-                             "value": 2000,
-                             "asset_class": "Fixed Income", "owner": "Sam", "institution": "Bank 2",
-                             "account_type": "ASSET"}
+                             "value": 2000, "asset_class": "Fixed Income", "owner": "Sam", "institution": "Bank 2",
+                             "account_type": "ASSET", "update_frequency": 9}
         self.liability_data_1 = {"timestamp": "2017-06-05", "name": "Visa Card", "value": 1000, "investment": "CASHX",
                                  "institution": "Bank 1", "account_type": "LIABILITY", "asset_class": "None",
-                                 "owner": "Craig"}
+                                 "owner": "Craig", "update_frequency": 15}
         self.liability_data_2 = {"timestamp": "2017-07-05", "name": "Personal Loan", "value": 1500,
-                                 "investment": "CASHX",
-                                 "institution": "Bank 2", "account_type": "LIABILITY", "asset_class": "None",
-                                 "owner": "Eusavio"}
+                                 "investment": "CASHX", "institution": "Bank 2", "account_type": "LIABILITY",
+                                 "asset_class": "None", "owner": "Eusavio"}
 
     def test_it_starts_off_with_no_assets_or_liabilities(self):
         self.assertEqual(self.portfolio.assets_value(), 0)
