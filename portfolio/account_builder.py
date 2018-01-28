@@ -4,12 +4,14 @@ from valid_options.asset_class import AssetClass
 from portfolio.invalid_account_exception import InvalidAccountException
 import typing
 
+
 class AccountBuilder:
     def __init__(self):
         self.__owner = None  # type: str
         self.__name = None  # type: str
         self.__investment = None  # type: str
         self.__institution = None  # type: str
+        self.__update_frequency = None  # type: int
         self.__asset_class = AssetClass.CASH_EQUIVALENTS  # type: AssetClass
         self.__account_type = AccountType.ASSET  # type: AccountType
 
@@ -22,9 +24,12 @@ class AccountBuilder:
             raise InvalidAccountException("The name of the investment must be set.")
         elif self.__institution is None:
             raise InvalidAccountException("The name of the institution must be set.")
-        else:
+        elif self.__update_frequency is None:
             return Account(self.__name, self.__owner, self.__investment, self.__asset_class, self.__institution,
                            self.__account_type)
+        else:
+            return Account(self.__name, self.__owner, self.__investment, self.__asset_class, self.__institution,
+                           self.__account_type, self.__update_frequency)
 
     def set_name(self, name: str) -> typing.Any:
         self.__name = name
@@ -60,4 +65,8 @@ class AccountBuilder:
             self.set_liability()
         elif account_type == AccountType.ASSET:
             self.set_asset()
+        return self
+
+    def set_update_frequency(self, update_frequency):
+        self.__update_frequency = update_frequency
         return self
