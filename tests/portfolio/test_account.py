@@ -10,7 +10,7 @@ from valid_options.asset_class import AssetClass
 class AssetTestCase(unittest.TestCase):
     def setUp(self):
         self.account = Account("account name", "Bob Bobberson", "investment", AssetClass.CASH_EQUIVALENTS,
-                               "Rachel's Bank", AccountType.ASSET)
+                               "Rachel's Bank", AccountType.ASSET, 12)
         self.liability = Account("account name", "Bob Bobberson", "investment", AssetClass.CASH_EQUIVALENTS,
                                  "Rachel's Bank", AccountType.LIABILITY)
 
@@ -25,6 +25,12 @@ class AssetTestCase(unittest.TestCase):
 
     def test_it_has_an_asset_class(self):
         self.assertEqual(self.account.asset_class(), "Cash Equivalents")
+
+    def test_it_has_a_suggested_frequency_of_updates_in_days(self):
+        self.assertEqual(self.account.update_frequency, 12)
+
+    def test_it_has_a_default_frequency_of_one_week(self):
+        self.assertEqual(self.liability.update_frequency, 7)
 
     def test_it_throws_an_exception_if_a_string_is_passed_in_for_asset_class(self):
         invalid_account = Account("account name", "Bob Bobberson", "investment", AssetClass.CASH_EQUIVALENTS,
