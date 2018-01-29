@@ -2,6 +2,8 @@ import unittest
 
 from portfolio.account_builder import AccountBuilder
 from portfolio.portfolio import Portfolio
+from utilities.constants import Constants
+from utilities.epoch_timestamp_converter import EpochTimestampConverter
 from valid_options.account_type import AccountType
 from valid_options.asset_class import AssetClass
 
@@ -11,18 +13,16 @@ class PortfolioTestCase(unittest.TestCase):
         self.portfolio = Portfolio()
         self.asset_data_1 = {"timestamp": "2017-06-01", "name": "Proctor and Gamble", "investment": "PG", "value": 1000,
                              "asset_class": "Equities", "owner": "Bob", "institution": "Bank 1",
-                             "account_type": "ASSET"}
+                             "account_type": "ASSET", "update_frequency": 2}
         self.asset_data_2 = {"timestamp": "2017-07-01", "name": "Vanguard Bond Fund", "investment": "VTIBX",
-                             "value": 2000,
-                             "asset_class": "Fixed Income", "owner": "Sam", "institution": "Bank 2",
-                             "account_type": "ASSET"}
+                             "value": 2000, "asset_class": "Fixed Income", "owner": "Sam", "institution": "Bank 2",
+                             "account_type": "ASSET", "update_frequency": 9}
         self.liability_data_1 = {"timestamp": "2017-06-05", "name": "Visa Card", "value": 1000, "investment": "CASHX",
                                  "institution": "Bank 1", "account_type": "LIABILITY", "asset_class": "None",
-                                 "owner": "Craig"}
+                                 "owner": "Craig", "update_frequency": 15}
         self.liability_data_2 = {"timestamp": "2017-07-05", "name": "Personal Loan", "value": 1500,
-                                 "investment": "CASHX",
-                                 "institution": "Bank 2", "account_type": "LIABILITY", "asset_class": "None",
-                                 "owner": "Eusavio"}
+                                 "investment": "CASHX", "institution": "Bank 2", "account_type": "LIABILITY",
+                                 "asset_class": "None", "owner": "Eusavio"}
 
     def test_it_starts_off_with_no_assets_or_liabilities(self):
         self.assertEqual(self.portfolio.assets_value(), 0)
@@ -285,6 +285,53 @@ class PortfolioTestCase(unittest.TestCase):
         self.portfolio.import_account(account)
         self.assertEqual(self.portfolio.accounts, [account])
 
+    def test_it_returns_a_list_of_outdated_assets(self):
+        account_one = AccountBuilder().set_name("name") \
+            .set_institution("institution") \
+            .set_owner("owner") \
+            .set_investment("investment") \
+            .set_asset_class(AssetClass.NONE) \
+            .set_account_type(AccountType.ASSET) \
+            .set_update_frequency(120) \
+            .build()
+        account_two = AccountBuilder().set_name("name") \
+            .set_institution("institution") \
+            .set_owner("owner") \
+            .set_investment("investment") \
+            .set_asset_class(AssetClass.NONE) \
+            .set_account_type(AccountType.ASSET) \
+            .set_update_frequency(1) \
+            .build()
+        timestamp = EpochTimestampConverter().epoch() - 5*Constants.SECONDS_PER_DAY
+        account_one.import_snapshot(timestamp, 100)
+        account_two.import_snapshot(timestamp, 100)
+        self.portfolio.import_account(account_one)
+        self.portfolio.import_account(account_two)
+        self.assertEqual(self.portfolio.outdated_assets(), [account_two])
+
+    def test_it_returns_a_list_of_outdated_liabilities(self):
+        account_one = AccountBuilder().set_name("name") \
+            .set_institution("institution") \
+            .set_owner("owner") \
+            .set_investment("investment") \
+            .set_asset_class(AssetClass.NONE) \
+            .set_account_type(AccountType.LIABILITY) \
+            .set_update_frequency(10) \
+            .build()
+        account_two = AccountBuilder().set_name("name") \
+            .set_institution("institution") \
+            .set_owner("owner") \
+            .set_investment("investment") \
+            .set_asset_class(AssetClass.NONE) \
+            .set_account_type(AccountType.LIABILITY) \
+            .set_update_frequency(3) \
+            .build()
+        timestamp = EpochTimestampConverter().epoch() - 7*Constants.SECONDS_PER_DAY
+        account_one.import_snapshot(timestamp, 100)
+        account_two.import_snapshot(timestamp, 100)
+        self.portfolio.import_account(account_one)
+        self.portfolio.import_account(account_two)
+        self.assertEqual(self.portfolio.outdated_liabilities(), [account_two])
 
 if __name__ == '__main__':
     unittest.main()

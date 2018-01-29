@@ -12,10 +12,10 @@ class EpochTimestampConverterTestCase(unittest.TestCase):
         self.assertAlmostEqual(self.converter.epoch(), time.time(), places=1)
 
     def test_it_returns_an_epoch_from_a_partial_timestamp(self):
-        self.assertEqual(self.converter.epoch("2017-01-02"), 1483358400)
+        self.assertEqual(self.converter.epoch("2017-01-02"), 1483315200)
 
     def test_it_extracts_an_epoch_from_another_partial_timestamp(self):
-        self.assertEqual(self.converter.epoch("2011-03-01"), 1298980800)
+        self.assertEqual(self.converter.epoch("2011-03-01"), 1298937600)
 
     def test_it_extracts_an_epoch_from_a_full_timestamp(self):
         self.assertEqual(self.converter.epoch("2012-02-11T13:14:15Z"), 1328966055)

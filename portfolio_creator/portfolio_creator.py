@@ -14,6 +14,7 @@ class PortfolioCreator:
                                         "name": item["account"],
                                         "owner": item["owner"],
                                         "investment": item["investment"],
+                                        "update_frequency": item["update_frequency"],
                                         "account_type": self.__account_type(item),
                                         "value": self.__value(item),
                                         "asset_class": self.__asset_class(item)})

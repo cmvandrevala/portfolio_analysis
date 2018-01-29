@@ -32,6 +32,11 @@ class AssetTestCase(unittest.TestCase):
         account = self.builder.set_asset_class(AssetClass.ANNUITIES).build()
         self.assertTrue(account.is_identical_to(Account("name", "owner", "investment", AssetClass.ANNUITIES, "institution", AccountType.ASSET)))
 
+    def test_it_sets_the_update_frequency_of_an_account(self):
+        account = self.builder.set_update_frequency(12).build()
+        self.assertTrue(account.is_identical_to(
+            Account("name", "owner", "investment", AssetClass.CASH_EQUIVALENTS, "institution", AccountType.ASSET, 12)))
+
     def test_the_account_name_is_required(self):
         builder = AccountBuilder().set_owner("owner").set_investment("investment").set_institution("institution")
         self.assertRaises(InvalidAccountException, builder.build)
