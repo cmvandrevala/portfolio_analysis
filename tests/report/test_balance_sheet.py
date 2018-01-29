@@ -12,6 +12,7 @@ class BalanceSheetTestCase(unittest.TestCase):
             .set_owner("owner") \
             .set_investment("investment") \
             .set_institution("institution") \
+            .set_update_frequency(3) \
             .build()
         self.liability = AccountBuilder().set_name("name") \
             .set_owner("owner") \
@@ -36,8 +37,16 @@ class BalanceSheetTestCase(unittest.TestCase):
         balance_sheet_row = BalanceSheet().row(self.asset)
         self.assertEqual(balance_sheet_row, ["\x1b[1;31;40m" + expected_date + "\x1b[0m", "institution","name","investment","owner","0"])
 
-    def test_it_colors_the_date_red_if_it_is_over_7_days_in_the_past(self):
+    def test_it_colors_the_date_red_if_it_is_over_7_days_in_the_past_with_no_set_update_frequency(self):
         date_difference = Constants.SECONDS_PER_DAY*8
+        timestamp = EpochTimestampConverter().epoch()
+        expected_date = EpochTimestampConverter().timestamp(timestamp - date_difference)
+        self.liability.import_snapshot(timestamp - date_difference, 0)
+        balance_sheet_row = BalanceSheet().row(self.liability)
+        self.assertEqual(balance_sheet_row, ["\x1b[1;31;40m" + expected_date + "\x1b[0m", "institution","name","investment","owner","0"])
+
+    def test_it_colors_the_date_red_if_it_is_older_than_the_update_frequency(self):
+        date_difference = Constants.SECONDS_PER_DAY*4
         timestamp = EpochTimestampConverter().epoch()
         expected_date = EpochTimestampConverter().timestamp(timestamp - date_difference)
         self.asset.import_snapshot(timestamp - date_difference, 0)

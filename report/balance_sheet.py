@@ -15,7 +15,7 @@ class BalanceSheet:
         last_updated_epoch = EpochTimestampConverter().epoch(account.last_updated())
         if last_updated_epoch > EpochTimestampConverter().epoch():
             return self.__color_last_updated(account, self.RED)
-        elif self.__within_time_period(last_updated_epoch, 7):
+        if self.__within_time_period(last_updated_epoch, account.update_frequency):
             return self.__color_last_updated(account, self.RED)
         else:
             return self.__color_last_updated(account)

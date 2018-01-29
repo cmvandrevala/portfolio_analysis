@@ -9,7 +9,7 @@
 
 <div class="container">
     <h1>Assets</h1>
-    {% for asset in portfolio.assets() %}
+    {% for asset in portfolio.outdated_assets() %}
     <div class="row">
         <div class="column">{{ asset.institution }}</div>
         <div class="column">{{ asset.name }}</div>
@@ -34,7 +34,7 @@
     {% endfor %}
 
     <h1>Liabilities</h1>
-    {% for liability in portfolio.liabilities() %}
+    {% for liability in portfolio.outdated_liabilities() %}
     <div class="row">
         <div class="column">{{ liability.institution }}</div>
         <div class="column">{{ liability.name }}</div>

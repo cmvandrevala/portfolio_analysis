@@ -33,7 +33,7 @@ class EpochTimestampConverter:
 
     def __split_time_on_colons(self, time_string=None):
         if time_string is None:
-            return {"hour": 12, "minute": 0, "second": 0}
+            return {"hour": 0, "minute": 0, "second": 0}
         else:
             hour = int(time_string.split(":")[0])
             minute = int(time_string.split(":")[1])
