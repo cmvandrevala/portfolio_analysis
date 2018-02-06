@@ -132,12 +132,12 @@ class AssetTestCase(unittest.TestCase):
                                     "Rachel's Bank", AccountType.LIABILITY)
         self.assertFalse(self.account.is_identical_to(different_account))
 
-    def test_an_account_is_not_identical_to_one_with_a_different_update_frequency(self):
+    def test_an_account_is_identical_to_one_with_a_different_update_frequency(self):
         different_account = Account("account name", "Bob Bobberson", "investment", AssetClass.CASH_EQUIVALENTS,
                                "Rachel's Bank", AccountType.ASSET, 13)
-        self.assertFalse(self.account.is_identical_to(different_account))
+        self.assertTrue(self.account.is_identical_to(different_account))
 
-    def test_an_account_is_identical_to_one_with_identical_params_including_update_frequency(self):
+    def test_an_account_is_identical_to_one_with_the_same_update_frequency(self):
         different_account = Account("account name", "Bob Bobberson", "investment", AssetClass.CASH_EQUIVALENTS,
                                "Rachel's Bank", AccountType.ASSET, 12)
         self.assertTrue(self.account.is_identical_to(different_account))

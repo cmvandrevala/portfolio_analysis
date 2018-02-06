@@ -35,5 +35,4 @@ class Account:
                 self.investment == account.investment and
                 self.asset_class() == account.asset_class() and
                 self.institution == account.institution and
-                self.account_type() == account.account_type() and
-                self.update_frequency == account.update_frequency)
+                self.account_type() == account.account_type())

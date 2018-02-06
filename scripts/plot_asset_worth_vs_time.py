@@ -13,12 +13,12 @@ from valid_options.asset_class import AssetClass
 portfolio = PortfolioCreator().create(DataSource())
 number_of_days = Constants.DAYS_PER_YEAR * 1
 
-institution = "Consumer's Credit Union"
-name = "Bank Accounts"
-owner = "Family"
-investment = "Regular Shares"
+institution = "Charles Schwab"
+name = "Brokerage"
+owner = "Annamarie"
+investment = "Bank of America"
 account_type = AccountType.ASSET
-asset_class = AssetClass.NONE
+asset_class = AssetClass.EQUITIES
 
 test_account = AccountBuilder().set_name(name) \
     .set_institution(institution) \
@@ -26,6 +26,7 @@ test_account = AccountBuilder().set_name(name) \
     .set_investment(investment) \
     .set_asset_class(asset_class) \
     .set_account_type(account_type) \
+    .set_update_frequency(90) \
     .build()
 
 account = None

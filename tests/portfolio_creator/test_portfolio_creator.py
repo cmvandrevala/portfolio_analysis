@@ -26,7 +26,7 @@ class MockDataSource:
                             "asset_class": "None",
                             "update_frequency": 22},
                             {"timestamp": "2017-10-26",
-                            "institution": "Bob's Bank",
+                            "institution": "Sam's Bank",
                             "account": "Credit Card",
                             "owner": "John",
                             "investment": "CASHX",
@@ -46,7 +46,7 @@ class PortfolioCreatorTestCase(unittest.TestCase):
         self.assertEqual(self.portfolio.percentages(), {"CASHX": 1.0})
         self.assertEqual(self.portfolio.asset_classes(), {'Annuities': 0.0, 'Cash Equivalents': 1.0, 'Commodities': 0.0, 'Equities': 0.0, 'Fixed Assets': 0.0, 'Fixed Income': 0.0, 'Real Estate': 0.0})
 
-    def test_it_assigns_the_correct_update_frequencyies_to_the_accounts(self):
+    def test_it_assigns_the_correct_update_frequencies_to_the_accounts(self):
         accounts = self.portfolio.accounts
         first_account = accounts[0]
         self.assertEqual(first_account.update_frequency, 12)
