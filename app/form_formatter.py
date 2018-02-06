@@ -27,7 +27,7 @@ class FormFormatter:
 
     def __format_timestamp(self, form_data):
         if "timestamp" not in form_data:
-            form_data["timestamp"] = self.timestamp_generator.timestamp()
+            form_data["timestamp"] = self.timestamp_generator.epoch_to_date()
         return form_data
 
     def __compose(self, *functions):

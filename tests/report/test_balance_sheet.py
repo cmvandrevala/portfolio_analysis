@@ -4,7 +4,7 @@ from portfolio.account_builder import AccountBuilder
 from portfolio.portfolio import Portfolio
 from report.balance_sheet import BalanceSheet
 from utilities.constants import Constants
-from utilities.epoch_timestamp_converter import EpochTimestampConverter
+from utilities.epoch_date_converter import EpochDateConverter
 
 
 class BalanceSheetTestCase(unittest.TestCase):
@@ -25,16 +25,16 @@ class BalanceSheetTestCase(unittest.TestCase):
 
     def test_it_returns_a_formatted_row_for_a_balance_sheet(self):
         date_difference = Constants.SECONDS_PER_DAY * 2
-        timestamp = EpochTimestampConverter().epoch()
-        expected_date = EpochTimestampConverter().timestamp(timestamp - date_difference)
+        timestamp = EpochDateConverter().date_to_epoch()
+        expected_date = EpochDateConverter().epoch_to_date(timestamp - date_difference)
         self.asset.import_snapshot(timestamp - date_difference, 100)
         balance_sheet_row = BalanceSheet().row(self.asset)
         self.assertEqual(balance_sheet_row, [expected_date, "institution", "name", "investment", "owner", "100.00"])
 
     def test_it_colors_the_date_red_if_it_is_in_the_future(self):
         date_difference = Constants.SECONDS_PER_DAY * 91
-        timestamp = EpochTimestampConverter().epoch()
-        expected_date = EpochTimestampConverter().timestamp(timestamp + date_difference)
+        timestamp = EpochDateConverter().date_to_epoch()
+        expected_date = EpochDateConverter().epoch_to_date(timestamp + date_difference)
         self.asset.import_snapshot(timestamp + date_difference, 100)
         balance_sheet_row = BalanceSheet().row(self.asset)
         self.assertEqual(balance_sheet_row,
@@ -43,8 +43,8 @@ class BalanceSheetTestCase(unittest.TestCase):
 
     def test_it_colors_the_date_red_if_it_is_over_7_days_in_the_past_with_no_set_update_frequency(self):
         date_difference = Constants.SECONDS_PER_DAY * 8
-        timestamp = EpochTimestampConverter().epoch()
-        expected_date = EpochTimestampConverter().timestamp(timestamp - date_difference)
+        timestamp = EpochDateConverter().date_to_epoch()
+        expected_date = EpochDateConverter().epoch_to_date(timestamp - date_difference)
         self.liability.import_snapshot(timestamp - date_difference, 0)
         balance_sheet_row = BalanceSheet().row(self.liability)
         self.assertEqual(balance_sheet_row,
@@ -53,8 +53,8 @@ class BalanceSheetTestCase(unittest.TestCase):
 
     def test_it_colors_the_date_red_if_it_is_older_than_the_update_frequency(self):
         date_difference = Constants.SECONDS_PER_DAY * 4
-        timestamp = EpochTimestampConverter().epoch()
-        expected_date = EpochTimestampConverter().timestamp(timestamp - date_difference)
+        timestamp = EpochDateConverter().date_to_epoch()
+        expected_date = EpochDateConverter().epoch_to_date(timestamp - date_difference)
         self.asset.import_snapshot(timestamp - date_difference, 0)
         balance_sheet_row = BalanceSheet().row(self.asset)
         self.assertEqual(balance_sheet_row,
@@ -69,7 +69,7 @@ class BalanceSheetTestCase(unittest.TestCase):
         self.assertEqual(balance_sheet.create(), expected_output)
 
     def test_it_returns_a_balance_sheet_with_one_asset(self):
-        self.asset.import_snapshot(EpochTimestampConverter().epoch('2017-12-12'), 100)
+        self.asset.import_snapshot(EpochDateConverter().date_to_epoch('2017-12-12'), 100)
         self.portfolio.import_account(self.asset)
         balance_sheet = BalanceSheet(self.portfolio)
         expected_output = [["Last Updated", "Institution", "Account", "Investment", "Owner", "Value"],
@@ -79,7 +79,7 @@ class BalanceSheetTestCase(unittest.TestCase):
         self.assertEqual(balance_sheet.create(), expected_output)
 
     def test_it_returns_a_balance_sheet_with_one_liability(self):
-        self.liability.import_snapshot(EpochTimestampConverter().epoch('2011-1-1'), 500.12)
+        self.liability.import_snapshot(EpochDateConverter().date_to_epoch('2011-1-1'), 500.12)
         self.portfolio.import_account(self.liability)
         balance_sheet = BalanceSheet(self.portfolio)
         expected_output = [["Last Updated", "Institution", "Account", "Investment", "Owner", "Value"],
@@ -89,8 +89,8 @@ class BalanceSheetTestCase(unittest.TestCase):
         self.assertEqual(balance_sheet.create(), expected_output)
 
     def test_it_returns_a_balance_sheet_with_an_asset_and_a_liability(self):
-        self.asset.import_snapshot(EpochTimestampConverter().epoch('2017-11-12'), 1020)
-        self.liability.import_snapshot(EpochTimestampConverter().epoch('2013-5-5'), 0.12)
+        self.asset.import_snapshot(EpochDateConverter().date_to_epoch('2017-11-12'), 1020)
+        self.liability.import_snapshot(EpochDateConverter().date_to_epoch('2013-5-5'), 0.12)
         self.portfolio.import_account(self.asset)
         self.portfolio.import_account(self.liability)
         balance_sheet = BalanceSheet(self.portfolio)

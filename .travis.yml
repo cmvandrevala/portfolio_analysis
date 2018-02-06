@@ -1,6 +1,9 @@
 language: python
+before_install:
+  - export TZ=America/Chicago
 python:
   - 3.6
-  - nightly
 script:
-  - make test
+  - pip3 install pipenv
+  - pipenv install
+  - pipenv run make test

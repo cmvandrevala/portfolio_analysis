@@ -13,6 +13,7 @@ matplotlib = "*"
 requests = "*"
 flask = "*"
 "jinja2" = "*"
+dateutils = "*"
 
 
 [dev-packages]

@@ -3,7 +3,7 @@ import unittest
 from portfolio.account_builder import AccountBuilder
 from portfolio.portfolio import Portfolio
 from utilities.constants import Constants
-from utilities.epoch_timestamp_converter import EpochTimestampConverter
+from utilities.epoch_date_converter import EpochDateConverter
 from valid_options.account_type import AccountType
 from valid_options.asset_class import AssetClass
 
@@ -302,7 +302,7 @@ class PortfolioTestCase(unittest.TestCase):
             .set_account_type(AccountType.ASSET) \
             .set_update_frequency(1) \
             .build()
-        timestamp = EpochTimestampConverter().epoch() - 5 * Constants.SECONDS_PER_DAY
+        timestamp = EpochDateConverter().date_to_epoch() - 5 * Constants.SECONDS_PER_DAY
         account_one.import_snapshot(timestamp, 100)
         account_two.import_snapshot(timestamp, 100)
         self.portfolio.import_account(account_one)
@@ -326,7 +326,7 @@ class PortfolioTestCase(unittest.TestCase):
             .set_account_type(AccountType.LIABILITY) \
             .set_update_frequency(3) \
             .build()
-        timestamp = EpochTimestampConverter().epoch() - 7 * Constants.SECONDS_PER_DAY
+        timestamp = EpochDateConverter().date_to_epoch() - 7 * Constants.SECONDS_PER_DAY
         account_one.import_snapshot(timestamp, 100)
         account_two.import_snapshot(timestamp, 100)
         self.portfolio.import_account(account_one)

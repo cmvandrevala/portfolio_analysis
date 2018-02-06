@@ -6,12 +6,13 @@ from portfolio.account_builder import AccountBuilder
 from portfolio_creator.data_source import DataSource
 from portfolio_creator.portfolio_creator import PortfolioCreator
 from utilities.constants import Constants
-from utilities.epoch_timestamp_converter import EpochTimestampConverter
+from utilities.epoch_date_converter import EpochDateConverter
 from valid_options.account_type import AccountType
 from valid_options.asset_class import AssetClass
 
 portfolio = PortfolioCreator().create(DataSource())
-number_of_days = Constants.DAYS_PER_YEAR * 1
+number_of_days = Constants.DAYS_PER_YEAR * 5
+separator = "=>"
 
 institution = "Charles Schwab"
 name = "Brokerage"
@@ -43,7 +44,7 @@ times = []
 owners_equity = []
 
 for day in range(0, number_of_days):
-    historical_time = EpochTimestampConverter().epoch() - day * Constants.SECONDS_PER_DAY
+    historical_time = EpochDateConverter().date_to_epoch() - day * Constants.SECONDS_PER_DAY
     times.append(datetime.datetime.fromtimestamp(historical_time))
     owners_equity.append(account.value(historical_time))
 
@@ -60,5 +61,5 @@ plot(times, owners_equity, 'o')
 
 xlabel('Date')
 ylabel("Value")
-title("Value of " + institution + "/" + name + " vs. Time")
+title("Value of " + institution + separator + name + separator + investment + " vs. Time")
 show()

@@ -5,7 +5,7 @@ import math
 from portfolio.account_builder import AccountBuilder
 from portfolio.portfolio import Portfolio
 from portfolio_analysis.portfolio_analyzer import PortfolioAnalyzer
-from utilities.epoch_timestamp_converter import EpochTimestampConverter
+from utilities.epoch_date_converter import EpochDateConverter
 from valid_options.account_type import AccountType
 from valid_options.asset_class import AssetClass
 
@@ -19,7 +19,7 @@ class PortfolioAnalyzerCase(unittest.TestCase):
             .set_asset_class(AssetClass.NONE) \
             .set_account_type(AccountType.ASSET) \
             .build()
-        account.import_snapshot(EpochTimestampConverter().epoch(), 1234)
+        account.import_snapshot(EpochDateConverter().date_to_epoch(), 1234)
         portfolio = Portfolio()
         portfolio.import_account(account)
         self.assertEqual(PortfolioAnalyzer(portfolio).debt_to_equity(), 0.0)
@@ -32,7 +32,7 @@ class PortfolioAnalyzerCase(unittest.TestCase):
             .set_asset_class(AssetClass.NONE) \
             .set_account_type(AccountType.LIABILITY) \
             .build()
-        account.import_snapshot(EpochTimestampConverter().epoch(), 1234)
+        account.import_snapshot(EpochDateConverter().date_to_epoch(), 1234)
         portfolio = Portfolio()
         portfolio.import_account(account)
         self.assertEqual(PortfolioAnalyzer(portfolio).debt_to_equity(), 1.0)
@@ -52,8 +52,8 @@ class PortfolioAnalyzerCase(unittest.TestCase):
             .set_asset_class(AssetClass.NONE) \
             .set_account_type(AccountType.LIABILITY) \
             .build()
-        asset.import_snapshot(EpochTimestampConverter().epoch(), 12345)
-        liability.import_snapshot(EpochTimestampConverter().epoch(), 12345)
+        asset.import_snapshot(EpochDateConverter().date_to_epoch(), 12345)
+        liability.import_snapshot(EpochDateConverter().date_to_epoch(), 12345)
         portfolio = Portfolio()
         portfolio.import_account(asset)
         portfolio.import_account(liability)
@@ -74,8 +74,8 @@ class PortfolioAnalyzerCase(unittest.TestCase):
             .set_asset_class(AssetClass.NONE) \
             .set_account_type(AccountType.LIABILITY) \
             .build()
-        asset.import_snapshot(EpochTimestampConverter().epoch(), 1234)
-        liability.import_snapshot(EpochTimestampConverter().epoch(), 12345)
+        asset.import_snapshot(EpochDateConverter().date_to_epoch(), 1234)
+        liability.import_snapshot(EpochDateConverter().date_to_epoch(), 12345)
         portfolio = Portfolio()
         portfolio.import_account(asset)
         portfolio.import_account(liability)
@@ -96,7 +96,7 @@ class PortfolioAnalyzerCase(unittest.TestCase):
             .set_asset_class(AssetClass.NONE) \
             .set_account_type(AccountType.LIABILITY) \
             .build()
-        timestamp = EpochTimestampConverter().epoch()
+        timestamp = EpochDateConverter().date_to_epoch()
         early_timestamp = timestamp - 200000
         query_time = timestamp - 100000
         asset.import_snapshot(timestamp, 112233)
@@ -104,7 +104,7 @@ class PortfolioAnalyzerCase(unittest.TestCase):
         portfolio = Portfolio()
         portfolio.import_account(asset)
         portfolio.import_account(liability)
-        self.assertEqual(PortfolioAnalyzer(portfolio).debt_to_equity(EpochTimestampConverter().timestamp(query_time)), 1.0)
+        self.assertEqual(PortfolioAnalyzer(portfolio).debt_to_equity(EpochDateConverter().epoch_to_date(query_time)), 1.0)
 
 
 if __name__ == '__main__':

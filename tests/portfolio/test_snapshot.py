@@ -1,12 +1,12 @@
 import unittest
 
-from utilities.epoch_timestamp_converter import EpochTimestampConverter
+from utilities.epoch_date_converter import EpochDateConverter
 from portfolio.snapshot import Snapshot
 
 
 class SnapshotTestCase(unittest.TestCase):
     def setUp(self):
-        self.timestamp = EpochTimestampConverter().epoch()
+        self.timestamp = EpochDateConverter().date_to_epoch()
         self.snapshot = Snapshot(self.timestamp, 10235.63)
 
     def test_it_has_a_timestamp(self):

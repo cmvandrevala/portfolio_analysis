@@ -2,7 +2,7 @@ import unittest
 
 from portfolio.account import Account
 from utilities.constants import Constants
-from utilities.epoch_timestamp_converter import EpochTimestampConverter
+from utilities.epoch_date_converter import EpochDateConverter
 from valid_options.account_type import AccountType
 from valid_options.asset_class import AssetClass
 
@@ -53,21 +53,21 @@ class AssetTestCase(unittest.TestCase):
         self.assertEqual(value, 0)
 
     def test_it_returns_an_value_of_zero_when_queried_before_a_snapshot(self):
-        timestamp = EpochTimestampConverter().epoch()
+        timestamp = EpochDateConverter().date_to_epoch()
         query_time = timestamp - 20
         self.account.import_snapshot(timestamp, 100)
         value = self.account.value(query_time)
         self.assertEqual(value, 0)
 
     def test_it_returns_the_correct_value_when_queried_after_a_snapshot(self):
-        timestamp = EpochTimestampConverter().epoch()
+        timestamp = EpochDateConverter().date_to_epoch()
         query_time = timestamp + 20
         self.account.import_snapshot(timestamp, 100)
         value = self.account.value(query_time)
         self.assertEqual(value, 100)
 
     def test_it_returns_the_correct_value_when_queried_in_between_two_snapshots(self):
-        later_timestamp = EpochTimestampConverter().epoch()
+        later_timestamp = EpochDateConverter().date_to_epoch()
         earlier_timestamp = later_timestamp - 120
         query_time = (earlier_timestamp + later_timestamp) / 2
         self.account.import_snapshot(earlier_timestamp, 300)
@@ -76,7 +76,7 @@ class AssetTestCase(unittest.TestCase):
         self.assertEqual(value, 300)
 
     def test_the_order_in_which_snapshots_are_imported_makes_no_difference(self):
-        timestamp1 = EpochTimestampConverter().epoch()
+        timestamp1 = EpochDateConverter().date_to_epoch()
         timestamp2 = timestamp1 - 1
         timestamp3 = timestamp1 - 2
         query_time = timestamp1 + 1
@@ -87,17 +87,17 @@ class AssetTestCase(unittest.TestCase):
         self.assertEqual(value, 10)
 
     def test_it_defaults_to_the_current_time_if_no_argument_is_given(self):
-        timestamp = EpochTimestampConverter().epoch()
+        timestamp = EpochDateConverter().date_to_epoch()
         self.account.import_snapshot(timestamp - 5, 10)
         self.account.import_snapshot(timestamp - 10, 20)
         value = self.account.value()
         self.assertEqual(value, 10)
 
     def test_it_returns_the_latest_timestamp(self):
-        epoch = EpochTimestampConverter().epoch()
+        epoch = EpochDateConverter().date_to_epoch()
         self.account.import_snapshot(epoch, 100)
         updated = self.account.last_updated()
-        self.assertEqual(updated, EpochTimestampConverter().timestamp(epoch))
+        self.assertEqual(updated, EpochDateConverter().epoch_to_date(epoch))
 
     def test_an_account_is_identical_to_itself(self):
         self.assertTrue(self.account.is_identical_to(self.account))

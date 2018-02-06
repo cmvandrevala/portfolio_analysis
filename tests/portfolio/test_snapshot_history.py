@@ -1,6 +1,6 @@
 import unittest
 
-from utilities.epoch_timestamp_converter import EpochTimestampConverter
+from utilities.epoch_date_converter import EpochDateConverter
 from portfolio.snapshot import Snapshot
 from portfolio.snapshot_history import SnapshotHistory
 
@@ -8,16 +8,16 @@ from portfolio.snapshot_history import SnapshotHistory
 class SnapshotHistoryTestCase(unittest.TestCase):
     def setUp(self):
         self.history = SnapshotHistory()
-        self.converter = EpochTimestampConverter()
+        self.converter = EpochDateConverter()
 
     def test_imports_a_snapshot(self):
-        snapshot = Snapshot(self.converter.epoch(), 1000)
+        snapshot = Snapshot(self.converter.date_to_epoch(), 1000)
         self.history.import_snapshot(snapshot)
         self.assertEqual(self.history.all(), [snapshot])
 
     def test_imports_two_snapshots(self):
-        snapshot1 = Snapshot(self.converter.epoch(), 1000)
-        snapshot2 = Snapshot(self.converter.epoch(), 100)
+        snapshot1 = Snapshot(self.converter.date_to_epoch(), 1000)
+        snapshot2 = Snapshot(self.converter.date_to_epoch(), 100)
         self.history.import_snapshot(snapshot1)
         self.history.import_snapshot(snapshot2)
         self.assertEqual(self.history.all(), [snapshot1, snapshot2])
@@ -26,21 +26,21 @@ class SnapshotHistoryTestCase(unittest.TestCase):
         self.assertEqual(self.history.value(), 0)
 
     def test_it_returns_an_value_of_zero_when_queried_before_a_snapshot(self):
-        timestamp = self.converter.epoch()
+        timestamp = self.converter.date_to_epoch()
         query_time = timestamp - 20
         self.history.import_snapshot(Snapshot(timestamp, 100))
         value = self.history.value(query_time)
         self.assertEqual(value, 0)
 
     def test_it_returns_the_correct_value_when_queried_after_a_snapshot(self):
-        timestamp = self.converter.epoch()
+        timestamp = self.converter.date_to_epoch()
         query_time = timestamp + 20
         self.history.import_snapshot(Snapshot(timestamp, 100))
         value = self.history.value(query_time)
         self.assertEqual(value, 100)
 
     def test_it_returns_the_correct_value_when_queried_in_between_two_snapshots(self):
-        later_timestamp = self.converter.epoch()
+        later_timestamp = self.converter.date_to_epoch()
         earlier_timestamp = later_timestamp - 120
         query_time = (earlier_timestamp + later_timestamp) / 2
 
@@ -51,7 +51,7 @@ class SnapshotHistoryTestCase(unittest.TestCase):
         self.assertEqual(value, 300)
 
     def test_the_order_in_which_snapshots_are_imported_makes_no_difference(self):
-        timestamp1 = self.converter.epoch()
+        timestamp1 = self.converter.date_to_epoch()
         timestamp2 = timestamp1 - 1
         timestamp3 = timestamp1 - 2
         query_time = timestamp1 + 1
@@ -62,22 +62,22 @@ class SnapshotHistoryTestCase(unittest.TestCase):
         self.assertEqual(value, 10)
 
     def test_it_defaults_to_the_current_epoch_if_no_argument_is_given(self):
-        timestamp = self.converter.epoch()
+        timestamp = self.converter.date_to_epoch()
         self.history.import_snapshot(Snapshot(timestamp - 5, 10))
         self.history.import_snapshot(Snapshot(timestamp - 10, 20))
         value = self.history.value()
         self.assertEqual(value, 10)
 
     def test_it_returns_the_latest_timestamp_for_one_snapshot(self):
-        current_epoch = self.converter.epoch()
-        formatted_date = EpochTimestampConverter().timestamp(current_epoch)
+        current_epoch = self.converter.date_to_epoch()
+        formatted_date = EpochDateConverter().epoch_to_date(current_epoch)
         snapshot = Snapshot(current_epoch, 1000)
         self.history.import_snapshot(snapshot)
         self.assertEqual(self.history.last_updated(), formatted_date)
 
     def test_it_returns_the_latest_timestamp_for_two_snapshots(self):
-        current_epoch = self.converter.epoch()
-        formatted_date = EpochTimestampConverter().timestamp(current_epoch)
+        current_epoch = self.converter.date_to_epoch()
+        formatted_date = EpochDateConverter().epoch_to_date(current_epoch)
         snapshot = Snapshot(current_epoch, 1000)
         self.history.import_snapshot(snapshot)
         snapshot = Snapshot(current_epoch - 1000000, 2000)
@@ -85,8 +85,8 @@ class SnapshotHistoryTestCase(unittest.TestCase):
         self.assertEqual(self.history.last_updated(), formatted_date)
 
     def test_it_returns_the_latest_timestamp_for_three_snapshots(self):
-        current_epoch = self.converter.epoch()
-        formatted_date = EpochTimestampConverter().timestamp(current_epoch)
+        current_epoch = self.converter.date_to_epoch()
+        formatted_date = EpochDateConverter().epoch_to_date(current_epoch)
         snapshot = Snapshot(current_epoch, 1000)
         self.history.import_snapshot(snapshot)
         snapshot = Snapshot(current_epoch - 1000000, 2000)

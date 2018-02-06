@@ -2,7 +2,7 @@ from collections import defaultdict
 
 from portfolio.account_builder import AccountBuilder
 from utilities.constants import Constants
-from utilities.epoch_timestamp_converter import EpochTimestampConverter
+from utilities.epoch_date_converter import EpochDateConverter
 from valid_options.account_type import AccountType
 from valid_options.asset_class import AssetClass
 
@@ -68,14 +68,14 @@ class Portfolio:
     def __outdated_account(self, accounts):
         output = []
         for account in accounts:
-            last_updated = EpochTimestampConverter().epoch(account.last_updated())
-            expected_update = EpochTimestampConverter().epoch() - account.update_frequency*Constants.SECONDS_PER_DAY
+            last_updated = EpochDateConverter().date_to_epoch(account.last_updated())
+            expected_update = EpochDateConverter().date_to_epoch() - account.update_frequency * Constants.SECONDS_PER_DAY
             if last_updated < expected_update:
                 output.append(account)
         return output
 
     def __value_of(self, accounts, date=None):
-        return sum(account.value(EpochTimestampConverter().epoch(date)) for account in accounts)
+        return sum(account.value(EpochDateConverter().date_to_epoch(date)) for account in accounts)
 
     def __normalize_output(self, output):
         for key, value in output.items():
@@ -87,7 +87,7 @@ class Portfolio:
     def __create_or_update(self, date, value, account):
         for existing_account in self.accounts:
             if existing_account.is_identical_to(account):
-                existing_account.import_snapshot(EpochTimestampConverter().epoch(date), value)
+                existing_account.import_snapshot(EpochDateConverter().date_to_epoch(date), value)
                 return
-        account.import_snapshot(EpochTimestampConverter().epoch(date), value)
+        account.import_snapshot(EpochDateConverter().date_to_epoch(date), value)
         self.accounts.append(account)

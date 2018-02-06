@@ -4,8 +4,8 @@ from app.form_formatter import FormFormatter
 
 
 class MockTimestampCreator:
-    def timestamp(self):
-        return "some timestamp"
+    def epoch_to_date(self):
+        return "some date"
 
 
 class FormFormatterTestCase(unittest.TestCase):
@@ -49,5 +49,5 @@ class FormFormatterTestCase(unittest.TestCase):
         input_data = {'account': 'account', 'institution': 'institution', 'owner': 'owner', 'investment': 'investment',
                       'asset': False, 'value': 0}
         output_data = {'account': 'account', 'institution': 'institution', 'owner': 'owner', 'investment': 'investment',
-                       'asset': False, 'value': 0, 'timestamp': 'some timestamp'}
+                       'asset': False, 'value': 0, 'timestamp': 'some date'}
         self.assertEqual(self.formatter.format(input_data), output_data)
