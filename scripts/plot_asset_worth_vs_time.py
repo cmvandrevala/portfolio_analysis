@@ -16,11 +16,11 @@ default_start_date = "2018-01-01"
 
 institution = "Charles Schwab"
 name = "Brokerage"
-owner = "Annamarie"
-investment = "Bank of America"
+owner = "Cyrus"
+investment = "Johnson and Johnson"
 account_type = AccountType.ASSET
 asset_class = AssetClass.EQUITIES
-open_date = "2014-11-24"
+open_date = None
 
 test_account = AccountBuilder().set_name(name) \
     .set_institution(institution) \
@@ -43,7 +43,8 @@ if account is None:
     exit(1)
 
 if account.open_date is None:
-    start_epoch = EpochDateConverter().date_to_epoch(default_start_date)
+    snapshots = account.history.snapshots
+    start_epoch = snapshots[0].timestamp
 else:
     start_epoch = EpochDateConverter().date_to_epoch(account.open_date)
 end_epoch = EpochDateConverter().date_to_epoch()

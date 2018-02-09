@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8ab73f25-681c-4567-9a0a-205475726e87" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/plot_asset_worth_vs_time.py" afterPath="$PROJECT_DIR$/scripts/plot_asset_worth_vs_time.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -13,61 +14,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="portfolio_creator.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/portfolio_creator/portfolio_creator.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="435">
-              <caret line="31" column="0" lean-forward="true" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="data_source.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/portfolio_creator/data_source.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="9" column="0" lean-forward="true" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="portfolio.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/portfolio/portfolio.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="355">
-              <caret line="30" column="52" lean-forward="true" selection-start-line="30" selection-start-column="52" selection-end-line="30" selection-end-column="52" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="test_portfolio_creator.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/tests/portfolio_creator/test_portfolio_creator.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="766">
-              <caret line="55" column="13" lean-forward="true" selection-start-line="55" selection-start-column="13" selection-end-line="55" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="plot_asset_worth_vs_time.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scripts/plot_asset_worth_vs_time.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="428">
-              <caret line="66" column="23" lean-forward="true" selection-start-line="66" selection-start-column="23" selection-end-line="66" selection-end-column="23" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="constants.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/utilities/constants.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="16" lean-forward="false" selection-start-line="0" selection-start-column="16" selection-end-line="0" selection-end-column="16" />
+            <state relative-caret-position="540">
+              <caret line="46" column="40" lean-forward="true" selection-start-line="46" selection-start-column="40" selection-end-line="46" selection-end-column="40" />
               <folding />
             </state>
           </provider>
@@ -819,10 +770,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/portfolio/portfolio.py">
+    <entry file="file://$PROJECT_DIR$/portfolio_creator/portfolio_creator.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="355">
-          <caret line="30" column="52" lean-forward="true" selection-start-line="30" selection-start-column="52" selection-end-line="30" selection-end-column="52" />
+        <state relative-caret-position="435">
+          <caret line="31" column="0" lean-forward="true" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -835,10 +786,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/portfolio_creator/portfolio_creator.py">
+    <entry file="file://$PROJECT_DIR$/portfolio/portfolio.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="435">
-          <caret line="31" column="0" lean-forward="true" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
+        <state relative-caret-position="355">
+          <caret line="30" column="52" lean-forward="true" selection-start-line="30" selection-start-column="52" selection-end-line="30" selection-end-column="52" />
           <folding />
         </state>
       </provider>
@@ -861,8 +812,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/plot_asset_worth_vs_time.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="428">
-          <caret line="66" column="23" lean-forward="true" selection-start-line="66" selection-start-column="23" selection-end-line="66" selection-end-column="23" />
+        <state relative-caret-position="540">
+          <caret line="46" column="40" lean-forward="true" selection-start-line="46" selection-start-column="40" selection-end-line="46" selection-end-column="40" />
           <folding />
         </state>
       </provider>
