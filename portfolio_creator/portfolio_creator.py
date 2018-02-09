@@ -10,14 +10,15 @@ class PortfolioCreator:
         snapshots = json.loads(data)
         for item in snapshots["snapshots"]:
             portfolio.import_data({"timestamp": item["timestamp"],
-                                        "institution": item["institution"],
-                                        "name": item["account"],
-                                        "owner": item["owner"],
-                                        "investment": item["investment"],
-                                        "update_frequency": item["update_frequency"],
-                                        "account_type": self.__account_type(item),
-                                        "value": self.__value(item),
-                                        "asset_class": self.__asset_class(item)})
+                                   "institution": item["institution"],
+                                   "name": item["account"],
+                                   "owner": item["owner"],
+                                   "investment": item["investment"],
+                                   "update_frequency": item["update_frequency"],
+                                   "account_type": self.__account_type(item),
+                                   "value": self.__value(item),
+                                   "asset_class": self.__asset_class(item),
+                                   "open_date": item["open_date"]})
         return portfolio
 
     def __account_type(self, account):

@@ -32,6 +32,7 @@ class Portfolio:
             .set_asset_class(AssetClass(data.get("asset_class")))\
             .set_account_type(AccountType(data.get("account_type")))\
             .set_update_frequency(data.get("update_frequency"))\
+            .set_open_date(data.get("open_date"))\
             .build()
         self.__create_or_update(data.get("timestamp"), data.get("value"), account)
 
