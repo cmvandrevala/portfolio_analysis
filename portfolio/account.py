@@ -3,14 +3,19 @@ from portfolio.snapshot_history import SnapshotHistory
 
 
 class Account:
-    def __init__(self, name, owner, investment, asset_class, institution, account_type, update_frequency = 7):
+    def __init__(self, name, owner, investment, asset_class, institution, account_type, update_frequency=None,
+                 open_date=None):
         self.name = name
         self.owner = owner
         self.investment = investment
         self.__asset_class = asset_class
         self.institution = institution
         self.__account_type = account_type
-        self.update_frequency = update_frequency
+        if update_frequency is None:
+            self.update_frequency = 7
+        else:
+            self.update_frequency = update_frequency
+        self.open_date = open_date
         self.history = SnapshotHistory()
 
     def account_type(self):
@@ -35,4 +40,5 @@ class Account:
                 self.investment == account.investment and
                 self.asset_class() == account.asset_class() and
                 self.institution == account.institution and
-                self.account_type() == account.account_type())
+                self.account_type() == account.account_type() and
+                self.open_date == account.open_date)

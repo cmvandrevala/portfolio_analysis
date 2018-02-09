@@ -37,6 +37,11 @@ class AssetTestCase(unittest.TestCase):
         self.assertTrue(account.is_identical_to(
             Account("name", "owner", "investment", AssetClass.CASH_EQUIVALENTS, "institution", AccountType.ASSET, 12)))
 
+    def test_it_sets_the_open_date(self):
+        account = self.builder.set_open_date("2005-1-1").build()
+        self.assertTrue(account.is_identical_to(
+            Account("name", "owner", "investment", AssetClass.CASH_EQUIVALENTS, "institution", AccountType.ASSET, None, "2005-1-1")))
+
     def test_the_account_name_is_required(self):
         builder = AccountBuilder().set_owner("owner").set_investment("investment").set_institution("institution")
         self.assertRaises(InvalidAccountException, builder.build)
