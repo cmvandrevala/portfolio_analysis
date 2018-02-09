@@ -11,8 +11,8 @@ from valid_options.account_type import AccountType
 from valid_options.asset_class import AssetClass
 
 portfolio = PortfolioCreator().create(DataSource())
-number_of_days = Constants.DAYS_PER_YEAR * 5
 separator = "=>"
+default_start_date = "2018-01-01"
 
 institution = "Charles Schwab"
 name = "Brokerage"
@@ -20,6 +20,7 @@ owner = "Annamarie"
 investment = "Bank of America"
 account_type = AccountType.ASSET
 asset_class = AssetClass.EQUITIES
+open_date = "2014-11-24"
 
 test_account = AccountBuilder().set_name(name) \
     .set_institution(institution) \
@@ -28,6 +29,7 @@ test_account = AccountBuilder().set_name(name) \
     .set_asset_class(asset_class) \
     .set_account_type(account_type) \
     .set_update_frequency(90) \
+    .set_open_date(open_date)\
     .build()
 
 account = None
@@ -39,6 +41,14 @@ for a in portfolio.accounts:
 if account is None:
     print("No account found")
     exit(1)
+
+if account.open_date is None:
+    start_epoch = EpochDateConverter().date_to_epoch(default_start_date)
+else:
+    start_epoch = EpochDateConverter().date_to_epoch(account.open_date)
+end_epoch = EpochDateConverter().date_to_epoch()
+number_of_seconds = end_epoch - start_epoch
+number_of_days = int(number_of_seconds / Constants.SECONDS_PER_DAY)
 
 times = []
 owners_equity = []
@@ -58,6 +68,15 @@ for snapshot in account.history.snapshots:
     owners_equity.append(snapshot.value)
 
 plot(times, owners_equity, 'o')
+
+times = []
+owners_equity = []
+
+if account.open_date is not None:
+    times.append(datetime.datetime.fromtimestamp(EpochDateConverter().date_to_epoch(account.open_date)))
+    owners_equity.append(0)
+
+plot(times, owners_equity, 'x')
 
 xlabel('Date')
 ylabel("Value")
