@@ -11,9 +11,12 @@ from utilities.epoch_date_converter import EpochDateConverter
 
 app = Flask(__name__)
 
-
 @app.route("/")
-def record():
+def index():
+    return render_template('index.html')
+
+@app.route("/accounts")
+def accounts():
     portfolio = PortfolioCreator().create(DataSource())
     return render_template('record.html', portfolio=portfolio)
 
