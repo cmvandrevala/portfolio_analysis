@@ -18,8 +18,13 @@ def index():
 @app.route("/accounts")
 def accounts():
     portfolio = PortfolioCreator().create(DataSource())
-    return render_template('record.html', portfolio=portfolio)
+    return render_template('accounts.html', portfolio=portfolio)
 
+@app.route("/accounts/<int:account_id>")
+def account(account_id):
+    portfolio = PortfolioCreator().create(DataSource())
+    account = portfolio.accounts[account_id]
+    return render_template('account.html', account=account)
 
 @app.route("/append_snapshot", methods=['POST'])
 def append_snapshot():

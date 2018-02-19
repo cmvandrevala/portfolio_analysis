@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ account.institution }} | {{ account.name }}</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.3.0/milligram.min.css">
+</head>
+<body>
+    <div class="container">
+    <form>
+        <fieldset>
+            <div class="row">
+                <div class="column"></div>
+                <div class="column">Account Institution</div>
+                <div class="column"><input type="text" name="institution" value="{{ account.institution }}" /></div>
+                <div class="column"></div>
+            </div>
+            <div class="row">
+                <div class="column"></div>
+                <div class="column">Account Name</div>
+                <div class="column"><input type="text" name="account" value="{{ account.name }}" /></div>
+                <div class="column"></div>
+            </div>
+            <div class="row">
+                <div class="column"></div>
+                <div class="column">Account Owner</div>
+                <div class="column"><input type="text" name="owner" value="{{ account.owner }}" /></div>
+                <div class="column"></div>
+            </div>
+            <div class="row">
+                <div class="column"></div>
+                <div class="column">Account Investment</div>
+                <div class="column"><input type="text" name="investment" value="{{ account.investment }}" /></div>
+                <div class="column"></div>
+            </div>
+            <div class="row">
+                <div class="column"></div>
+                <div class="column">Account Type</div>
+                <div class="column"><input type="text" name="asset" value="{{ account.account_type() }}" /></div>
+                <div class="column"></div>
+            </div>
+            <div class="row">
+                <div class="column"></div>
+                <div class="column"></div>
+                <div class="column"><button>Update</button></div>
+                <div class="column"></div>
+            </div>
+            </fieldset>
+        </form>
+    </div>
+    </div>
+</body>
+</html>
