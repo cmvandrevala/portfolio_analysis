@@ -11,19 +11,19 @@
     <h1>Assets</h1>
     {% for asset in portfolio.outdated_assets() %}
     <div class="row">
-        <div class="column">{{ asset.institution }}</div>
-        <div class="column">{{ asset.name }}</div>
-        <div class="column">{{ asset.investment }}</div>
-        <div class="column">{{ asset.owner }}</div>
+        <div class="column">{{ asset.institution() }}</div>
+        <div class="column">{{ asset.name() }}</div>
+        <div class="column">{{ asset.investment() }}</div>
+        <div class="column">{{ asset.owner() }}</div>
         <div class="column">{{ asset.last_updated() }}</div>
         <div class="column">{{ asset.value() }}</div>
         <div class="column">
             <form method="post" action="/append_snapshot" id={{ "asset-row-" + loop.index|string }}>
                 <fieldset>
-                    <input type="hidden" name="account" value="{{ asset.name }}" />
-                    <input type="hidden" name="institution" value="{{ asset.institution }}" />
-                    <input type="hidden" name="owner" value="{{ asset.owner }}" />
-                    <input type="hidden" name="investment" value="{{ asset.investment }}" />
+                    <input type="hidden" name="account" value="{{ asset.name() }}" />
+                    <input type="hidden" name="institution" value="{{ asset.institution() }}" />
+                    <input type="hidden" name="owner" value="{{ asset.owner() }}" />
+                    <input type="hidden" name="investment" value="{{ asset.investment() }}" />
                     <input type="hidden" name="asset" value="{{ asset.account_type() }}" />
                     <input type="text" name="value" form={{ "asset-row-" + loop.index|string }} />
                     <button form={{ "asset-row-" + loop.index|string }}>Update</button>
@@ -36,19 +36,19 @@
     <h1>Liabilities</h1>
     {% for liability in portfolio.outdated_liabilities() %}
     <div class="row">
-        <div class="column">{{ liability.institution }}</div>
-        <div class="column">{{ liability.name }}</div>
-        <div class="column">{{ liability.investment }}</div>
-        <div class="column">{{ liability.owner }}</div>
+        <div class="column">{{ liability.institution() }}</div>
+        <div class="column">{{ liability.name() }}</div>
+        <div class="column">{{ liability.investment() }}</div>
+        <div class="column">{{ liability.owner() }}</div>
         <div class="column">{{ liability.last_updated() }}</div>
         <div class="column">{{ liability.value() }}</div>
         <div class="column">
             <form method="post" action="/append_snapshot" id={{ "liability-row-" + loop.index|string }}>
                 <fieldset>
-                    <input type="hidden" name="account" value="{{ liability.name }}" />
-                    <input type="hidden" name="institution" value="{{ liability.institution }}" />
-                    <input type="hidden" name="owner" value="{{ liability.owner }}" />
-                    <input type="hidden" name="investment" value="{{ liability.investment }}" />
+                    <input type="hidden" name="account" value="{{ liability.name() }}" />
+                    <input type="hidden" name="institution" value="{{ liability.institution() }}" />
+                    <input type="hidden" name="owner" value="{{ liability.owner() }}" />
+                    <input type="hidden" name="investment" value="{{ liability.investment() }}" />
                     <input type="hidden" name="asset" value="{{ liability.account_type() }}" />
                     <input type="text" name="value" form={{ "liability-row-" + loop.index|string }} />
                     <button form={{ "liability-row-" + loop.index|string }}>Update</button>

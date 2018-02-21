@@ -5,6 +5,7 @@ from utilities.constants import Constants
 from utilities.epoch_date_converter import EpochDateConverter
 from valid_options.account_type import AccountType
 from valid_options.asset_class import AssetClass
+from valid_options.term import Term
 
 
 class Portfolio:
@@ -33,6 +34,7 @@ class Portfolio:
             .set_account_type(AccountType(data.get("account_type")))\
             .set_update_frequency(data.get("update_frequency"))\
             .set_open_date(data.get("open_date"))\
+            .set_term(Term(data.get("term")))\
             .build()
         self.__create_or_update(data.get("timestamp"), data.get("value"), account)
 

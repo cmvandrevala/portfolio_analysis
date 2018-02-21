@@ -31,7 +31,7 @@ def append_snapshot():
     request_body = FormFormatter(EpochDateConverter()).format(request.form.to_dict())
     json_body = json.dumps(request_body)
     requests.post(Constants.DATA_URL + "/append_snapshot", data=json_body)
-    return redirect("/", code=302)
+    return redirect("/accounts", code=302)
 
 
 if __name__ == "__main__":

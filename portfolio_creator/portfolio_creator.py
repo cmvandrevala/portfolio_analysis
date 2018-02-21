@@ -18,7 +18,8 @@ class PortfolioCreator:
                                    "account_type": self.__account_type(item),
                                    "value": self.__value(item),
                                    "asset_class": self.__asset_class(item),
-                                   "open_date": item["open_date"]})
+                                   "open_date": item["open_date"],
+                                   "term": self.__term(item)})
         return portfolio
 
     def __account_type(self, account):
@@ -29,3 +30,6 @@ class PortfolioCreator:
 
     def __asset_class(self, account):
         return account.get("asset_class", "None")
+
+    def __term(self, account):
+        return account["term"] or "none"
