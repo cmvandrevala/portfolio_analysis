@@ -5,32 +5,33 @@ from utilities.constants import Constants
 from utilities.epoch_date_converter import EpochDateConverter
 from valid_options.account_type import AccountType
 from valid_options.asset_class import AssetClass
+from valid_options.term import Term
 
 
 class AssetTestCase(unittest.TestCase):
     def setUp(self):
         self.asset = Account("account name", "Bob Bobberson", "investment", AssetClass.CASH_EQUIVALENTS,
-                               "Rachel's Bank", AccountType.ASSET, 12, "2001-12-12")
+                               "Rachel's Bank", AccountType.ASSET, 12, "2001-12-12", Term.SHORT)
         self.liability = Account("account name", "Bob Bobberson", "investment", AssetClass.CASH_EQUIVALENTS,
                                  "Rachel's Bank", AccountType.LIABILITY)
 
     def test_it_has_a_name(self):
-        self.assertEqual(self.asset.name, "account name")
+        self.assertEqual(self.asset.name(), "account name")
 
     def test_it_has_an_owner(self):
-        self.assertEqual(self.asset.owner, "Bob Bobberson")
+        self.assertEqual(self.asset.owner(), "Bob Bobberson")
 
     def test_it_has_a_investment(self):
-        self.assertEqual(self.asset.investment, "investment")
+        self.assertEqual(self.asset.investment(), "investment")
 
     def test_it_has_an_asset_class(self):
         self.assertEqual(self.asset.asset_class(), "Cash Equivalents")
 
     def test_it_has_a_suggested_frequency_of_updates_in_days(self):
-        self.assertEqual(self.asset.update_frequency, 12)
+        self.assertEqual(self.asset.update_frequency(), 12)
 
     def test_it_has_a_default_frequency_of_one_week(self):
-        self.assertEqual(self.liability.update_frequency, 7)
+        self.assertEqual(self.liability.update_frequency(), 7)
 
     def test_it_throws_an_exception_if_a_string_is_passed_in_for_asset_class(self):
         invalid_account = Account("account name", "Bob Bobberson", "investment", AssetClass.CASH_EQUIVALENTS,
@@ -38,16 +39,32 @@ class AssetTestCase(unittest.TestCase):
         self.assertRaises(AttributeError, invalid_account.account_type)
 
     def test_it_has_an_institution(self):
-        self.assertEqual(self.asset.institution, "Rachel's Bank")
+        self.assertEqual(self.asset.institution(), "Rachel's Bank")
 
     def test_it_has_an_account_type(self):
         self.assertEqual(self.asset.account_type(), AccountType.ASSET.value)
 
     def test_it_has_a_default_open_date_of_None(self):
-        self.assertIsNone(self.liability.open_date)
+        self.assertIsNone(self.liability.open_date())
 
     def test_it_has_an_open_date(self):
-        self.assertEqual(self.asset.open_date, "2001-12-12")
+        self.assertEqual(self.asset.open_date(), "2001-12-12")
+
+    def test_it_has_a_default_term(self):
+        self.assertEqual(self.liability.term(), Term.NONE.value)
+
+    def test_it_can_have_a_term_of_short(self):
+        self.assertEqual(self.asset.term(), Term.SHORT.value)
+
+    def test_it_can_have_a_term_of_medium(self):
+        asset = Account("account name", "Bob Bobberson", "investment", AssetClass.CASH_EQUIVALENTS,
+                             "Rachel's Bank", AccountType.ASSET, 12, "2001-12-12", Term.MEDIUM)
+        self.assertEqual(asset.term(), Term.MEDIUM.value)
+
+    def test_it_can_have_a_term_of_long(self):
+        asset = Account("account name", "Bob Bobberson", "investment", AssetClass.CASH_EQUIVALENTS,
+                             "Rachel's Bank", AccountType.ASSET, 12, "2001-12-12", Term.LONG)
+        self.assertEqual(asset.term(), Term.LONG.value)
 
     def test_it_throws_an_exception_if_a_string_is_passed_in_for_an_account_type(self):
         invalid_account = Account("account name", "Bob Bobberson", "investment", "Cash Equivalents", "Rachel's Bank",

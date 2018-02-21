@@ -45,7 +45,7 @@ class Portfolio:
     def percentages(self):
         output = defaultdict(float)
         for asset in self.assets():
-            output[asset.investment] += asset.value()
+            output[asset.investment()] += asset.value()
         self.__normalize_output(output)
         return output
 
@@ -70,7 +70,7 @@ class Portfolio:
         output = []
         for account in accounts:
             last_updated = EpochDateConverter().date_to_epoch(account.last_updated())
-            expected_update = EpochDateConverter().date_to_epoch() - account.update_frequency * Constants.SECONDS_PER_DAY
+            expected_update = EpochDateConverter().date_to_epoch() - account.update_frequency() * Constants.SECONDS_PER_DAY
             if last_updated < expected_update:
                 output.append(account)
         return output

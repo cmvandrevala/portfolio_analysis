@@ -52,20 +52,20 @@ class PortfolioCreatorTestCase(unittest.TestCase):
     def test_it_assigns_the_correct_update_frequencies_to_the_accounts(self):
         accounts = self.portfolio.accounts
         first_account = accounts[0]
-        self.assertEqual(first_account.update_frequency, 12)
+        self.assertEqual(first_account.update_frequency(), 12)
         second_account = accounts[1]
-        self.assertEqual(second_account.update_frequency, 22)
+        self.assertEqual(second_account.update_frequency(), 22)
         third_account = accounts[2]
-        self.assertEqual(third_account.update_frequency, 195)
+        self.assertEqual(third_account.update_frequency(), 195)
 
     def test_it_assigns_the_correct_open_dates_to_the_accounts(self):
         accounts = self.portfolio.accounts
         first_account = accounts[0]
-        self.assertEqual(first_account.open_date, None)
+        self.assertEqual(first_account.open_date(), None)
         second_account = accounts[1]
-        self.assertEqual(second_account.open_date, "2000-11-12")
+        self.assertEqual(second_account.open_date(), "2000-11-12")
         third_account = accounts[2]
-        self.assertEqual(third_account.open_date, "2017-1-1")
+        self.assertEqual(third_account.open_date(), "2017-1-1")
 
 
 if __name__ == '__main__':

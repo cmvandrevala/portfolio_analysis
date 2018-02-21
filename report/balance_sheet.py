@@ -22,12 +22,12 @@ class BalanceSheet:
         return data
 
     def row(self, account):
-        return [self.__last_updated(account), account.institution, account.name, account.investment, account.owner,
+        return [self.__last_updated(account), account.institution(), account.name(), account.investment(), account.owner(),
                 '%.2f' % account.value()]
 
     def __last_updated(self, account):
         last_updated_epoch = EpochDateConverter().date_to_epoch(account.last_updated())
-        if self.__outside_valid_time_period(last_updated_epoch, account.update_frequency):
+        if self.__outside_valid_time_period(last_updated_epoch, account.update_frequency()):
             return self.__color_last_updated(account, SnapshotStatus.OUTDATED)
         else:
             return self.__color_last_updated(account, SnapshotStatus.CURRENT)
