@@ -15,6 +15,7 @@ class AccountBuilder:
         self.__asset_class = AssetClass.CASH_EQUIVALENTS  # type: AssetClass
         self.__account_type = AccountType.ASSET  # type: AccountType
         self.__open_date = None
+        self.__term = None
 
     def build(self) -> Account:
         if self.__name is None:
@@ -27,7 +28,7 @@ class AccountBuilder:
             raise InvalidAccountException("The name of the institution must be set.")
         else:
             return Account(self.__name, self.__owner, self.__investment, self.__asset_class, self.__institution,
-                           self.__account_type, self.__update_frequency, self.__open_date)
+                           self.__account_type, self.__update_frequency, self.__open_date, self.__term)
 
     def set_name(self, name: str) -> typing.Any:
         self.__name = name
@@ -71,4 +72,8 @@ class AccountBuilder:
 
     def set_open_date(self, open_date):
         self.__open_date = open_date
+        return self
+
+    def set_term(self, term):
+        self.__term = term
         return self

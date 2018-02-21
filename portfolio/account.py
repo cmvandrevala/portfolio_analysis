@@ -61,4 +61,5 @@ class Account:
                 self.asset_class() == account.asset_class() and
                 self.institution() == account.institution() and
                 self.account_type() == account.account_type() and
-                self.open_date() == account.open_date())
+                self.open_date() == account.open_date() and
+                self.term() == account.term())

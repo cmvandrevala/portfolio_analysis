@@ -5,6 +5,7 @@ from portfolio.account_builder import AccountBuilder
 from portfolio.invalid_account_exception import InvalidAccountException
 from valid_options.account_type import AccountType
 from valid_options.asset_class import AssetClass
+from valid_options.term import Term
 
 
 class AssetTestCase(unittest.TestCase):
@@ -41,6 +42,12 @@ class AssetTestCase(unittest.TestCase):
         account = self.builder.set_open_date("2005-1-1").build()
         self.assertTrue(account.is_identical_to(
             Account("name", "owner", "investment", AssetClass.CASH_EQUIVALENTS, "institution", AccountType.ASSET, None, "2005-1-1")))
+
+    def test_it_sets_the_term(self):
+        account = self.builder.set_term(Term.MEDIUM).build()
+        expected = Account("name", "owner", "investment", AssetClass.CASH_EQUIVALENTS, "institution", AccountType.ASSET,
+                           None, None, Term.MEDIUM)
+        self.assertTrue(account.is_identical_to(expected))
 
     def test_the_account_name_is_required(self):
         builder = AccountBuilder().set_owner("owner").set_investment("investment").set_institution("institution")

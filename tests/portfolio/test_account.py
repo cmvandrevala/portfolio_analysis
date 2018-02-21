@@ -11,7 +11,7 @@ from valid_options.term import Term
 class AssetTestCase(unittest.TestCase):
     def setUp(self):
         self.asset = Account("account name", "Bob Bobberson", "investment", AssetClass.CASH_EQUIVALENTS,
-                               "Rachel's Bank", AccountType.ASSET, 12, "2001-12-12", Term.SHORT)
+                             "Rachel's Bank", AccountType.ASSET, 12, "2001-12-12", Term.SHORT)
         self.liability = Account("account name", "Bob Bobberson", "investment", AssetClass.CASH_EQUIVALENTS,
                                  "Rachel's Bank", AccountType.LIABILITY)
 
@@ -58,12 +58,12 @@ class AssetTestCase(unittest.TestCase):
 
     def test_it_can_have_a_term_of_medium(self):
         asset = Account("account name", "Bob Bobberson", "investment", AssetClass.CASH_EQUIVALENTS,
-                             "Rachel's Bank", AccountType.ASSET, 12, "2001-12-12", Term.MEDIUM)
+                        "Rachel's Bank", AccountType.ASSET, 12, "2001-12-12", Term.MEDIUM)
         self.assertEqual(asset.term(), Term.MEDIUM.value)
 
     def test_it_can_have_a_term_of_long(self):
         asset = Account("account name", "Bob Bobberson", "investment", AssetClass.CASH_EQUIVALENTS,
-                             "Rachel's Bank", AccountType.ASSET, 12, "2001-12-12", Term.LONG)
+                        "Rachel's Bank", AccountType.ASSET, 12, "2001-12-12", Term.LONG)
         self.assertEqual(asset.term(), Term.LONG.value)
 
     def test_it_throws_an_exception_if_a_string_is_passed_in_for_an_account_type(self):
@@ -127,48 +127,59 @@ class AssetTestCase(unittest.TestCase):
 
     def test_an_account_is_not_identical_to_one_with_a_different_name(self):
         different_account = Account("another name", "Bob Bobberson", "investment", AssetClass.CASH_EQUIVALENTS,
-                                    "Rachel's Bank", AccountType.ASSET)
+                                    "Rachel's Bank", AccountType.ASSET, Term.SHORT)
         self.assertFalse(self.asset.is_identical_to(different_account))
 
     def test_an_account_is_not_identical_to_one_with_a_different_owner(self):
         different_account = Account("account name", "Sam Sampson", "investment", AssetClass.CASH_EQUIVALENTS,
-                                    "Rachel's Bank", AccountType.ASSET)
+                                    "Rachel's Bank", AccountType.ASSET, Term.SHORT)
         self.assertFalse(self.asset.is_identical_to(different_account))
 
     def test_an_account_is_not_identical_to_one_with_a_different_investment(self):
         different_account = Account("account name", "Bob Bobberson", "investment_2", AssetClass.CASH_EQUIVALENTS,
-                                    "Rachel's Bank", AccountType.ASSET)
+                                    "Rachel's Bank", AccountType.ASSET, Term.SHORT)
         self.assertFalse(self.asset.is_identical_to(different_account))
 
     def test_an_account_is_not_identical_to_one_with_a_different_asset_class(self):
         different_account = Account("account name", "Bob Bobberson", "investment", AssetClass.EQUITIES, "Rachel's Bank",
-                                    AccountType.ASSET)
+                                    AccountType.ASSET, Term.SHORT)
         self.assertFalse(self.asset.is_identical_to(different_account))
 
     def test_an_account_is_not_identical_to_one_with_a_different_institution(self):
         different_account = Account("account name", "Bob Bobberson", "investment", AssetClass.CASH_EQUIVALENTS,
-                                    "Eric's Bank", AccountType.ASSET)
+                                    "Eric's Bank", AccountType.ASSET, Term.SHORT)
         self.assertFalse(self.asset.is_identical_to(different_account))
 
     def test_an_account_is_not_identical_to_one_with_a_different_account_type(self):
         different_account = Account("account name", "Bob Bobberson", "investment", AssetClass.CASH_EQUIVALENTS,
-                                    "Rachel's Bank", AccountType.LIABILITY)
+                                    "Rachel's Bank", AccountType.LIABILITY, Term.SHORT)
         self.assertFalse(self.asset.is_identical_to(different_account))
 
     def test_an_account_is_identical_to_one_with_a_different_update_frequency(self):
         different_account = Account("account name", "Bob Bobberson", "investment", AssetClass.CASH_EQUIVALENTS,
-                               "Rachel's Bank", AccountType.ASSET, 13, "2001-12-12")
+                                    "Rachel's Bank", AccountType.ASSET, 13, "2001-12-12", Term.SHORT)
         self.assertTrue(self.asset.is_identical_to(different_account))
 
     def test_an_account_is_identical_to_one_with_the_same_update_frequency(self):
         different_account = Account("account name", "Bob Bobberson", "investment", AssetClass.CASH_EQUIVALENTS,
-                               "Rachel's Bank", AccountType.ASSET, 12, "2001-12-12")
+                                    "Rachel's Bank", AccountType.ASSET, 12, "2001-12-12", Term.SHORT)
         self.assertTrue(self.asset.is_identical_to(different_account))
 
     def test_an_account_is_not_identical_to_one_with_a_different_open_date(self):
         different_account = Account("account name", "Bob Bobberson", "investment", AssetClass.CASH_EQUIVALENTS,
-                               "Rachel's Bank", AccountType.ASSET, 12, "2001-12-15")
+                                    "Rachel's Bank", AccountType.ASSET, 12, "2001-12-15", Term.SHORT)
         self.assertFalse(self.asset.is_identical_to(different_account))
+
+    def test_an_account_is_identical_to_one_with_the_same_term(self):
+        different_account = Account("account name", "Bob Bobberson", "investment", AssetClass.CASH_EQUIVALENTS,
+                                    "Rachel's Bank", AccountType.ASSET, 12, "2001-12-12", Term.SHORT)
+        self.assertTrue(self.asset.is_identical_to(different_account))
+
+    def test_an_account_is_not_identical_to_one_with_a_different_term(self):
+        different_account = Account("account name", "Bob Bobberson", "investment", AssetClass.CASH_EQUIVALENTS,
+                                    "Rachel's Bank", AccountType.ASSET, 12, "2001-12-12", Term.MEDIUM)
+        self.assertFalse(self.asset.is_identical_to(different_account))
+
 
 if __name__ == '__main__':
     unittest.main()
