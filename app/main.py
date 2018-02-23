@@ -11,6 +11,7 @@ from utilities.epoch_date_converter import EpochDateConverter
 from valid_options.account_type import AccountType
 
 app = Flask(__name__)
+portfolio = PortfolioCreator().create(DataSource())
 
 
 @app.route("/")
@@ -21,22 +22,22 @@ def index():
 
 @app.route("/accounts")
 def accounts():
-    portfolio = PortfolioCreator().create(DataSource())
     return render_template('accounts.html', portfolio=portfolio)
 
 
 @app.route("/accounts/<int:account_id>")
 def account(account_id):
-    portfolio = PortfolioCreator().create(DataSource())
     account = portfolio.accounts[account_id]
     return render_template('account.html', account=account)
 
 
 @app.route("/append_snapshot", methods=['POST'])
 def append_snapshot():
+    global portfolio
     request_body = FormFormatter(EpochDateConverter()).format(request.form.to_dict())
     json_body = json.dumps(request_body)
     requests.post(Constants.DATA_URL + "/append_snapshot", data=json_body)
+    portfolio = PortfolioCreator().create(DataSource())
     return redirect("/accounts", code=302)
 
 

@@ -9,18 +9,27 @@
     <div class="container">
       <div class="row">
           <div class="column">Account Institution</div>
+          <div class="column">{{ account.institution() }}</div>
       </div>
       <div class="row">
           <div class="column">Account Name</div>
+          <div class="column">{{ account.name() }}</div>
       </div>
       <div class="row">
           <div class="column">Account Owner</div>
+          <div class="column">{{ account.owner() }}</div>
       </div>
       <div class="row">
           <div class="column">Account Investment</div>
+          <div class="column">{{ account.investment() }}</div>
+      </div>
+      <div class="row">
+          <div class="column">Account Term</div>
+          <div class="column">{{ account.term() }}</div>
       </div>
       <div class="row">
           <div class="column">Account Type</div>
+          <div class="column">{{ account.account_type() }}</div>
       </div>
     </div>
     </div>
