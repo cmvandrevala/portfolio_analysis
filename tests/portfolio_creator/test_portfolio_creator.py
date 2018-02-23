@@ -15,8 +15,7 @@ class MockDataSource:
                                           "value": 98066,
                                           "asset_class": "Cash Equivalents",
                                           "update_frequency": 12,
-                                          "open_date": None,
-                                          "term": "long"},
+                                          "open_date": None},
                                          {"timestamp": "2017-10-25",
                                           "institution": "Bob's Bank",
                                           "account": "Credit Card",
@@ -82,7 +81,7 @@ class PortfolioCreatorTestCase(unittest.TestCase):
     def test_it_assigns_the_correct_terms_to_the_accounts(self):
         accounts = self.portfolio.accounts
         first_account = accounts[0]
-        self.assertEqual(first_account.term(), "long")
+        self.assertEqual(first_account.term(), "none")
         second_account = accounts[1]
         self.assertEqual(second_account.term(), "medium")
         third_account = accounts[2]

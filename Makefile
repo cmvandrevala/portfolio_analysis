@@ -22,6 +22,9 @@ percentages:
 recommend:
 	python3 -m scripts.recommend_investment
 
+start:
+	FLASK_APP=app/main.py flask run
+
 test:
 	python3 -m unittest discover tests/app
 	python3 -m unittest discover tests/portfolio

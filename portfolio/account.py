@@ -4,8 +4,7 @@ from valid_options.term import Term
 
 
 class Account:
-    def __init__(self, name, owner, investment, asset_class, institution, account_type, update_frequency=None,
-                 open_date=None, term=None):
+    def __init__(self, name, owner, investment, asset_class, institution, account_type, update_frequency=None, open_date=None, term=None):
         self.__name = name
         self.__owner = owner
         self.__investment = investment

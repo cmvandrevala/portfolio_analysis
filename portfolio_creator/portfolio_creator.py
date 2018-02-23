@@ -32,4 +32,7 @@ class PortfolioCreator:
         return account.get("asset_class", "None")
 
     def __term(self, account):
-        return account["term"] or "none"
+        if account.get("term") is None:
+            return "none"
+        else:
+            return account.get("term", "none")

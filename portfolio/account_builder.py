@@ -27,8 +27,7 @@ class AccountBuilder:
         elif self.__institution is None:
             raise InvalidAccountException("The name of the institution must be set.")
         else:
-            return Account(self.__name, self.__owner, self.__investment, self.__asset_class, self.__institution,
-                           self.__account_type, self.__update_frequency, self.__open_date, self.__term)
+            return Account(self.__name, self.__owner, self.__investment, self.__asset_class, self.__institution, self.__account_type, self.__update_frequency, self.__open_date, self.__term)
 
     def set_name(self, name: str) -> typing.Any:
         self.__name = name

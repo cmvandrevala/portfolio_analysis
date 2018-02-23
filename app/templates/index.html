@@ -3,11 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <title>Index</title>
-    <ul>
-        <li><a href="/accounts">Accounts List</a></li>
-    </ul>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.3.0/milligram.min.css">
 </head>
 <body>
-
+    <div class="container">
+        <div class="row">
+            <div class="column">
+                <h2>Menu</h2>
+                <ul>
+                    <li><a href="/accounts">Accounts in Need of Update</a></li>
+                </ul>
+            </div>
+            <div class="column">
+                <h2>Quick-Add a Snapshot</h2>
+                <form method="post" action="/append_snapshot" id=new_snapshot>
+                    <fieldset>
+                        <label>Account Name</label>
+                        <input type="text" name="account" />
+                        <label>Institution</label>
+                        <input type="text" name="institution" />
+                        <label>Owner</label>
+                        <input type="text" name="owner" />
+                        <label>Investment Name</label>
+                        <input type="text" name="investment" />
+                        <label>Asset or Liability</label>
+                        <select name="asset">
+                            {% for account_type in account_types %}
+                                <option value={{ account_type }}>{{ account_type }}</option>
+                            {% endfor %}
+                        </select>
+                        <label>Value</label>
+                        <input type="text" name="value" />
+                        <label>Timestamp</label>
+                        <input type="text" name="timestamp" />
+                        <button form=new_snapshot>Create Snapshot</button>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
 </body>
 </html>

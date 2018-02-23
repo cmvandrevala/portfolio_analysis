@@ -8,23 +8,29 @@ from portfolio_creator.data_source import DataSource
 from portfolio_creator.portfolio_creator import PortfolioCreator
 from utilities.constants import Constants
 from utilities.epoch_date_converter import EpochDateConverter
+from valid_options.account_type import AccountType
 
 app = Flask(__name__)
 
+
 @app.route("/")
 def index():
-    return render_template('index.html')
+    account_types = [e.value for e in AccountType]
+    return render_template('index.html', account_types=account_types)
+
 
 @app.route("/accounts")
 def accounts():
     portfolio = PortfolioCreator().create(DataSource())
     return render_template('accounts.html', portfolio=portfolio)
 
+
 @app.route("/accounts/<int:account_id>")
 def account(account_id):
     portfolio = PortfolioCreator().create(DataSource())
     account = portfolio.accounts[account_id]
     return render_template('account.html', account=account)
+
 
 @app.route("/append_snapshot", methods=['POST'])
 def append_snapshot():
