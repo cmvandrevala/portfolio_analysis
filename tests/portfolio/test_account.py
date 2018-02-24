@@ -9,10 +9,10 @@ from valid_options.term import Term
 
 class AssetTestCase(unittest.TestCase):
     def setUp(self):
-        self.asset_params = {"name": "account name", "owner": "Bob Bobberson", "investment": "investment", "asset_class": AssetClass.CASH_EQUIVALENTS, "institution": "Rachel's Bank", "account_type": AccountType.ASSET, "open_date": "2001-12-12", "update_frequency": 12, "term": Term.SHORT}
+        self.asset_params = {"name": "account name", "owner": "Bob Bobberson", "investment": "investment", "asset_class": AssetClass.CASH_EQUIVALENTS, "institution": "Rachel's Bank", "account_type": AccountType.ASSET, "open_date": "2001-12-12", "update_frequency": 12, "term": Term.SHORT, "uuid": "12345"}
         self.asset = Account(self.asset_params)
-        liability_params = {"name": "account name", "owner": "Bob Bobberson", "investment": "investment", "asset_class": AssetClass.CASH_EQUIVALENTS, "institution": "Rachel's Bank", "account_type": AccountType.ASSET}
-        self.liability = Account(liability_params)
+        self.liability_params = {"name": "account name", "owner": "Bob Bobberson", "investment": "investment", "asset_class": AssetClass.CASH_EQUIVALENTS, "institution": "Rachel's Bank", "account_type": AccountType.ASSET}
+        self.liability = Account(self.liability_params)
 
     def test_it_has_a_name(self):
         self.assertEqual(self.asset.name(), "account name")
@@ -48,6 +48,21 @@ class AssetTestCase(unittest.TestCase):
 
     def test_it_has_an_open_date(self):
         self.assertEqual(self.asset.open_date(), "2001-12-12")
+
+    def test_it_has_a_uuid(self):
+        self.assertEqual(self.asset.uuid(), "12345")
+
+    def test_it_creates_a_uuid_when_none_are_passed_in(self):
+        self.assertNotEqual(self.liability.uuid(), "12345")
+        self.assertNotEqual(self.liability.uuid(), None)
+
+    def test_it_creates_a_unique_uuid(self):
+        account_one = Account(self.liability_params)
+        account_two = Account(self.liability_params)
+        self.assertNotEqual(account_one.uuid(), account_two.uuid())
+
+    def test_the_uuid_is_a_string(self):
+        self.assertTrue(isinstance(self.liability.uuid(), str))
 
     def test_it_has_a_default_term(self):
         self.assertEqual(self.liability.term(), Term.NONE.value)

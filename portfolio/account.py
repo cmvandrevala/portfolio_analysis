@@ -1,3 +1,5 @@
+import uuid
+
 from portfolio.snapshot import Snapshot
 from portfolio.snapshot_history import SnapshotHistory
 from valid_options.term import Term
@@ -14,6 +16,7 @@ class Account:
         self.__update_frequency = params.get("update_frequency")
         self.__term = params.get("term")
         self.__open_date = params.get("open_date")
+        self.__uuid = params.get("uuid", str(uuid.uuid4()))
         self.__history = SnapshotHistory()
 
     def name(self):
@@ -42,6 +45,9 @@ class Account:
 
     def open_date(self):
         return self.__open_date
+
+    def uuid(self):
+        return self.__uuid
 
     def value(self, query_time=None):
         return self.__history.value(query_time)
