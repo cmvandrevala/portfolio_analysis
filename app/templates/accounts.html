@@ -26,10 +26,10 @@
                     <input type="hidden" name="investment" value="{{ asset.investment() }}" />
                     <input type="hidden" name="asset" value="{{ asset.account_type() }}" />
                     <input type="text" name="value" form={{ "asset-row-" + loop.index|string }} />
-                    <button form={{ "asset-row-" + loop.index|string }}>Update</button>
                 </fieldset>
             </form>
         </div>
+        <div class="column"><input type="submit" form={{ "asset-row-" + loop.index|string }} value="Update" /></div>
         <div class="column"><form action={{ "/accounts/" + asset.uuid() }}><input type="submit" value="Details" /></form></div>
     </div>
     {% endfor %}
@@ -52,10 +52,10 @@
                     <input type="hidden" name="investment" value="{{ liability.investment() }}" />
                     <input type="hidden" name="asset" value="{{ liability.account_type() }}" />
                     <input type="text" name="value" form={{ "liability-row-" + loop.index|string }} />
-                    <button form={{ "liability-row-" + loop.index|string }}>Update</button>
                 </fieldset>
             </form>
         </div>
+        <div class="column"><input type="submit" form={{ "liability-row-" + loop.index|string }} value="Update" /></div>
         <div class="column"><form action={{ "/accounts/" + liability.uuid() }}><input type="submit" value="Details" /></form></div>
     </div>
     {% endfor %}
