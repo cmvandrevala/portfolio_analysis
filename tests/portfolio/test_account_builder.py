@@ -15,39 +15,59 @@ class AssetTestCase(unittest.TestCase):
 
     def test_it_builds_an_account_with_defaults(self):
         account = self.builder.build()
-        self.assertTrue(account.is_identical_to(Account("name", "owner", "investment", AssetClass.CASH_EQUIVALENTS, "institution", AccountType.ASSET)))
+        params = {"name": "name", "owner": "owner", "investment": "investment",
+                  "asset_class": AssetClass.CASH_EQUIVALENTS, "institution": "institution",
+                  "account_type": AccountType.ASSET}
+        self.assertTrue(account.is_identical_to(Account(params)))
 
     def test_it_sets_an_account_as_a_liability_and_updates_the_asset_class(self):
         account = self.builder.set_liability().build()
-        self.assertTrue(account.is_identical_to(Account("name", "owner", "investment", AssetClass.NONE, "institution", AccountType.LIABILITY)))
+        params = {"name": "name", "owner": "owner", "investment": "investment",
+                  "asset_class": AssetClass.NONE, "institution": "institution",
+                  "account_type": AccountType.LIABILITY}
+        self.assertTrue(account.is_identical_to(Account(params)))
 
     def test_it_sets_an_account_as_a_liability_by_passing_in_the_account_type(self):
         account = self.builder.set_account_type(AccountType.LIABILITY).build()
-        self.assertTrue(account.is_identical_to(Account("name", "owner", "investment", AssetClass.NONE, "institution", AccountType.LIABILITY)))
+        params = {"name": "name", "owner": "owner", "investment": "investment",
+                  "asset_class": AssetClass.NONE, "institution": "institution",
+                  "account_type": AccountType.LIABILITY}
+        self.assertTrue(account.is_identical_to(Account(params)))
 
     def test_it_sets_an_account_as_an_asset(self):
         account = self.builder.set_liability().set_asset().build()
-        self.assertTrue(account.is_identical_to(Account("name", "owner", "investment", AssetClass.NONE, "institution", AccountType.ASSET)))
+        params = {"name": "name", "owner": "owner", "investment": "investment",
+                  "asset_class": AssetClass.NONE, "institution": "institution",
+                  "account_type": AccountType.ASSET}
+        self.assertTrue(account.is_identical_to(Account(params)))
 
     def test_it_sets_the_asset_class_of_an_account(self):
         account = self.builder.set_asset_class(AssetClass.ANNUITIES).build()
-        self.assertTrue(account.is_identical_to(Account("name", "owner", "investment", AssetClass.ANNUITIES, "institution", AccountType.ASSET)))
+        params = {"name": "name", "owner": "owner", "investment": "investment",
+                  "asset_class": AssetClass.ANNUITIES, "institution": "institution",
+                  "account_type": AccountType.ASSET}
+        self.assertTrue(account.is_identical_to(Account(params)))
 
     def test_it_sets_the_update_frequency_of_an_account(self):
         account = self.builder.set_update_frequency(12).build()
-        self.assertTrue(account.is_identical_to(
-            Account("name", "owner", "investment", AssetClass.CASH_EQUIVALENTS, "institution", AccountType.ASSET, 12)))
+        params = {"name": "name", "owner": "owner", "investment": "investment",
+                  "asset_class": AssetClass.CASH_EQUIVALENTS, "institution": "institution",
+                  "account_type": AccountType.ASSET}
+        self.assertTrue(account.is_identical_to(Account(params)))
 
     def test_it_sets_the_open_date(self):
         account = self.builder.set_open_date("2005-1-1").build()
-        self.assertTrue(account.is_identical_to(
-            Account("name", "owner", "investment", AssetClass.CASH_EQUIVALENTS, "institution", AccountType.ASSET, None, "2005-1-1")))
+        params = {"name": "name", "owner": "owner", "investment": "investment",
+                  "asset_class": AssetClass.CASH_EQUIVALENTS, "institution": "institution",
+                  "account_type": AccountType.ASSET, "open_date": "2005-1-1"}
+        self.assertTrue(account.is_identical_to(Account(params)))
 
     def test_it_sets_the_term(self):
         account = self.builder.set_term(Term.MEDIUM).build()
-        expected = Account("name", "owner", "investment", AssetClass.CASH_EQUIVALENTS, "institution", AccountType.ASSET,
-                           None, None, Term.MEDIUM)
-        self.assertTrue(account.is_identical_to(expected))
+        params = {"name": "name", "owner": "owner", "investment": "investment",
+                  "asset_class": AssetClass.CASH_EQUIVALENTS, "institution": "institution",
+                  "account_type": AccountType.ASSET, "term": Term.MEDIUM}
+        self.assertTrue(account.is_identical_to(Account(params)))
 
     def test_the_account_name_is_required(self):
         builder = AccountBuilder().set_owner("owner").set_investment("investment").set_institution("institution")

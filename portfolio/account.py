@@ -4,16 +4,16 @@ from valid_options.term import Term
 
 
 class Account:
-    def __init__(self, name, owner, investment, asset_class, institution, account_type, update_frequency=None, open_date=None, term=None):
-        self.__name = name
-        self.__owner = owner
-        self.__investment = investment
-        self.__asset_class = asset_class
-        self.__institution = institution
-        self.__account_type = account_type
-        self.__update_frequency = update_frequency
-        self.__term = term
-        self.__open_date = open_date
+    def __init__(self, params):
+        self.__name = params.get("name")
+        self.__owner = params.get("owner")
+        self.__investment = params.get("investment")
+        self.__asset_class = params.get("asset_class")
+        self.__institution = params.get("institution")
+        self.__account_type = params.get("account_type")
+        self.__update_frequency = params.get("update_frequency")
+        self.__term = params.get("term")
+        self.__open_date = params.get("open_date")
         self.__history = SnapshotHistory()
 
     def name(self):
