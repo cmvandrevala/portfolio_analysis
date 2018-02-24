@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8ab73f25-681c-4567-9a0a-205475726e87" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/portfolio/account.py" afterPath="$PROJECT_DIR$/portfolio/account.py" />
-      <change beforePath="$PROJECT_DIR$/tests/portfolio/test_account.py" afterPath="$PROJECT_DIR$/tests/portfolio/test_account.py" />
+      <change beforePath="$PROJECT_DIR$/app/main.py" afterPath="$PROJECT_DIR$/app/main.py" />
+      <change beforePath="$PROJECT_DIR$/app/templates/accounts.html" afterPath="$PROJECT_DIR$/app/templates/accounts.html" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -14,11 +14,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="account.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="account.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/portfolio/account.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
-              <caret line="16" column="40" lean-forward="true" selection-start-line="16" selection-start-column="40" selection-end-line="16" selection-end-column="40" />
+            <state relative-caret-position="135">
+              <caret line="9" column="40" lean-forward="true" selection-start-line="9" selection-start-column="40" selection-end-line="9" selection-end-column="40" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
               </folding>
@@ -26,14 +26,22 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="test_account.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/tests/portfolio/test_account.py">
+      <file leaf-file-name="main.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="343">
-              <caret line="54" column="61" lean-forward="true" selection-start-line="54" selection-start-column="61" selection-end-line="54" selection-end-column="61" />
-              <folding>
-                <element signature="e#0#15#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="450">
+              <caret line="40" column="27" lean-forward="false" selection-start-line="40" selection-start-column="27" selection-end-line="40" selection-end-column="27" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="accounts.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/templates/accounts.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="638">
+              <caret line="58" column="68" lean-forward="false" selection-start-line="58" selection-start-column="68" selection-end-line="58" selection-end-column="68" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -137,12 +145,10 @@
         <option value="$PROJECT_DIR$/utilities/epoch_date_converter.py" />
         <option value="$PROJECT_DIR$/scripts/plot_asset_worth_vs_time.py" />
         <option value="$PROJECT_DIR$/tests/portfolio/test_portfolio.py" />
-        <option value="$PROJECT_DIR$/app/templates/accounts.html" />
         <option value="$PROJECT_DIR$/app/templates/index.html" />
         <option value="$PROJECT_DIR$/portfolio_creator/portfolio_creator.py" />
         <option value="$PROJECT_DIR$/tests/portfolio_creator/test_portfolio_creator.py" />
         <option value="$PROJECT_DIR$/app/templates/account.html" />
-        <option value="$PROJECT_DIR$/app/main.py" />
         <option value="$PROJECT_DIR$/portfolio/portfolio.py" />
         <option value="$PROJECT_DIR$/portfolio/account_builder.py" />
         <option value="$PROJECT_DIR$/tests/report/test_balance_sheet.py" />
@@ -150,6 +156,8 @@
         <option value="$PROJECT_DIR$/tests/portfolio/test_account_builder.py" />
         <option value="$PROJECT_DIR$/tests/portfolio/test_account.py" />
         <option value="$PROJECT_DIR$/portfolio/account.py" />
+        <option value="$PROJECT_DIR$/app/main.py" />
+        <option value="$PROJECT_DIR$/app/templates/accounts.html" />
       </list>
     </option>
   </component>
@@ -716,14 +724,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/templates/accounts.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="600">
-          <caret line="40" column="62" lean-forward="false" selection-start-line="40" selection-start-column="62" selection-end-line="40" selection-end-column="62" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/portfolio_creator/portfolio_creator.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="285">
@@ -814,12 +814,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/main.py">
+    <entry file="file://$PROJECT_DIR$/portfolio/account.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="19" column="57" lean-forward="true" selection-start-line="19" selection-start-column="57" selection-end-line="19" selection-end-column="57" />
+        <state relative-caret-position="135">
+          <caret line="9" column="40" lean-forward="true" selection-start-line="9" selection-start-column="40" selection-end-line="9" selection-end-column="40" />
           <folding>
-            <element signature="e#0#11#0" expanded="false" />
+            <element signature="e#0#11#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -834,13 +834,19 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/portfolio/account.py">
+    <entry file="file://$PROJECT_DIR$/app/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="16" column="40" lean-forward="true" selection-start-line="16" selection-start-column="40" selection-end-line="16" selection-end-column="40" />
-          <folding>
-            <element signature="e#0#11#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="450">
+          <caret line="40" column="27" lean-forward="false" selection-start-line="40" selection-start-column="27" selection-end-line="40" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/templates/accounts.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="638">
+          <caret line="58" column="68" lean-forward="false" selection-start-line="58" selection-start-column="68" selection-end-line="58" selection-end-column="68" />
+          <folding />
         </state>
       </provider>
     </entry>

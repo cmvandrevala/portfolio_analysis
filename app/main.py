@@ -25,9 +25,10 @@ def accounts():
     return render_template('accounts.html', portfolio=portfolio)
 
 
-@app.route("/accounts/<int:account_id>")
-def account(account_id):
-    account = portfolio.accounts[account_id]
+@app.route("/accounts/<account_uuid>")
+def account(account_uuid):
+    account = list(filter(lambda x: x.uuid() == account_uuid, portfolio.accounts))[0]
+    print(account)
     return render_template('account.html', account=account)
 
 
