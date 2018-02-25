@@ -370,5 +370,6 @@ class PortfolioTestCase(unittest.TestCase):
         self.portfolio.import_account(account_two)
         self.assertEqual(self.portfolio.institutions(), ["inst"])
 
+
 if __name__ == '__main__':
     unittest.main()

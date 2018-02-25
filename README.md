@@ -69,7 +69,6 @@ make test
 There are a number of Python scripts located in the `scripts/` directory. Each one is associated with a make task.
 
 * `make asset` -> Plot the net worth of an asset or liability versus time
-* `make balance` -> Create a balance sheet with data from
 * `make classes` -> Plot asset classes of portfolio
 * `make de` -> Plot the debt to equity ratio of the portfolio versus time
 * `make mypy` -> Run mypy on each file of the project

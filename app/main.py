@@ -2,10 +2,12 @@ import json
 
 import requests
 from flask import Flask, render_template, redirect, request
+from terminaltables import AsciiTable
 
 from app.form_formatter import FormFormatter
 from portfolio_creator.data_source import DataSource
 from portfolio_creator.portfolio_creator import PortfolioCreator
+from report.balance_sheet import BalanceSheet
 from utilities.constants import Constants
 from utilities.epoch_date_converter import EpochDateConverter
 from valid_options.account_type import AccountType
@@ -40,6 +42,11 @@ def append_snapshot():
     requests.post(Constants.DATA_URL + "/append_snapshot", data=json_body)
     portfolio = PortfolioCreator().create(DataSource())
     return redirect("/accounts", code=302)
+
+
+@app.route("/balance_sheet")
+def balance_sheet():
+    return render_template('balance_sheet.html', balance_sheet=BalanceSheet(portfolio))
 
 
 if __name__ == "__main__":
