@@ -68,6 +68,9 @@ class Portfolio:
     def liabilities_value(self, date=None):
         return self.__value_of(self.liabilities(), date)
 
+    def institutions(self):
+        return list(set(map(lambda x: x.institution(), self.accounts)))
+
     def __outdated_account(self, accounts):
         output = []
         for account in accounts:

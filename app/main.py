@@ -17,7 +17,7 @@ portfolio = PortfolioCreator().create(DataSource())
 @app.route("/")
 def index():
     account_types = [e.value for e in AccountType]
-    return render_template('index.html', account_types=account_types)
+    return render_template('index.html', account_types=account_types, institutions=portfolio.institutions())
 
 
 @app.route("/accounts")

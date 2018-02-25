@@ -327,6 +327,48 @@ class PortfolioTestCase(unittest.TestCase):
         self.portfolio.import_account(account_two)
         self.assertEqual(self.portfolio.outdated_liabilities(), [account_two])
 
+    def test_it_returns_no_institutions_if_there_are_no_accounts_in_a_portfolio(self):
+        self.assertEqual(self.portfolio.institutions(), [])
+
+    def test_it_returns_one_institution(self):
+        account = AccountBuilder().set_name("name one") \
+            .set_institution("institution") \
+            .set_owner("owner") \
+            .set_investment("investment") \
+            .build()
+        self.portfolio.import_account(account)
+        self.assertEqual(self.portfolio.institutions(), ["institution"])
+
+    def test_it_returns_two_institutions(self):
+        account_one = AccountBuilder().set_name("name one") \
+            .set_institution("institution 1") \
+            .set_owner("owner") \
+            .set_investment("investment") \
+            .build()
+        account_two = AccountBuilder().set_name("name two") \
+            .set_institution("institution 2") \
+            .set_owner("owner") \
+            .set_investment("investment") \
+            .build()
+        self.portfolio.import_account(account_one)
+        self.portfolio.import_account(account_two)
+        self.assertTrue("institution 1" in self.portfolio.institutions())
+        self.assertTrue("institution 2" in self.portfolio.institutions())
+
+    def test_it_does_not_return_duplicate_institutions(self):
+        account_one = AccountBuilder().set_name("name one") \
+            .set_institution("inst") \
+            .set_owner("owner") \
+            .set_investment("investment") \
+            .build()
+        account_two = AccountBuilder().set_name("name two") \
+            .set_institution("inst") \
+            .set_owner("owner") \
+            .set_investment("investment") \
+            .build()
+        self.portfolio.import_account(account_one)
+        self.portfolio.import_account(account_two)
+        self.assertEqual(self.portfolio.institutions(), ["inst"])
 
 if __name__ == '__main__':
     unittest.main()

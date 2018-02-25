@@ -18,10 +18,15 @@
                 <h2>Quick-Add a Snapshot</h2>
                 <form method="post" action="/append_snapshot" id=new_snapshot>
                     <fieldset>
+                        <label>Institution</label>
+                        <input type="text" list="institutions" name="institution" />
+                        <datalist id="institutions">
+                            {% for institution in institutions %}
+                            <option value="{{ institution }}">
+                            {% endfor %}
+                        </datalist>
                         <label>Account Name</label>
                         <input type="text" name="account" />
-                        <label>Institution</label>
-                        <input type="text" name="institution" />
                         <label>Owner</label>
                         <input type="text" name="owner" />
                         <label>Investment Name</label>
