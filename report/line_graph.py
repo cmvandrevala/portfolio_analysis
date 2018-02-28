@@ -10,11 +10,10 @@ class LineGraph:
 
     def net_worth_vs_time(self, start_date, end_date):
         current_epoch = EpochDateConverter().date_to_epoch(start_date)
-        times = []
-        values = []
+        output = []
         while current_epoch <= EpochDateConverter().date_to_epoch(end_date):
             formatted_date = EpochDateConverter().epoch_to_date(current_epoch)
-            times.append(datetime.datetime.fromtimestamp(current_epoch))
-            values.append(self.__portfolio.total_value(formatted_date))
+            output.append({"x": datetime.datetime.fromtimestamp(current_epoch).strftime("%Y-%m-%d"),
+                           "y": self.__portfolio.total_value(formatted_date)})
             current_epoch += Constants.SECONDS_PER_DAY
-        return {"times": times, "values": values}
+        return output

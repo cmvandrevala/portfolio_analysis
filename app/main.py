@@ -1,13 +1,13 @@
 import json
 
 import requests
-from flask import Flask, render_template, redirect, request
-from terminaltables import AsciiTable
+from flask import Flask, jsonify, render_template, redirect, request
 
 from app.form_formatter import FormFormatter
 from portfolio_creator.data_source import DataSource
 from portfolio_creator.portfolio_creator import PortfolioCreator
 from report.balance_sheet import BalanceSheet
+from report.line_graph import LineGraph
 from utilities.constants import Constants
 from utilities.epoch_date_converter import EpochDateConverter
 from valid_options.account_type import AccountType
@@ -30,7 +30,6 @@ def accounts():
 @app.route("/accounts/<account_uuid>")
 def account(account_uuid):
     account = list(filter(lambda x: x.uuid() == account_uuid, portfolio.accounts))[0]
-    print(account)
     return render_template('account.html', account=account)
 
 
@@ -47,6 +46,13 @@ def append_snapshot():
 @app.route("/balance_sheet")
 def balance_sheet():
     return render_template('balance_sheet.html', balance_sheet=BalanceSheet(portfolio))
+
+
+@app.route("/net_worth_vs_time")
+def net_worth_vs_time():
+    start = request.args.get('start')
+    end = request.args.get('end')
+    return jsonify(LineGraph(portfolio).net_worth_vs_time(start, end))
 
 
 if __name__ == "__main__":
