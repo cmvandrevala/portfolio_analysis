@@ -119,6 +119,12 @@ class PortfolioTestCase(unittest.TestCase):
         self.assertEqual(self.portfolio.liabilities_value(), 1000)
         self.assertEqual(self.portfolio.total_value(), 2000)
 
+    def test_the_value_changes_on_the_day_it_is_recorded(self):
+        self.portfolio.import_data(self.asset_data_1)
+        self.assertEqual(self.portfolio.total_value("2017-05-31"), 0)
+        self.assertEqual(self.portfolio.total_value("2017-06-01"), 1000)
+        self.assertEqual(self.portfolio.total_value("2017-06-02"), 1000)
+
     def test_it_gives_the_total_value_of_the_portfolio_at_a_previous_time(self):
         asset_data = {"timestamp": "2017-01-01", "name": "Verizon", "investment": "VZ", "value": 100,
                       "asset_class": "Equities", "term": "none",

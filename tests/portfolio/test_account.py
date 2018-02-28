@@ -112,6 +112,12 @@ class AssetTestCase(unittest.TestCase):
         value = self.asset.value(query_time)
         self.assertEqual(value, 300)
 
+    def test_the_value_of_the_account_changes_on_the_day_a_snapshot_is_recorded(self):
+        epoch = EpochDateConverter().date_to_epoch("2015-12-12")
+        self.asset.import_snapshot(epoch, 100)
+        value = self.asset.value(epoch)
+        self.assertEqual(value, 100)
+
     def test_the_order_in_which_snapshots_are_imported_makes_no_difference(self):
         timestamp1 = EpochDateConverter().date_to_epoch()
         timestamp2 = timestamp1 - 1

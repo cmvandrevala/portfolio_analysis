@@ -43,12 +43,16 @@ class SnapshotHistoryTestCase(unittest.TestCase):
         later_timestamp = self.converter.date_to_epoch()
         earlier_timestamp = later_timestamp - 120
         query_time = (earlier_timestamp + later_timestamp) / 2
-
         self.history.import_snapshot(Snapshot(earlier_timestamp, 300))
         self.history.import_snapshot(Snapshot(later_timestamp, 250))
-
         value = self.history.value(query_time)
         self.assertEqual(value, 300)
+
+    def test_it_updates_the_value_at_the_time_the_snapshot_is_recorded(self):
+        epoch = EpochDateConverter().date_to_epoch("2014-02-03")
+        self.history.import_snapshot(Snapshot(epoch, 3060))
+        value = self.history.value(epoch)
+        self.assertEqual(value, 3060)
 
     def test_the_order_in_which_snapshots_are_imported_makes_no_difference(self):
         timestamp1 = self.converter.date_to_epoch()

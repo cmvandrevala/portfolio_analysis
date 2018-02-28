@@ -26,6 +26,6 @@ class SnapshotHistory:
     def __find_value(self, query_time):
         value = 0
         for snapshot in self.snapshots:
-            if query_time > snapshot.timestamp:
+            if query_time >= snapshot.timestamp:
                 value = snapshot.value
         return value
