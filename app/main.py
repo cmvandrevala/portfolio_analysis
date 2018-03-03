@@ -48,12 +48,15 @@ def balance_sheet():
     return render_template('balance_sheet.html', balance_sheet=BalanceSheet(portfolio))
 
 
-@app.route("/net_worth_vs_time")
-def net_worth_vs_time():
+@app.route("/net_worth")
+def net_worth():
     start = request.args.get('start')
     end = request.args.get('end')
     return jsonify(LineGraph(portfolio).net_worth_vs_time(start, end))
 
+@app.route("/net_worth_vs_time")
+def net_worth_vs_time():
+    return render_template('net_worth_vs_time.html')
 
 if __name__ == "__main__":
     app.run()

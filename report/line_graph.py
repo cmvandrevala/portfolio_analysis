@@ -13,7 +13,8 @@ class LineGraph:
         output = []
         while current_epoch <= EpochDateConverter().date_to_epoch(end_date):
             formatted_date = EpochDateConverter().epoch_to_date(current_epoch)
-            output.append({"x": datetime.datetime.fromtimestamp(current_epoch).strftime("%Y-%m-%d"),
-                           "y": self.__portfolio.total_value(formatted_date)})
+            output.append({"series": "net-worth",
+                           "date": datetime.datetime.fromtimestamp(current_epoch).strftime("%Y-%m-%d"),
+                           "value": self.__portfolio.total_value(formatted_date)})
             current_epoch += Constants.SECONDS_PER_DAY
         return output
