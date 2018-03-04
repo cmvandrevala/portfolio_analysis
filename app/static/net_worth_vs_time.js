@@ -1,6 +1,17 @@
 var urlParams = new URLSearchParams(window.location.search);
-var start = urlParams.get('start')
-var end = urlParams.get('end')
+
+function todays_date() {
+  var today = new Date();
+  var dd = today.getDate();
+  var mm = today.getMonth() + 1;
+  var yyyy = today.getFullYear();
+  if (dd < 10) dd = '0' + dd
+  if (mm < 10) mm = '0' + mm
+  return yyyy + "-" + mm + "-" + dd;
+}
+
+var start = urlParams.get('start') || "2018-01-01"
+var end = urlParams.get('end') || todays_date()
 
 var margin = {top: 30, right: 30, bottom: 100, left: 100};
 var width = 1000 - margin.left - margin.right;
