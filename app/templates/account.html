@@ -31,6 +31,27 @@
           <div class="column">Account Type</div>
           <div class="column">{{ account.account_type() }}</div>
       </div>
+
+      <div class="row">
+          <div class="column">Update Frequency (in Days)</div>
+          <div class="column">{{ account.update_frequency() }}</div>
+          <div class="column">
+              <form method="post" action="/update_frequency" id="update-frequency">
+                  <fieldset>
+                      <input type="hidden" name="account" value="{{ account.name() }}" />
+                      <input type="hidden" name="institution" value="{{ account.institution() }}" />
+                      <input type="hidden" name="owner" value="{{ account.owner() }}" />
+                      <input type="hidden" name="investment" value="{{ account.investment() }}" />
+                      <input type="hidden" name="asset" value="{{ account.account_type() }}" />
+                      <input type="text" name="frequency" form="update-frequency" />
+                  </fieldset>
+              </form>
+          </div>
+          <div class="column">
+              <input form="update-frequency" type="submit" value="Update Frequency" />
+          </div>
+      </div>
+
     </div>
 </body>
 </html>

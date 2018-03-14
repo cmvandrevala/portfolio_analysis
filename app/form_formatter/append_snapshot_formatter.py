@@ -3,7 +3,7 @@ import functools
 from valid_options.account_type import AccountType
 
 
-class FormFormatter:
+class AppendSnapshotFormatter:
     def __init__(self, timestamp_generator):
         self.timestamp_generator = timestamp_generator
 

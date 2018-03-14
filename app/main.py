@@ -3,7 +3,8 @@ import json
 import requests
 from flask import Flask, jsonify, render_template, redirect, request
 
-from app.form_formatter import FormFormatter
+from app.form_formatter.append_snapshot_formatter import AppendSnapshotFormatter
+from app.form_formatter.update_frequency_formatter import UpdateFrequencyFormatter
 from portfolio_creator.data_source import DataSource
 from portfolio_creator.portfolio_creator import PortfolioCreator
 from report.balance_sheet import BalanceSheet
@@ -36,9 +37,19 @@ def account(account_uuid):
 @app.route("/append_snapshot", methods=['POST'])
 def append_snapshot():
     global portfolio
-    request_body = FormFormatter(EpochDateConverter()).format(request.form.to_dict())
+    request_body = AppendSnapshotFormatter(EpochDateConverter()).format(request.form.to_dict())
     json_body = json.dumps(request_body)
     requests.post(Constants.DATA_URL + "/append_snapshot", data=json_body)
+    portfolio = PortfolioCreator().create(DataSource())
+    return redirect("/accounts", code=302)
+
+
+@app.route("/update_frequency", methods=['POST'])
+def update_frequency():
+    global portfolio
+    request_body = UpdateFrequencyFormatter().format(request.form.to_dict())
+    json_body = json.dumps(request_body)
+    requests.post(Constants.DATA_URL + "/update_frequency", data=json_body)
     portfolio = PortfolioCreator().create(DataSource())
     return redirect("/accounts", code=302)
 
@@ -54,9 +65,11 @@ def net_worth():
     end = request.args.get('end')
     return jsonify(LineGraph(portfolio).net_worth_vs_time(start, end))
 
+
 @app.route("/net_worth_vs_time")
 def net_worth_vs_time():
     return render_template('net_worth_vs_time.html')
+
 
 if __name__ == "__main__":
     app.run()
