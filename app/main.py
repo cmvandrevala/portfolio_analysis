@@ -3,8 +3,8 @@ import json
 import requests
 from flask import Flask, jsonify, render_template, redirect, request
 
-from app.form_formatter.append_snapshot_formatter import AppendSnapshotFormatter
-from app.form_formatter.update_frequency_formatter import UpdateFrequencyFormatter
+from form_formatter.append_snapshot_formatter import AppendSnapshotFormatter
+from form_formatter.update_frequency_formatter import UpdateFrequencyFormatter
 from portfolio_creator.data_source import DataSource
 from portfolio_creator.portfolio_creator import PortfolioCreator
 from report.balance_sheet import BalanceSheet
