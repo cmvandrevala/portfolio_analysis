@@ -23,9 +23,4 @@ start:
 	FLASK_APP=app/main.py flask run
 
 test:
-	python3 -m unittest discover tests/form_formatter
-	python3 -m unittest discover tests/portfolio
-	python3 -m unittest discover tests/portfolio_analysis
-	python3 -m unittest discover tests/portfolio_creator
-	python3 -m unittest discover tests/report
-	python3 -m unittest discover tests/utilities
+	python -m unittest discover
