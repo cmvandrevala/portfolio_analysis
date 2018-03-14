@@ -5,6 +5,7 @@ from flask import Flask, jsonify, render_template, redirect, request
 
 from form_formatter.append_snapshot_formatter import AppendSnapshotFormatter
 from form_formatter.update_frequency_formatter import UpdateFrequencyFormatter
+from form_formatter.update_open_date_formatter import UpdateOpenDateFormatter
 from portfolio_creator.data_source import DataSource
 from portfolio_creator.portfolio_creator import PortfolioCreator
 from report.balance_sheet import BalanceSheet
@@ -50,6 +51,16 @@ def update_frequency():
     request_body = UpdateFrequencyFormatter().format(request.form.to_dict())
     json_body = json.dumps(request_body)
     requests.post(Constants.DATA_URL + "/update_frequency", data=json_body)
+    portfolio = PortfolioCreator().create(DataSource())
+    return redirect("/accounts", code=302)
+
+@app.route("/update_open_date", methods=['POST'])
+def update_open_date():
+    global portfolio
+    request_body = UpdateOpenDateFormatter().format(request.form.to_dict())
+    json_body = json.dumps(request_body)
+    print(json_body)
+    requests.post(Constants.DATA_URL + "/update_open_date", data=json_body)
     portfolio = PortfolioCreator().create(DataSource())
     return redirect("/accounts", code=302)
 

@@ -33,6 +33,26 @@
       </div>
 
       <div class="row">
+          <div class="column">Open Date</div>
+          <div class="column">{{ account.open_date() }}</div>
+          <div class="column">
+              <form method="post" action="/update_open_date" id="update-open-date">
+                  <fieldset>
+                      <input type="hidden" name="account" value="{{ account.name() }}" />
+                      <input type="hidden" name="institution" value="{{ account.institution() }}" />
+                      <input type="hidden" name="owner" value="{{ account.owner() }}" />
+                      <input type="hidden" name="investment" value="{{ account.investment() }}" />
+                      <input type="hidden" name="asset" value="{{ account.account_type() }}" />
+                      <input type="text" name="open_date" form="update-open-date" />
+                  </fieldset>
+              </form>
+          </div>
+          <div class="column">
+              <input form="update-open-date" type="submit" value="Update Open Date" />
+          </div>
+      </div>
+
+      <div class="row">
           <div class="column">Update Frequency (in Days)</div>
           <div class="column">{{ account.update_frequency() }}</div>
           <div class="column">
