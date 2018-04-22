@@ -13,8 +13,10 @@ from report.line_graph import LineGraph
 from utilities.constants import Constants
 from utilities.epoch_date_converter import EpochDateConverter
 from valid_options.account_type import AccountType
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 portfolio = PortfolioCreator().create(DataSource())
 
 
@@ -64,11 +66,13 @@ def update_open_date():
     portfolio = PortfolioCreator().create(DataSource())
     return redirect("/accounts", code=302)
 
-
 @app.route("/balance_sheet")
 def balance_sheet():
     return render_template('balance_sheet.html', balance_sheet=BalanceSheet(portfolio))
 
+@app.route("/balance_sheet_rows")
+def balance_sheet_rows():
+    return jsonify(BalanceSheet(portfolio).json())
 
 @app.route("/net_worth")
 def net_worth():

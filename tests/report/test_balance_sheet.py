@@ -67,6 +67,68 @@ class BalanceSheetTestCase(unittest.TestCase):
                            ["", "", "", "", "Total", "1019.88"]]
         self.assertEqual(balance_sheet.create(), expected_output)
 
+    def test_it_returns_no_assets_or_liabilities(self):
+        balance_sheet = BalanceSheet(self.portfolio)
+        expected_output = {"assets": [], "liabilities": []}
+        self.assertEqual(balance_sheet.json(), expected_output)
+
+    def test_it_returns_an_asset(self):
+        self.asset.import_snapshot(EpochDateConverter().date_to_epoch('2017-11-12'), 1020)
+        self.portfolio.import_account(self.asset)
+        balance_sheet = BalanceSheet(self.portfolio)
+        expected_output = {"assets": [{"lastUpdated": "2017-11-12T12:00:00-05:00", "institution": "institution", "owner": "owner", "account": "name", "value": 1020, "investment": "investment"}], "liabilities": []}
+        self.assertEqual(balance_sheet.json(), expected_output)
+
+    def test_it_returns_two_assets(self):
+        asset_one = AccountBuilder().set_name("name one") \
+            .set_owner("owner one") \
+            .set_investment("investment one") \
+            .set_institution("institution one") \
+            .set_update_frequency(5) \
+            .build()
+        asset_two = AccountBuilder().set_name("name two") \
+            .set_owner("owner two") \
+            .set_investment("investment two") \
+            .set_institution("institution two") \
+            .set_update_frequency(3) \
+            .build()
+        asset_one.import_snapshot(EpochDateConverter().date_to_epoch('2005-11-12'), 100.50)
+        asset_two.import_snapshot(EpochDateConverter().date_to_epoch('2000-12-12'), 1289)
+        self.portfolio.import_account(asset_one)
+        self.portfolio.import_account(asset_two)
+        balance_sheet = BalanceSheet(self.portfolio)
+        expected_output = {"assets": [{"lastUpdated": "2005-11-12T12:00:00-05:00", "institution": "institution one", "owner": "owner one", "account": "name one", "value": 100.50, "investment": "investment one"}, {"lastUpdated": "2000-12-12T12:00:00-05:00", "institution": "institution two", "owner": "owner two", "account": "name two", "value": 1289, "investment": "investment two"}], "liabilities": []}
+        self.assertEqual(balance_sheet.json(), expected_output)
+
+    def test_it_returns_a_liability(self):
+        self.liability.import_snapshot(EpochDateConverter().date_to_epoch('2010-01-10'), 129)
+        self.portfolio.import_account(self.liability)
+        balance_sheet = BalanceSheet(self.portfolio)
+        expected_output = {"assets": [], "liabilities": [{"lastUpdated": "2010-01-10T12:00:00-05:00", "institution": "institution", "owner": "owner", "account": "name", "value": 129, "investment": "investment"}]}
+        self.assertEqual(balance_sheet.json(), expected_output)
+
+    def test_it_returns_two_liabilities(self):
+        liability_one = AccountBuilder().set_name("name one") \
+            .set_owner("owner one") \
+            .set_investment("investment one") \
+            .set_institution("institution one") \
+            .set_update_frequency(5) \
+            .set_liability() \
+            .build()
+        liability_two = AccountBuilder().set_name("name two") \
+            .set_owner("owner two") \
+            .set_investment("investment two") \
+            .set_institution("institution two") \
+            .set_update_frequency(3) \
+            .set_liability() \
+            .build()
+        liability_one.import_snapshot(EpochDateConverter().date_to_epoch('2005-11-12'), 100.50)
+        liability_two.import_snapshot(EpochDateConverter().date_to_epoch('2000-12-12'), 1289)
+        self.portfolio.import_account(liability_one)
+        self.portfolio.import_account(liability_two)
+        balance_sheet = BalanceSheet(self.portfolio)
+        expected_output = {"assets": [], "liabilities": [{"lastUpdated": "2005-11-12T12:00:00-05:00", "institution": "institution one", "owner": "owner one", "account": "name one", "value": 100.50, "investment": "investment one"}, {"lastUpdated": "2000-12-12T12:00:00-05:00", "institution": "institution two", "owner": "owner two", "account": "name two", "value": 1289, "investment": "investment two"}]}
+        self.assertEqual(balance_sheet.json(), expected_output)
 
 if __name__ == '__main__':
     unittest.main()
