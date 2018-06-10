@@ -7,6 +7,9 @@ classes:
 de:
 	python3 -m scripts.plot_debt_to_equity_vs_time
 
+debt:
+	python3 -m scripts.plot_debt_vs_time
+
 mypy:
 	python3 -m scripts.run_mypy
 

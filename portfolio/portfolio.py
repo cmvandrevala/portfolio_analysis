@@ -68,6 +68,13 @@ class Portfolio:
     def liabilities_value(self, date=None):
         return self.__value_of(self.liabilities(), date)
 
+    def liabilities_without_mortgage(self, date=None):
+        accounts = []
+        for liability in self.liabilities():
+            if (liability.name() != "Mortgage"):
+                accounts.append(liability)
+        return self.__value_of(accounts, date)
+
     def institutions(self):
         return list(set(map(lambda x: x.institution(), self.accounts)))
 
