@@ -1,1 +1,0 @@
-class InvalidRecommendationException(Exception): pass

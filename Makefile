@@ -19,9 +19,6 @@ net:
 percentages:
 	python3 -m scripts.calculate_percentages
 
-recommend:
-	python3 -m scripts.recommend_investment
-
 start:
 	FLASK_APP=app/main.py flask run
 
