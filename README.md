@@ -1,5 +1,7 @@
 # Finance Scripts
 
+[![CircleCI](https://circleci.com/gh/cmvandrevala/portfolio_analysis/tree/master.svg?style=svg)](https://circleci.com/gh/cmvandrevala/portfolio_analysis/tree/master)
+
 ## Background
 
 I love learning about finance and economics and have written a number of small, "toy-box" scripts over the years. Most of these are quick and dirty experiments driven by my own curiosity. Unfortunately, these scripts have started to become disorganized and contain quite a bit of repetition.
@@ -40,13 +42,13 @@ This project pulls portfolio data from a general ledger server. Refer to [this](
 If you are using `pipenv` on OSX, you might notice an error complaining that Python has not been installed as a framework:
 
 ```bazaar
-RuntimeError: Python is not installed as a framework. The Mac OS X backend 
-will not be able to function correctly if Python is not installed as a 
-framework. See the Python documentation for more information on installing 
-Python as a framework on Mac OS X. Please either reinstall Python as a 
-framework, or try one of the other backends. If you are using (Ana)Conda 
-please install python.app and replace the use of 'python' with 'pythonw'. 
-See 'Working with Matplotlib on OSX' in the Matplotlib FAQ for more 
+RuntimeError: Python is not installed as a framework. The Mac OS X backend
+will not be able to function correctly if Python is not installed as a
+framework. See the Python documentation for more information on installing
+Python as a framework on Mac OS X. Please either reinstall Python as a
+framework, or try one of the other backends. If you are using (Ana)Conda
+please install python.app and replace the use of 'python' with 'pythonw'.
+See 'Working with Matplotlib on OSX' in the Matplotlib FAQ for more
 information.
 ```
 
@@ -74,5 +76,4 @@ There are a number of Python scripts located in the `scripts/` directory. Each o
 * `make mypy` -> Run mypy on each file of the project
 * `make net` -> Plot owner's equity versus time
 * `make percentages` -> Generate percentages for use in Portfolio Visualizer
-* `make recommend` -> Recommend an investment for a future purchase or payment
 * `make test` -> Run the test suite
