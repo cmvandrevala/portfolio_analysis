@@ -1,26 +1,19 @@
 [[source]]
-
 url = "https://pypi.python.org/simple"
 verify_ssl = true
 name = "pypi"
 
-
 [packages]
-
 mypy = "*"
 terminaltables = "*"
 matplotlib = "*"
-requests = "*"
-flask = "*"
+requests = ">=2.20.1"
+flask = ">=1.0.2"
 "jinja2" = "*"
 dateutils = "*"
-flask-cors = "*"
-
+flask-cors = ">=3.0.7"
 
 [dev-packages]
 
-
-
 [requires]
-
 python_version = "3.6"
